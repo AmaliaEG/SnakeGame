@@ -10,9 +10,9 @@ public Position(int n, int m) {
 }
 
 public Integer[][] spawnPoint() { // Head is index 0
-    snakePosition[0][0] = n/2;
+    snakePosition[0][0] = (n/2) + 1;
     snakePosition[0][1] = m/2;
-    snakePosition[1][0] = (n/2) + 1;
+    snakePosition[1][0] = n/2;
     snakePosition[1][1] = m/2;
     return snakePosition;
 }
@@ -27,7 +27,14 @@ public void drawBody(Integer[][] snakePosition) {
 }
 
 public void getBigger(int x, int y) {
-
+    Integer[][] newSnakePosition = new Integer[snakePosition.length][2];
+    for (int i = 0; i < snakePosition.length; i++) {
+        snakePosition[i][0] = newSnakePosition[i][0];
+        snakePosition[i][1] = newSnakePosition[i][1];
+    }
+    newSnakePosition[snakePosition.length][0] = x;
+    newSnakePosition[snakePosition.length][1] = y;
+    snakePosition = newSnakePosition;
 }
 
 public String toString() {
@@ -41,11 +48,11 @@ public String toString() {
 }
 
 public int getXPosition() {
-    return snakePosition[0][0];
+    return snakePosition[snakePosition[0].length][0];
 }
 
 public int getYPosition() {
-    return snakePosition[0][1];
+    return snakePosition[snakePosition[0].length][1];
 }
 
 }
