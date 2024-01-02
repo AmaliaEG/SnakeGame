@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import javafx.scene.paint.Color;
-
 public class Main {
     public static void main(String[] args) {
         Scanner sizeInput = new Scanner(System.in);
@@ -17,9 +15,8 @@ public class Main {
         StdDraw.setXscale(0, width);
         StdDraw.setYscale(0, height);
         StdDraw.square(0, 0, height);
-        double corner = 0;
-        for (double i = corner; i < width; i++) {
-            for (double j = corner; j < height; j++) {
+        for (double i = 0; i < width; i++) {
+            for (double j = 0; j < height; j++) {
                 StdDraw.square(i, j, 1);
             }
         }
