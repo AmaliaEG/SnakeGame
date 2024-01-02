@@ -9,6 +9,7 @@ public class Main {
         int height = sizeInput.nextInt();
         drawGrid(width, height);
         sizeInput.close();
+        Movement.requestFocus();
     }
 
     public static void drawGrid(int width, int height) {
