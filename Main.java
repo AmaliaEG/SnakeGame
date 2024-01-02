@@ -7,7 +7,7 @@ public class Main {
         int width = sizeInput.nextInt();
         System.out.print("Input a grid height between 5-100 (inclusive): ");
         int height = sizeInput.nextInt();
-        drawTrack(width, height);
+        drawGrid(width, height);
         sizeInput.close();
     }
 
