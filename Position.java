@@ -40,8 +40,12 @@ public String toString() {
     return s;
 }
 
-public Integer[][] getPosition() {
-    return snakePosition;
+public int getXPosition() {
+    return snakePosition[0][0];
+}
+
+public int getYPosition() {
+    return snakePosition[0][1];
 }
 
 }
