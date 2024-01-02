@@ -47,12 +47,15 @@ public String toString() {
     return s;
 }
 
+public Integer[][] getPosition() {
+    return snakePosition;
+}
 public int getXPosition() {
-    return snakePosition[snakePosition[0].length][0];
+    return snakePosition[(snakePosition[0].length)-1][0];
 }
 
 public int getYPosition() {
-    return snakePosition[snakePosition[0].length][1];
+    return snakePosition[(snakePosition[0].length)-1][1];
 }
 
 }
