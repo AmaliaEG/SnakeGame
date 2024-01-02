@@ -11,7 +11,7 @@ public class Main {
         sizeInput.close();
     }
 
-    public static void drawTrack(int width, int height) {
+    public static void drawGrid(int width, int height) {
         StdDraw.setXscale(0, width);
         StdDraw.setYscale(0, height);
         StdDraw.square(0, 0, height);
