@@ -5,13 +5,28 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+import javax.swing.*;
 
 import java.util.Scanner;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        int width = 500;
+        int height = width;
+        JFrame frame = new JFrame("Snake");
+        frame.setVisible(true);
+        frame.setSize(width, height);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        Draw game = new Draw(width, height);
+        frame.add(game);
+        frame.pack();
+
     }
 
     @Override
@@ -26,6 +41,8 @@ public class Main extends Application {
         StackPane root = new StackPane();
         Canvas canvas = new Canvas(width, height);
         root.getChildren().add(canvas);
+
+        GridPane grid = new GridPane();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.GREEN);
