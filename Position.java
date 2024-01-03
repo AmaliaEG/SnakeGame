@@ -1,59 +1,61 @@
+import java.util.ArrayList;
+
 public class Position {
     private int n, m;
-    public Integer[][] snakePosition = new Integer[2][2];
+    public ArrayList<ArrayList<Integer>> snakePosition = new ArrayList<ArrayList<Integer>>();
 
 public Position(int n, int m) {
     this.n = n;
     this.m = m;
 }
 
-public Integer[][] spawnPoint() { // Head is index 0
-    snakePosition[0][0] = (n/2) + 1;
-    snakePosition[0][1] = m/2;
-    snakePosition[1][0] = n/2;
-    snakePosition[1][1] = m/2;
+public ArrayList<ArrayList<Integer>> spawnPoint() { // Head is index 0
+    ArrayList<Integer> head = new ArrayList<Integer>();
+    ArrayList<Integer> tail = new ArrayList<Integer>();
+    head.add(n/2);
+    head.add(m/2);
+    tail.add((n/2)+1);
+    tail.add(m/2);
+    snakePosition.add(tail);
+    snakePosition.add(head);
     return snakePosition;
 }
 
-public void drawBody(Integer[][] snakePosition) {
-    int length = snakePosition[0].length;
+public void drawBody(ArrayList<ArrayList<Integer>> snakePosition) {
+    int length = snakePosition.size();
     for (int i = 0; i < length; i++) {
-        int xPosition = snakePosition[i][0];
-        int yPosition = snakePosition[i][1];
+        int xPosition = snakePosition.get(i).get(0);
+        int yPosition = snakePosition.get(i).get(1);
         StdDraw.filledSquare(xPosition, yPosition, 1);
     }
 }
 
 public void getBigger(int x, int y) {
-    Integer[][] newSnakePosition = new Integer[snakePosition.length][2];
-    for (int i = 0; i < snakePosition.length; i++) {
-        snakePosition[i][0] = newSnakePosition[i][0];
-        snakePosition[i][1] = newSnakePosition[i][1];
-    }
-    newSnakePosition[snakePosition.length][0] = x;
-    newSnakePosition[snakePosition.length][1] = y;
-    snakePosition = newSnakePosition;
+    ArrayList<Integer> newHead = new ArrayList<Integer>();
+    newHead.add(x);
+    newHead.add(y);
+    snakePosition.add(newHead);
 }
 
 public String toString() {
     String s = "";
-    for (int i = 0; i < snakePosition[0].length; i++) {
-        for (int j = 0; j < snakePosition.length; j++) {
-            s = s + snakePosition[i][j] + "\n";
+    for (int i = 0; i < snakePosition.size(); i++) {
+        for (int j = 0; j < 2; j++) {
+            s = s + snakePosition.get(i).get(j) + "\n";
         }
     }
     return s;
 }
 
-public Integer[][] getPosition() {
+public ArrayList<ArrayList<Integer>> getPosition() {
     return snakePosition;
 }
 public int getXPosition() {
-    return snakePosition[(snakePosition[0].length)-1][0];
+    return snakePosition.get(snakePosition.size() - 1).get(0);
 }
 
 public int getYPosition() {
-    return snakePosition[(snakePosition[0].length)-1][1];
+    return snakePosition.get(snakePosition.size() - 1).get(1);
 }
 
 }
