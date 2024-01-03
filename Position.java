@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Position {
+public class Position{
+    private int score = 0;
     private int n, m;
     public ArrayList<ArrayList<Integer>> snakePosition = new ArrayList<ArrayList<Integer>>();
 
@@ -35,6 +36,7 @@ public void getBigger(int x, int y) {
     newHead.add(x);
     newHead.add(y);
     snakePosition.add(newHead);
+    score++;
 }
 
 public String toString() {
