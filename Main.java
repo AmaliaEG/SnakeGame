@@ -13,17 +13,24 @@ import java.util.Scanner;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        //launch(args);
-        int width = 500;
-        int height = width;
+        int canvasSize = 300;
+
+        // launch(args);
+        Scanner sizeInput = new Scanner(System.in);
+        System.out.print("Input a grid width between 5-100 (inclusive): ");
+        int xGridUser = sizeInput.nextInt();
+        System.out.print("Input a grid height between 5-100 (inclusive): ");
+        int yGridUser = sizeInput.nextInt();
+        sizeInput.close();
+
         JFrame frame = new JFrame("Snake");
         frame.setVisible(true);
-        frame.setSize(width, height);
+        frame.setSize(canvasSize, canvasSize);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Draw game = new Draw(width, height);
+        Draw game = new Draw(xGridUser, yGridUser, canvasSize);
         frame.add(game);
         frame.pack();
 

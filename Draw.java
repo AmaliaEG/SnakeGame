@@ -15,14 +15,18 @@ public class Draw extends JPanel{
         }
     }
 
-    int width;
-    int height;
+    int gridX;
+    int gridY;
+    int canvasSize;
+    int tileAmount;
     int tileSize = 25;
 
-    Draw(int width, int height) {
-        this.width = width;
-        this.height = height;
-        setPreferredSize(new Dimension(this.width, this.height));
+    Draw(int gridX, int gridY, int canvasSize) {
+        this.gridX = gridX;
+        this.gridY = gridY;
+        this.canvasSize = canvasSize;
+
+        setPreferredSize(new Dimension(this.canvasSize, this.canvasSize));
         setBackground(Color.BLACK);
     }
 
@@ -32,9 +36,11 @@ public class Draw extends JPanel{
     }
 
     public void drawGrid(Graphics g){
-        for (int i = 0; i < width/tileSize; i++) {
-            g.drawLine(i*tileSize, 0, i*tileSize, height);
-            g.drawLine(0, i*tileSize, width, i*tileSize);
+        tileSize = canvasSize/gridX;
+
+        for (int i = 0; i < tileSize; i++) {
+            g.drawLine(i*tileSize, 0, i*tileSize, canvasSize);
+            g.drawLine(0, i*tileSize, canvasSize, i*tileSize);
         }
     }
 }
