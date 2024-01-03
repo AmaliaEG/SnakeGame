@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Position {
     private int n, m;
     public Integer[][] snakePosition = new Integer[2][2];
