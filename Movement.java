@@ -16,9 +16,9 @@ public class Movement implements KeyListener {
         setFocusable(true);
     }
     public void move(){
-        Integer[][] snakePosition = position.getSnakePosition;
-        getXposition.snakePosition[][] += velocityX;
-        getYPosition.snakePosition[][] += velocityY; 
+        Integer[][] snakePosition = position.getPosition();
+        snakePosition[0][0] += velocityX;
+        snakePosition[0][1] += velocityY; 
     }
 
     @Override
