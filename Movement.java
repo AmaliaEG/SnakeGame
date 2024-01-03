@@ -3,21 +3,22 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Movement implements KeyListener {
+    private Position position;
     int velocityX = 0;
     int velocityY = 0;
     public static void main(String[] args) {
 
     }
 
-    public Movement() {
-        position = new Position(10, 10);
+    public Movement(Position position) {
+        this.position = position;
         addKeyListener(this);
         setFocusable(true);
     }
     public void move(){
-        ArrayList<ArrayList<Integer>> snakePosition = Position.getSnakePosition();
-        snakePosition.get(i).get(1) += velocityX;
-        snakehead.y += velocityY;
+        Integer[][] snakePosition = position.getSnakePosition;
+        getXposition.snakePosition[][] += velocityX;
+        getYPosition.snakePosition[][] += velocityY; 
     }
 
     @Override
