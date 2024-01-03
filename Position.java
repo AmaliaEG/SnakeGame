@@ -22,15 +22,6 @@ public ArrayList<ArrayList<Integer>> spawnPoint() { // Head is index 0
     return snakePosition;
 }
 
-public void drawBody(ArrayList<ArrayList<Integer>> snakePosition) {
-    int length = snakePosition.size();
-    for (int i = 0; i < length; i++) {
-        int xPosition = snakePosition.get(i).get(0);
-        int yPosition = snakePosition.get(i).get(1);
-        StdDraw.filledSquare(xPosition, yPosition, 1);
-    }
-}
-
 public void getBigger(int x, int y) {
     ArrayList<Integer> newHead = new ArrayList<Integer>();
     newHead.add(x);

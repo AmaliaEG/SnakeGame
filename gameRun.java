@@ -11,6 +11,10 @@ public class gameRun {
                 alive = false;
             }
         }
-        
     }
+
+    
+
+
+
 }
