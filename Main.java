@@ -29,13 +29,11 @@ public class Main extends Application {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Draw game = new Draw(xGridUser, yGridUser, canvasSize);
+        Draw2 game = new Draw2(xGridUser, yGridUser, canvasSize);
         frame.add(game);
         frame.pack();
-
     }
-
+    
     @Override
     public void start(Stage primaryStage) {
         Scanner sizeInput = new Scanner(System.in);
@@ -59,5 +57,5 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         // Movement.requestFocus();
-    }
+    } 
 }

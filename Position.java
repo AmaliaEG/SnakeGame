@@ -51,4 +51,8 @@ public int getYPosition() {
     return snakePosition.get(snakePosition.size() - 1).get(1);
 }
 
+public int getSize() {
+    return snakePosition.size();
+}
+
 }

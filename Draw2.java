@@ -16,36 +16,50 @@ public class Draw2 extends JPanel{
         }
     }
 
-    int width;
-    int height;
+    int gridX;
+    int gridY;
+    int canvasSize;
+    int tileAmount;
     int tileSize = 25;
 
-    Draw2(int width, int height) {
-        this.width = width;
-        this.height = height;
-        setPreferredSize(new Dimension(this.width, this.height));
+    Tile snakeTile;
+    Position snakePosition;
+
+    Draw2(int gridX, int gridY, int canvasSize) {
+        this.gridX = gridX;
+        this.gridY = gridY;
+        this.canvasSize = canvasSize;
+
+        setPreferredSize(new Dimension(this.canvasSize, this.canvasSize));
         setBackground(Color.BLACK);
+
+        snakePosition = new Position(gridX, gridY);
+        snakePosition.spawnPoint();
+        snakeTile = new Tile(snakePosition.getXPosition() * tileSize, snakePosition.getYPosition() * tileSize);
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         drawGrid(g);
+        drawSnake(g);
     }
 
     public void drawGrid(Graphics g){
-        for (int i = 0; i < width/tileSize; i++) {
-            g.drawLine(i*tileSize, 0, i*tileSize, height);
-            g.drawLine(0, i*tileSize, width, i*tileSize);
+        tileSize = canvasSize/gridX;
+        for (int i = 0; i < tileSize; i++) {
+            g.drawLine(i*tileSize, 0, i*tileSize, canvasSize);
+            g.drawLine(0, i*tileSize, canvasSize, i*tileSize);
         }
     }
 
-    public void drawSnake(Graphics g, Position snake) {
+    public void drawSnake(Graphics g) {
         g.setColor(Color.yellow); // Head
-        g.fillRect(snake.getXPosition(), snake.getYPosition(), tileSize, tileSize);
-        g.setColor(Color.green); // Body
-        ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
+        g.fillRect(snakeTile.x, snakeTile.y, tileSize, tileSize);
+
+        ArrayList<ArrayList<Integer>> dataXY = snakePosition.getPosition();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
-            g.fillRect(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1)*tileSize, tileSize, tileSize);
+            g.setColor(Color.green);
+            g.fillRect(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
         }
     }
 }
