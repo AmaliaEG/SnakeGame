@@ -21,14 +21,6 @@ public ArrayList<ArrayList<Integer>> spawnPoint() {
     return snakePosition;
 }
 
-public void getBigger(int x, int y) {
-    ArrayList<Integer> newHead = new ArrayList<Integer>();
-    newHead.add(x);
-    newHead.add(y);
-    snakePosition.add(newHead);
-    // score++;
-}
-
 public void moveBody(Position snake, int headX, int headY) {
     int iterations = snake.getSize() - 1;
     for (int i = 0; i > iterations; i++) {
@@ -41,22 +33,45 @@ public void moveBody(Position snake, int headX, int headY) {
     snakePosition.get(iterations).set(1, newY);
 }
 
+public void getBigger(int x, int y) {
+    ArrayList<Integer> newHead = new ArrayList<Integer>();
+    newHead.add(x);
+    newHead.add(y);
+    snakePosition.add(newHead);
+    // score++;
+}
+
 public void wallJump(int gridHeight, int gridWidth, Position snake) {
     int headXValue = snake.getXPosition();
     int headYValue = snake.getYPosition();
     if (headXValue == gridWidth) {
-        newSnake.get(snake.getSize() - 1).set(0, 0);
+        snakePosition.get(snake.getSize() - 1).set(0, 0);
     }
     else if (headXValue < 0) {
-        newSnake.get(snake.getSize() - 1).set(0, gridWidth-1);
+        snakePosition.get(snake.getSize() - 1).set(0, gridWidth-1);
     }
     else if (headYValue == gridHeight) {
-        newSnake.get(snake.getSize() - 1).set(1, 0);
+        snakePosition.get(snake.getSize() - 1).set(1, 0);
     }
     else if (headYValue < 0) {
-        newSnake.get(snake.getSize() - 1).set(1, gridHeight-1);
+        snakePosition.get(snake.getSize() - 1).set(1, gridHeight-1);
     }
 }
+
+public void suicide(Position snake) {
+    int headX = snake.getXPosition();
+    int headY = snake.getYPosition();
+    for (int i = 0; i < snake.getSize() - 1; i++) {
+        int bodyX = snakePosition.get(i).get(0);
+        int bodyY = snakePosition.get(i).get(1);
+
+        if (headX == bodyX && headY == bodyY) {
+            snakePosition.clear();
+            break;
+        }
+    }
+}
+
 
 public String toString() {
     String s = "";
