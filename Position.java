@@ -30,16 +30,32 @@ public void getBigger(int x, int y) {
 }
 
 public void moveBody(Position snake, int headX, int headY) {
-    ArrayList<ArrayList<Integer>> newSnake = snake.getPosition();
     int iterations = snake.getSize() - 1;
     for (int i = 0; i > iterations; i++) {
-        newSnake.get(i).set(0, newSnake.get(i + 1).get(0));
-        newSnake.get(i).set(1, newSnake.get(i + 1).get(1));
+        snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
+        snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
     }
     int newX = snake.getXPosition() + headX;
     int newY = snake.getYPosition() + headY;
-    newSnake.get(iterations).set(0, newX);
-    newSnake.get(iterations).set(1, newY);
+    snakePosition.get(iterations).set(0, newX);
+    snakePosition.get(iterations).set(1, newY);
+}
+
+public void wallJump(int gridHeight, int gridWidth, Position snake) {
+    int headXValue = snake.getXPosition();
+    int headYValue = snake.getYPosition();
+    if (headXValue == gridWidth) {
+        newSnake.get(snake.getSize() - 1).set(0, 0);
+    }
+    else if (headXValue < 0) {
+        newSnake.get(snake.getSize() - 1).set(0, gridWidth-1);
+    }
+    else if (headYValue == gridHeight) {
+        newSnake.get(snake.getSize() - 1).set(1, 0);
+    }
+    else if (headYValue < 0) {
+        newSnake.get(snake.getSize() - 1).set(1, gridHeight-1);
+    }
 }
 
 public String toString() {
@@ -68,3 +84,4 @@ public int getSize() {
 }
 
 }
+
