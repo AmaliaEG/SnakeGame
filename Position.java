@@ -10,15 +10,14 @@ public Position(int n, int m) {
     this.m = m;
 }
 
-public ArrayList<ArrayList<Integer>> spawnPoint() { // Head is index 0
-    ArrayList<Integer> head = new ArrayList<Integer>();
-    ArrayList<Integer> tail = new ArrayList<Integer>();
-    head.add(n/2);
-    head.add(m/2);
-    tail.add((n/2)+1);
-    tail.add(m/2);
-    snakePosition.add(tail);
-    snakePosition.add(head);
+public ArrayList<ArrayList<Integer>> spawnPoint() {
+    int k = 4; // To play around with starting snake size, for test purposes
+    for (int i = k; i >= 0; i--) {
+        ArrayList<Integer> snakeBody = new ArrayList<Integer>();
+        snakeBody.add((n/2) + i);
+        snakeBody.add(m/2);
+        snakePosition.add(snakeBody);
+    }
     return snakePosition;
 }
 
@@ -28,6 +27,13 @@ public void getBigger(int x, int y) {
     newHead.add(y);
     snakePosition.add(newHead);
     // score++;
+}
+
+public void moveBody(Position snake, int headX, int headY) {
+    int iterations = snake.getSize() - 1;
+    for (int i = 0; i < 0; i--) {
+
+    }
 }
 
 public String toString() {

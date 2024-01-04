@@ -36,17 +36,17 @@ public class DrawCanvas extends Application {
 
         for (int i = 0; i <= X_GRID_FROM_USER; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.WHITESMOKE);
+            lineVertical.setStroke(Color.FORESTGREEN);
             gridLines.getChildren().add(lineVertical);
         }
 
         for (int i = 0; i <= Y_GRID_FROM_USER; i++) {
             Line lineHorizontal = new Line(0, i * tileSize, WIDTH_CANVAS, i * tileSize);
-            lineHorizontal.setStroke(Color.WHITESMOKE);
+            lineHorizontal.setStroke(Color.FORESTGREEN);
             gridLines.getChildren().add(lineHorizontal);
         }
 
-        Scene scene = new Scene(root, WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(root, WIDTH_CANVAS, HEIGHT_CANVAS, Color.DARKGREEN);
         root.getChildren().add(gridLines);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -55,12 +55,13 @@ public class DrawCanvas extends Application {
     public void drawSnake(Position snake) {
         Group snakeBody = new Group();
         Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize, tileSize);
-        head.setFill(Color.GREEN);
+        head.setFill(Color.MAGENTA);
         snakeBody.getChildren().add(head);
+        
         ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
             Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
-            tail.setFill(Color.FORESTGREEN);
+            tail.setFill(Color.LIGHTPINK);
             snakeBody.getChildren().add(tail);
         }
         root.getChildren().add(snakeBody);
