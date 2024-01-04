@@ -1,9 +1,14 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
-import java.util.Scanner;
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class MainTest extends Application {
 
+
+public class MainTest extends Application implements KeyListener {
+    int velocityX = 0;
+    int velocityY = 0;
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,4 +32,41 @@ public class MainTest extends Application {
         snake.spawnPoint();
         drawCanvas.drawSnake(snake);
     }
+
+    public MainTest(){
+        addKeyListener(this);
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1) {
+            velocityX = 0;
+            velocityY = -1;
+        }
+
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN && velocityY != -1){
+            velocityX = 0;
+            velocityY = 1;
+        }
+
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT && velocityX != 1) {
+            velocityX = -1;
+            velocityY = 0;
+        }
+
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1) {
+            velocityX = 1;
+            velocityY = 0;
+        }
+    }
+
+    //Needs to be defined however not used
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
 }
