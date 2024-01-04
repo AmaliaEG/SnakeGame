@@ -121,6 +121,8 @@ public class MainTest extends Application {
                     velocityX = 1;
                     velocityY = 0;
                 }
+                
+            default:
                 break;
         }
     }
