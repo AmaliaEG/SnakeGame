@@ -8,40 +8,36 @@ import javafx.stage.Stage;
 public class DrawCanvas extends Application {
 
     public static final int MAX_CANVAS = 600;
-    public int HEIGHT_CANVAS;
-    public int WIDTH_CANVAS;
-    public int X_GRID_FROM_USER = 5;
-    public int Y_GRID_FROM_USER = 5;
-    public int tileSize;
-    private Stage primaryStage;
+    int HEIGHT_CANVAS;
+    int WIDTH_CANVAS;
+    int X_GRID_FROM_USER;
+    int Y_GRID_FROM_USER;
+    int tileSize;
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    public DrawCanvas(int x, int y) {
+        this.X_GRID_FROM_USER = x;
+        this.Y_GRID_FROM_USER = y;
+    }
+
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        calculateCanvasSize();
         createGrid(primaryStage);
     }
 
-    public void setGridSize(int x, int y) {
-        this.X_GRID_FROM_USER = x;
-        this.Y_GRID_FROM_USER = y;
-        calculateCanvasSize();
-        createGrid((Stage) primaryStage.getOwner());
-    }
-
-    private void calculateCanvasSize() {
+    public void calculateCanvasSize() {
+        //this.X_GRID_FROM_USER = x;
+        //this.Y_GRID_FROM_USER = y;
         int maxGridSize = Math.max(X_GRID_FROM_USER, Y_GRID_FROM_USER);
-
-        tileSize = MAX_CANVAS / maxGridSize;
-        WIDTH_CANVAS = tileSize * X_GRID_FROM_USER;
-        HEIGHT_CANVAS = tileSize * Y_GRID_FROM_USER;
+        this.tileSize = MAX_CANVAS / maxGridSize;
+        this.WIDTH_CANVAS = tileSize * X_GRID_FROM_USER;
+        this.HEIGHT_CANVAS = tileSize * Y_GRID_FROM_USER;
     }
 
-    private void createGrid(Stage primaryStage) {
+    public void createGrid(Stage primaryStage) {
         Group gridLines = new Group();
 
         for (int i = 0; i <= X_GRID_FROM_USER; i++) {
@@ -55,6 +51,7 @@ public class DrawCanvas extends Application {
             lineHorizontal.setStroke(Color.WHITESMOKE);
             gridLines.getChildren().add(lineHorizontal);
         }
+        
 
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
