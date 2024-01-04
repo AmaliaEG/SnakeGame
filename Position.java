@@ -30,10 +30,16 @@ public void getBigger(int x, int y) {
 }
 
 public void moveBody(Position snake, int headX, int headY) {
+    ArrayList<ArrayList<Integer>> newSnake = snake.getPosition();
     int iterations = snake.getSize() - 1;
-    for (int i = 0; i > 0; i--) {
-
+    for (int i = 0; i > iterations; i++) {
+        newSnake.get(i).set(0, newSnake.get(i + 1).get(0));
+        newSnake.get(i).set(1, newSnake.get(i + 1).get(1));
     }
+    int newX = snake.getXPosition() + headX;
+    int newY = snake.getYPosition() + headY;
+    newSnake.get(iterations).set(0, newX);
+    newSnake.get(iterations).set(1, newY);
 }
 
 public String toString() {
