@@ -1,18 +1,15 @@
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
-import javax.swing.*;
-
 import java.util.Scanner;
 
-public class MainTest {
+public class MainTest extends Application {
 
     public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
         Scanner sizeInput = new Scanner(System.in);
         System.out.print("Input a grid width between 5-100 (inclusive): ");
         int xGridUser = sizeInput.nextInt();
@@ -20,8 +17,10 @@ public class MainTest {
         int yGridUser = sizeInput.nextInt();
         sizeInput.close();
 
-        DrawCanvas canvas = new DrawCanvas(); 
-        canvas.calculateCanvasSize(xGridUser, yGridUser);
-        Application.launch(DrawCanvas.class);
+        DrawCanvas drawCanvas = new DrawCanvas();
+        drawCanvas.X_GRID_FROM_USER = xGridUser;
+        drawCanvas.Y_GRID_FROM_USER = yGridUser;
+        drawCanvas.calculateCanvasSize();
+        drawCanvas.createGrid(primaryStage);
     }
 }

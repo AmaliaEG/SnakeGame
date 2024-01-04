@@ -18,19 +18,11 @@ public class DrawCanvas extends Application {
         launch(args);
     }
 
-    public DrawCanvas(int x, int y) {
-        this.X_GRID_FROM_USER = x;
-        this.Y_GRID_FROM_USER = y;
-    }
-
     @Override
     public void start(Stage primaryStage) {
-        createGrid(primaryStage);
     }
 
     public void calculateCanvasSize() {
-        //this.X_GRID_FROM_USER = x;
-        //this.Y_GRID_FROM_USER = y;
         int maxGridSize = Math.max(X_GRID_FROM_USER, Y_GRID_FROM_USER);
         this.tileSize = MAX_CANVAS / maxGridSize;
         this.WIDTH_CANVAS = tileSize * X_GRID_FROM_USER;
@@ -52,7 +44,6 @@ public class DrawCanvas extends Application {
             gridLines.getChildren().add(lineHorizontal);
         }
         
-
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         root.getChildren().add(gridLines);
