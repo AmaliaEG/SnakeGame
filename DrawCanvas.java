@@ -66,6 +66,9 @@ public class DrawCanvas extends Application {
         }
         root.getChildren().add(snakeBody);
     }
-}
 
-// Random comment
+    public Group getRoot() {
+        return root;
+    }
+}
+ 
