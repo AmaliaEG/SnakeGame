@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
 public class DrawCanvas extends Application {
@@ -13,6 +14,7 @@ public class DrawCanvas extends Application {
     int X_GRID_FROM_USER;
     int Y_GRID_FROM_USER;
     int tileSize;
+    private Group root = new Group();
 
     public static void main(String[] args) {
         launch(args);
@@ -43,11 +45,24 @@ public class DrawCanvas extends Application {
             lineHorizontal.setStroke(Color.WHITESMOKE);
             gridLines.getChildren().add(lineHorizontal);
         }
-        
-        Group root = new Group();
+
         Scene scene = new Scene(root, WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         root.getChildren().add(gridLines);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public void drawSnake(Position snake) {
+        Group snakeBody = new Group();
+        Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize, tileSize);
+        head.setFill(Color.GREEN);
+        snakeBody.getChildren().add(head);
+        ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
+        for (int i = dataXY.size() - 2; i >= 0; i--) {
+            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
+            tail.setFill(Color.FORESTGREEN);
+            snakeBody.getChildren().add(tail);
+        }
+        root.getChildren().add(snakeBody);
     }
 }

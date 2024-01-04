@@ -22,5 +22,9 @@ public class MainTest extends Application {
         drawCanvas.Y_GRID_FROM_USER = yGridUser;
         drawCanvas.calculateCanvasSize();
         drawCanvas.createGrid(primaryStage);
+
+        Position snake = new Position(xGridUser, yGridUser);
+        snake.spawnPoint();
+        drawCanvas.drawSnake(snake);
     }
 }
