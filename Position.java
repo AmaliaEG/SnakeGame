@@ -39,7 +39,6 @@ public void getBigger(int x, int y) {
     newHead.add(x);
     newHead.add(y);
     snakePosition.add(newHead);
-    
     // score++;
 }
 
@@ -74,16 +73,6 @@ public void suicide(Position snake) {
     }
 }
 
-public String toString() {
-    String s = "";
-    for (int i = 0; i < snakePosition.size(); i++) {
-        for (int j = 0; j < 2; j++) {
-            s = s + snakePosition.get(i).get(j) + "Body part: " + i + "\n";
-        }
-    }
-    return s;
-}
-
 public ArrayList<ArrayList<Integer>> getPosition() {
     return snakePosition;
 }
@@ -97,6 +86,16 @@ public int getYPosition() {
 
 public int getSize() {
     return snakePosition.size();
+}
+
+public String toString() {
+    String s = "";
+    for (int i = 0; i < snakePosition.size(); i++) {
+        for (int j = 0; j < 2; j++) {
+            s = s + snakePosition.get(i).get(j) + "Body part: " + i + "\n";
+        }
+    }
+    return s;
 }
 
 }
