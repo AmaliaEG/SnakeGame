@@ -87,6 +87,7 @@ public class MainTest2 extends Application {
                     }
                     snake.wallJump(yGridUser, xGridUser, snake);
                     snake.suicide(snake);
+                    
                     drawCanvas.drawSnake(snake);
                     System.out.println(snake);
                 }

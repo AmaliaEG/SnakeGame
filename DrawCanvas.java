@@ -69,6 +69,19 @@ public class DrawCanvas extends Application {
         root.getChildren().add(snakeBody);
     }
 
+       public void drawPoint(ArrayList<ArrayList<Integer>> dataXY) {
+        root.getChildren().removeIf(node -> node instanceof Group);
+        
+        Group point = new Group();
+        
+        for (int i = 0; i < dataXY.size(); i++) {
+            Rectangle pointSpawn = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
+            pointSpawn.setFill(Color.RED);
+            point.getChildren().add(point);
+        }
+        root.getChildren().add(point);
+    }
+
     public Group getRoot() {
         return root;
     }
