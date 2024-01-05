@@ -21,6 +21,18 @@ public ArrayList<ArrayList<Integer>> spawnPoint() {
     return snakePosition;
 }
 
+public void moveBody(Position snake, int headX, int headY) {
+    int iterations = snake.getSize() - 1;
+    for (int i = 0; i > iterations; i++) {
+        snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
+        snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
+    }
+    int newX = snake.getXPosition() + headX;
+    int newY = snake.getYPosition() + headY;
+    snakePosition.get(iterations).set(0, newX);
+    snakePosition.get(iterations).set(1, newY);
+}
+
 public void getBigger(int x, int y) {
     ArrayList<Integer> newHead = new ArrayList<Integer>();
     newHead.add(x);
@@ -29,18 +41,37 @@ public void getBigger(int x, int y) {
     // score++;
 }
 
-public void moveBody(Position snake, int headX, int headY) {
-    ArrayList<ArrayList<Integer>> newSnake = snake.getPosition();
-    int iterations = snake.getSize() - 1;
-    for (int i = 0; i > iterations; i++) {
-        newSnake.get(i).set(0, newSnake.get(i + 1).get(0));
-        newSnake.get(i).set(1, newSnake.get(i + 1).get(1));
+public void wallJump(int gridHeight, int gridWidth, Position snake) {
+    int headXValue = snake.getXPosition();
+    int headYValue = snake.getYPosition();
+    if (headXValue == gridWidth) {
+        snakePosition.get(snake.getSize() - 1).set(0, 0);
     }
-    int newX = snake.getXPosition() + headX;
-    int newY = snake.getYPosition() + headY;
-    newSnake.get(iterations).set(0, newX);
-    newSnake.get(iterations).set(1, newY);
+    else if (headXValue < 0) {
+        snakePosition.get(snake.getSize() - 1).set(0, gridWidth-1);
+    }
+    else if (headYValue == gridHeight) {
+        snakePosition.get(snake.getSize() - 1).set(1, 0);
+    }
+    else if (headYValue < 0) {
+        snakePosition.get(snake.getSize() - 1).set(1, gridHeight-1);
+    }
 }
+
+public void suicide(Position snake) {
+    int headX = snake.getXPosition();
+    int headY = snake.getYPosition();
+    for (int i = 0; i < snake.getSize() - 1; i++) {
+        int bodyX = snakePosition.get(i).get(0);
+        int bodyY = snakePosition.get(i).get(1);
+
+        if (headX == bodyX && headY == bodyY) {
+            snakePosition.clear();
+            break;
+        }
+    }
+}
+
 
 public String toString() {
     String s = "";
@@ -68,3 +99,4 @@ public int getSize() {
 }
 
 }
+
