@@ -6,6 +6,8 @@ import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
 
+// THIS IS THE OPTIMIZED BRANCH
+
 public class MainTest2 extends Application {
     private long lastUpdateTime = 0;
 
