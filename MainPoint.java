@@ -5,6 +5,8 @@ import javafx.scene.*;
 import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
+import javafx.scene.shape.*;
+import javafx.scene.paint.Color;
 
 
 
@@ -41,9 +43,12 @@ public class MainPoint extends Application {
         System.out.println(testPoint.toString());
 
         //testPoint.removeFilledSpaces(snakePosition);
-        //System.out.println(testPoint.toString());
+        //System.out.println(testPoint.toString());]
 
-        //System.out.println(testPoint.getRandomPosition());
+        int[][] randomPosition = testPoint.getRandomPosition();
+
+        System.out.println(randomPosition[0][0] + " " + randomPosition[0][1]);
+        drawCanvas.drawPoint(testPoint.getRandomPosition());
 
         Scene scene = primaryStage.getScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -106,6 +111,7 @@ public class MainPoint extends Application {
                     snake.suicide(snake);
                     
                     drawCanvas.drawSnake(snake);
+                    
                     //System.out.println(snake);
                 }
             }

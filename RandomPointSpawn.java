@@ -52,11 +52,14 @@ public class RandomPointSpawn {
         return spawnSpaces;
     }
 
-    public int[] getRandomPosition(){
+    public int[][] getRandomPosition(){
         int randomX = rand.nextInt(spawnSpaces.size());
+        int randomY = -1;
 
-        int [] randomPosition = {randomX, rand.nextInt(spawnSpaces.get(randomX).size()) };
-        return randomPosition;
+        if(!spawnSpaces.get(randomX).isEmpty()){
+            randomY = spawnSpaces.get(randomX).remove(rand.nextInt(spawnSpaces.get(randomX).size()));
+        }
+        return new int[][]{{randomX, randomY}};
     }
 
  
