@@ -91,7 +91,7 @@ public class MainTest2 extends Application {
             @Override
             public void handle(long now) {
 
-                if (now - lastUpdateTime >= 500000000L) {
+                if (now - lastUpdateTime >= 800000000L) {
 
                     lastUpdateTime = now;
                     if (apple) {
