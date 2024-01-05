@@ -90,8 +90,8 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
 
-                if (now - lastUpdateTime >= 500000000L) {
-
+                if (now - lastUpdateTime >= 200000000) {
+                    apple = checkForPoint(snake, p);
                     lastUpdateTime = now;
                     if (apple) {
                         apple = false;
@@ -114,7 +114,6 @@ public class Main extends Application {
                     snake.wallJump(gridY, gridX, snake);
                     snake.suicide(snake);
                     canvas.drawSnake(snake);
-                    apple = checkForPoint(snake, p);
                     System.out.println(snake);
                 }
             }
