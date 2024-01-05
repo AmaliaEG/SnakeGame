@@ -12,6 +12,10 @@ public class MainTest2 extends Application {
     private long lastUpdateTime = 0;
 
     boolean north, south, east, west;
+
+    ArrayList<Integer> pointPosition = new ArrayList<Integer>();
+    ArrayList<ArrayList<Integer>> allPoints = new ArrayList<ArrayList<Integer>>();
+
     
     public static void main(String[] args) {
         launch(args);
@@ -19,6 +23,13 @@ public class MainTest2 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        pointPosition.add(2);
+        pointPosition.add(2);
+
+        allPoints.add(pointPosition);
+
+
+
         Scanner sizeInput = new Scanner(System.in);
         System.out.print("Input a grid width between 5-100 (inclusive): ");
         int xGridUser = sizeInput.nextInt();
@@ -35,6 +46,7 @@ public class MainTest2 extends Application {
         Position snake = new Position(xGridUser, yGridUser);
         snake.spawnPoint();
         drawCanvas.drawSnake(snake);
+        drawCanvas.drawPoint(allPoints);
 
         Scene scene = primaryStage.getScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -95,8 +107,8 @@ public class MainTest2 extends Application {
                     }
                     snake.wallJump(yGridUser, xGridUser, snake);
                     snake.suicide(snake);
-                    
                     drawCanvas.drawSnake(snake);
+                    drawCanvas.drawPoint(allPoints);
                     System.out.println(snake);
                 }
             }
