@@ -39,6 +39,7 @@ public void getBigger(int x, int y) {
     newHead.add(x);
     newHead.add(y);
     snakePosition.add(newHead);
+    
     // score++;
 }
 

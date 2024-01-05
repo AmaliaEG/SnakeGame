@@ -11,6 +11,7 @@ public class MainTest2 extends Application {
 
     boolean north, south, east, west;
     boolean apple = false;
+    int lastDirection = 0;
 
     ArrayList<Integer> pointPosition = new ArrayList<Integer>();
     ArrayList<ArrayList<Integer>> allPoints = new ArrayList<ArrayList<Integer>>();
@@ -50,7 +51,7 @@ public class MainTest2 extends Application {
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case UP:
-                        if (!south) {
+                        if (!(lastDirection == 2)) {
                             north = true;
                             south = false;
                             east = false;
@@ -58,7 +59,7 @@ public class MainTest2 extends Application {
                         }
                         break;
                     case DOWN:
-                        if (!north) {
+                        if (!(lastDirection == 1)) {
                             north = false;
                             south = true;
                             east = false;
@@ -66,7 +67,7 @@ public class MainTest2 extends Application {
                         }
                         break;
                     case RIGHT:
-                        if (!west) {
+                        if (!(lastDirection == 4)) {
                             north = false;
                             south = false;
                             east = true;
@@ -74,7 +75,7 @@ public class MainTest2 extends Application {
                         }
                         break;
                     case LEFT:
-                        if (!east) {
+                        if (!(lastDirection == 3)) {
                             north = false;
                             south = false;
                             east = false;
@@ -96,12 +97,16 @@ public class MainTest2 extends Application {
                     if (apple) {
                         apple = false;
                     } else if (north) {
+                        lastDirection = 1;
                         snake.moveBody(snake, 0, -1);
                     } else if (south) {
+                        lastDirection = 2;
                         snake.moveBody(snake, 0, 1);
                     } else if (east) {
+                        lastDirection = 3;
                         snake.moveBody(snake, 1, 0);
                     } else if (west) {
+                        lastDirection = 4;
                         snake.moveBody(snake, -1, 0);
                     }
 
