@@ -102,4 +102,12 @@ public class MainTest2 extends Application {
         };
         timer.start();
     }
-}
+
+    public void checkForPoint(Position snake, ArrayList<ArrayList<Integer>> pointList) {
+        for (int i = 0; i < snake.getSize(); i++) {
+            if (snake.getXPosition() == pointList.get(i).get(0) && snake.getYPosition() == pointList.get(i).get(1)) {
+                snake.getBigger(pointList.get(i).get(0), pointList.get(i).get(1));
+            }
+        }
+    }
+ }
