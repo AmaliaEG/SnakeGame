@@ -15,7 +15,6 @@ public class DrawCanvas extends Application {
     int Y_GRID_FROM_USER;
     int tileSize;
     private Group root = new Group();
-    //Group point = new Group();
 
     public static void main(String[] args) {
         launch(args);
@@ -57,39 +56,34 @@ public class DrawCanvas extends Application {
         root.getChildren().removeIf(node -> node instanceof Group);
         Group snakeBody = new Group();
 
-        Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize,
-                tileSize);
+        Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize, tileSize);
         head.setFill(Color.MAGENTA);
         snakeBody.getChildren().add(head);
-
+        
         ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
-            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
-                    tileSize);
+            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
             tail.setFill(Color.LIGHTPINK);
             snakeBody.getChildren().add(tail);
         }
         root.getChildren().add(snakeBody);
     }
 
-    public void drawPoint(ArrayList<ArrayList<Integer>> dataXY) {
+       public void drawPoint(int[][] dataXY) {
+        root.getChildren().removeIf(node -> node instanceof Group);
+        
         Group point = new Group();
-
-        for (int i = 0; i < dataXY.size(); i++) {
-            System.out.println("position of point: " + dataXY.get(i).get(0) + " and " + dataXY.get(i).get(1));
-
-            Rectangle pointSpawn = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize,
-                    tileSize, tileSize);
+        
+        for (int i = 0; i < dataXY.length; i++) {
+            Rectangle pointSpawn = new Rectangle(dataXY[i][0]*tileSize, dataXY[i][1]*tileSize, tileSize, tileSize);
             pointSpawn.setFill(Color.RED);
             point.getChildren().add(pointSpawn);
         }
-
         root.getChildren().add(point);
-
-
     }
 
     public Group getRoot() {
         return root;
     }
 }
+ 
