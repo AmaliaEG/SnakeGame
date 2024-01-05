@@ -72,7 +72,6 @@ public void suicide(Position snake) {
     }
 }
 
-
 public String toString() {
     String s = "";
     for (int i = 0; i < snakePosition.size(); i++) {

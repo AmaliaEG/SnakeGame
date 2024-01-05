@@ -1,6 +1,7 @@
 import javafx.application.Application;
+import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import java.util.*;
@@ -11,11 +12,14 @@ import javafx.event.EventHandler;
 
 
 public class MainTest extends Application {
-    private int velocityX = 0;
-    private int velocityY = 0;
-    private Position snake;
+    // private int velocityX = 0;
+    // private int velocityY = 0;
+    //private Position snake;
+
+    private Node snakie;
 
     boolean north, south, east, west;
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -29,7 +33,7 @@ public class MainTest extends Application {
         int yGridUser = sizeInput.nextInt();
         sizeInput.close();
 
-        DrawCanvas drawCanvas = new DrawCanvas();
+        DrawCanvasTest drawCanvas = new DrawCanvasTest(); //Test
         drawCanvas.X_GRID_FROM_USER = xGridUser;
         drawCanvas.Y_GRID_FROM_USER = yGridUser;
         drawCanvas.calculateCanvasSize();
@@ -40,21 +44,23 @@ public class MainTest extends Application {
         drawCanvas.drawSnake(snake);
 
         //Sets up key event handling
-        Scene scene = new Scene(drawCanvas.getRoot(), drawCanvas.WIDTH_CANVAS, drawCanvas.HEIGHT_CANVAS);
+        /*Scene scene = new Scene(drawCanvas.getRoot(), drawCanvas.WIDTH_CANVAS, drawCanvas.HEIGHT_CANVAS);
         scene.setOnKeyPressed(this::handleKeyPress);
         scene.setOnKeyReleased(this::handleKeyRelease);
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        javafx.animation.AnimationsTimer animationTimer = new javafx.animation.AnimationTimer(){
+        javafx.animation.AnimationTimer animationTimer = new javafx.animation.AnimationTimer(){
             @Override
             public void handle(long now) {
                 updateSnakePosition(snake);
                 drawCanvas.drawSnake(snake);
             }
         };
-        animationTimer.start();
+        animationTimer.start();*/
     }
+}
+    
         
         /*scene.setOnKeyPressed(new EventHandler <KeyEvent>() {
             @Override
@@ -92,9 +98,9 @@ public class MainTest extends Application {
                 if (south) dy += 1;
                 if (east) dx += 1;
                 if (west) dx -= 1;*/
-    }
+    
 
-    private void handleKeyPress(KeyEvent e) {
+    /*private void handleKeyPress(KeyEvent e) {
         switch (e.getCode()) {
             case UP:
                 if(velocityY!= 1) {
@@ -133,7 +139,7 @@ public class MainTest extends Application {
         velocityY = 0;
     }
 
-    private void updateSnakePosition() {
+    private void updateSnakePosition(Position position) {
         int headX = snake.getXPosition();
         int headY = snake.getYPosition();
 
@@ -142,6 +148,15 @@ public class MainTest extends Application {
 
         snake.moveBody(snake, headX, headY);
         snake.getBigger(headX, headY);
+
+        drawCanvas.getRoot().getChildren().clear();
+
+        drawCanvas.createGrid(primaryStage);
+
+        drawCanvas.drawSnake(drawCanvas.getRoot(), snake);
+
+
+    }*/
             
 
     /*public MainTest(){
@@ -180,4 +195,4 @@ public class MainTest extends Application {
     public void keyReleased(KeyEvent e) {
     }*/
 
-}
+//}
