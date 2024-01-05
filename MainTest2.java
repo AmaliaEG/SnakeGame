@@ -42,28 +42,36 @@ public class MainTest2 extends Application {
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
                     case UP:
-                        north = true;
-                        south = false;
-                        east = false;
-                        west = false;
+                        if (!south) {
+                            north = true;
+                            south = false;
+                            east = false;
+                            west = false;
+                        }
                         break;
                     case DOWN:
-                        north = false;
-                        south = true;
-                        east = false;
-                        west = false;
+                        if (!north) {
+                            north = false;
+                            south = true;
+                            east = false;
+                            west = false;
+                        }
                         break;
                     case RIGHT:
-                        north = false;
-                        south = false;
-                        east = true;
-                        west = false;
+                        if (!west) {
+                            north = false;
+                            south = false;
+                            east = true;
+                            west = false;
+                        }
                         break;
                     case LEFT:
-                        north = false;
-                        south = false;
-                        east = false;
-                        west = true;
+                        if (!east) {
+                            north = false;
+                            south = false;
+                            east = false;
+                            west = true;
+                        }
                         break;
                     default:
                 }
@@ -95,4 +103,12 @@ public class MainTest2 extends Application {
         };
         timer.start();
     }
-}
+
+    public void checkForPoint(Position snake, ArrayList<ArrayList<Integer>> pointList) {
+        for (int i = 0; i < snake.getSize(); i++) {
+            if (snake.getXPosition() == pointList.get(i).get(0) && snake.getYPosition() == pointList.get(i).get(1)) {
+                snake.getBigger(pointList.get(i).get(0), pointList.get(i).get(1));
+            }
+        }
+    }
+ }

@@ -23,14 +23,14 @@ public ArrayList<ArrayList<Integer>> spawnPoint() {
 
 public ArrayList<ArrayList<Integer>> moveBody(Position snake, int headX, int headY) {
     int iterations = snake.getSize() - 1;
-    for (int i = 0; i > iterations; i++) {
-        this.snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
-        this.snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
+    for (int i = 0; i < iterations; i++) {
+        snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
+        snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
     }
     int newX = snake.getXPosition() + headX;
     int newY = snake.getYPosition() + headY;
-    this.snakePosition.get(iterations).set(0, newX);
-    this.snakePosition.get(iterations).set(1, newY);
+    snakePosition.get(iterations).set(0, newX);
+    snakePosition.get(iterations).set(1, newY);
     return snakePosition;
 }
 
