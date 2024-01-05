@@ -6,19 +6,26 @@ import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
 
-
-
 public class MainTest2 extends Application {
     private long lastUpdateTime = 0;
 
     boolean north, south, east, west;
-    
+    boolean apple = false;
+
+    ArrayList<Integer> pointPosition = new ArrayList<Integer>();
+    ArrayList<ArrayList<Integer>> allPoints = new ArrayList<ArrayList<Integer>>();
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
+        pointPosition.add(2);
+        pointPosition.add(2);
+
+        allPoints.add(pointPosition);
+
         Scanner sizeInput = new Scanner(System.in);
         System.out.print("Input a grid width between 5-100 (inclusive): ");
         int xGridUser = sizeInput.nextInt();
@@ -35,6 +42,7 @@ public class MainTest2 extends Application {
         Position snake = new Position(xGridUser, yGridUser);
         snake.spawnPoint();
         drawCanvas.drawSnake(snake);
+        drawCanvas.drawPoint(allPoints);
 
         Scene scene = primaryStage.getScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -81,10 +89,13 @@ public class MainTest2 extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (now - lastUpdateTime >= 500000000L) {
-                    lastUpdateTime = now;
 
-                    if (north) {
+                if (now - lastUpdateTime >= 500000000L) {
+
+                    lastUpdateTime = now;
+                    if (apple) {
+                        apple = false;
+                    } else if (north) {
                         snake.moveBody(snake, 0, -1);
                     } else if (south) {
                         snake.moveBody(snake, 0, 1);
@@ -93,10 +104,12 @@ public class MainTest2 extends Application {
                     } else if (west) {
                         snake.moveBody(snake, -1, 0);
                     }
+
                     snake.wallJump(yGridUser, xGridUser, snake);
                     snake.suicide(snake);
-                    
                     drawCanvas.drawSnake(snake);
+                    drawCanvas.drawPoint(allPoints);
+                    apple = checkForPoint(snake, allPoints);
                     System.out.println(snake);
                 }
             }
@@ -104,11 +117,34 @@ public class MainTest2 extends Application {
         timer.start();
     }
 
-    public void checkForPoint(Position snake, ArrayList<ArrayList<Integer>> pointList) {
-        for (int i = 0; i < snake.getSize(); i++) {
-            if (snake.getXPosition() == pointList.get(i).get(0) && snake.getYPosition() == pointList.get(i).get(1)) {
-                snake.getBigger(pointList.get(i).get(0), pointList.get(i).get(1));
+    public boolean checkForPoint(Position snake, ArrayList<ArrayList<Integer>> pointList) {
+        boolean apple = false;
+
+        int snakeNextX = snake.getXPosition();
+        int snakeNextY = snake.getYPosition();
+
+        if (north) {
+            snakeNextY -= 1;
+        } else if (south) {
+            snakeNextY += 1;
+        } else if (east) {
+            snakeNextX += 1;
+        } else if (west) {
+            snakeNextX -= 1;
+        }
+
+        for (int i = 0; i < pointList.size(); i++) {
+            
+            int pointX = pointList.get(i).get(0);
+            int pointY = pointList.get(i).get(1);
+
+            if (snakeNextX == pointX && snakeNextY == pointY) {
+                this.allPoints.clear();
+                snake.getBigger(pointX, pointY);
+                apple = true;
             }
         }
+
+        return apple;
     }
- }
+}
