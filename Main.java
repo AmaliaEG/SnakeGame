@@ -6,8 +6,6 @@ import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
 
-// THIS IS THE OPTIMIZED BRANCH
-
 public class Main extends Application {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
