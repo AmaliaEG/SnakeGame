@@ -11,7 +11,7 @@ public Position(int n, int m) {
 }
 
 public ArrayList<ArrayList<Integer>> spawnPoint() {
-    int k = 4; // To play around with starting snake size, for test purposes
+    int k = 2; // To play around with starting snake size, for test purposes
     for (int i = k; i >= 0; i--) {
         ArrayList<Integer> snakeBody = new ArrayList<Integer>();
         snakeBody.add((n/2) + i);
@@ -21,16 +21,17 @@ public ArrayList<ArrayList<Integer>> spawnPoint() {
     return snakePosition;
 }
 
-public void moveBody(Position snake, int headX, int headY) {
+public ArrayList<ArrayList<Integer>> moveBody(Position snake, int headX, int headY) {
     int iterations = snake.getSize() - 1;
     for (int i = 0; i > iterations; i++) {
-        snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
-        snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
+        this.snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
+        this.snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
     }
     int newX = snake.getXPosition() + headX;
     int newY = snake.getYPosition() + headY;
-    snakePosition.get(iterations).set(0, newX);
-    snakePosition.get(iterations).set(1, newY);
+    this.snakePosition.get(iterations).set(0, newX);
+    this.snakePosition.get(iterations).set(1, newY);
+    return snakePosition;
 }
 
 public void getBigger(int x, int y) {
@@ -76,7 +77,7 @@ public String toString() {
     String s = "";
     for (int i = 0; i < snakePosition.size(); i++) {
         for (int j = 0; j < 2; j++) {
-            s = s + snakePosition.get(i).get(j) + "\n";
+            s = s + snakePosition.get(i).get(j) + "Body part: " + i + "\n";
         }
     }
     return s;

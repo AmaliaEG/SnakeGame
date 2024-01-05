@@ -73,9 +73,8 @@ public class MainTest2 extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (now - lastUpdateTime >= 5_000_000_000L) { // Check if 5 seconds have passed
+                if (now - lastUpdateTime >= 500000000L) {
                     lastUpdateTime = now;
-
 
                     if (north) {
                         snake.moveBody(snake, 0, -1);
@@ -89,6 +88,7 @@ public class MainTest2 extends Application {
                     snake.wallJump(yGridUser, xGridUser, snake);
                     snake.suicide(snake);
                     drawCanvas.drawSnake(snake);
+                    System.out.println(snake);
                 }
             }
         };

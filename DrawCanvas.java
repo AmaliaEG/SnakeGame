@@ -53,7 +53,9 @@ public class DrawCanvas extends Application {
     }
 
     public void drawSnake(Position snake) {
+        root.getChildren().removeIf(node -> node instanceof Group);
         Group snakeBody = new Group();
+
         Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize, tileSize);
         head.setFill(Color.MAGENTA);
         snakeBody.getChildren().add(head);
