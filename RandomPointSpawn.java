@@ -53,12 +53,11 @@ public class RandomPointSpawn {
     }
 
     public int[][] getRandomPosition(){
-        int randomX = rand.nextInt(spawnSpaces.size());
-        int randomY = -1;
-
-        if(!spawnSpaces.get(randomX).isEmpty()){
+        int randomX = rand.nextInt(spawnSpaces.size()-1);
+        int randomY = rand.nextInt(spawnSpaces.get(randomX).size()-1);
+        /*if(!spawnSpaces.get(randomX).isEmpty()){
             randomY = spawnSpaces.get(randomX).remove(rand.nextInt(spawnSpaces.get(randomX).size()));
-        }
+        }*/
         return new int[][]{{randomX, randomY}};
     }
 

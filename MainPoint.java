@@ -48,7 +48,7 @@ public class MainPoint extends Application {
         int[][] randomPosition = testPoint.getRandomPosition();
 
         System.out.println(randomPosition[0][0] + " " + randomPosition[0][1]);
-        drawCanvas.drawPoint(testPoint.getRandomPosition());
+        
 
         Scene scene = primaryStage.getScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -111,6 +111,7 @@ public class MainPoint extends Application {
                     snake.suicide(snake);
                     
                     drawCanvas.drawSnake(snake);
+                    drawCanvas.drawPoint(testPoint.getRandomPosition());
                     
                     //System.out.println(snake);
                 }
