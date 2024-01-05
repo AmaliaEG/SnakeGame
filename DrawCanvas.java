@@ -84,7 +84,7 @@ public class DrawCanvas extends Application {
             point.getChildren().add(pointSpawn);
         }
 
-                    root.getChildren().add(point);
+        root.getChildren().add(point);
 
 
     }
