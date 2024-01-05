@@ -26,7 +26,7 @@ public class MainTest2 extends Application {
         int yGridUser = sizeInput.nextInt();
         sizeInput.close();
 
-        DrawCanvasTest drawCanvas = new DrawCanvasTest(); //Test
+        DrawCanvas drawCanvas = new DrawCanvas();
         drawCanvas.X_GRID_FROM_USER = xGridUser;
         drawCanvas.Y_GRID_FROM_USER = yGridUser;
         drawCanvas.calculateCanvasSize();
@@ -75,6 +75,7 @@ public class MainTest2 extends Application {
             public void handle(long now) {
                 if (now - lastUpdateTime >= 5_000_000_000L) { // Check if 5 seconds have passed
                     lastUpdateTime = now;
+
 
                     if (north) {
                         snake.moveBody(snake, 0, -1);
