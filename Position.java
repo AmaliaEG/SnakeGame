@@ -27,8 +27,8 @@ public ArrayList<ArrayList<Integer>> moveBody(Position snake, int headX, int hea
         snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
         snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
     }
-    int newX = snake.getXPosition() + headX;
-    int newY = snake.getYPosition() + headY;
+    int newX = snake.getX() + headX;
+    int newY = snake.getY() + headY;
     snakePosition.get(iterations).set(0, newX);
     snakePosition.get(iterations).set(1, newY);
     return snakePosition;
@@ -44,8 +44,8 @@ public void getBigger(int x, int y, Draw canvas) {
 }
 
 public void wallJump(int gridHeight, int gridWidth, Position snake) {
-    int headXValue = snake.getXPosition();
-    int headYValue = snake.getYPosition();
+    int headXValue = snake.getX();
+    int headYValue = snake.getY();
     if (headXValue == gridWidth) {
         snakePosition.get(snake.getSize() - 1).set(0, 0);
     }
@@ -61,8 +61,8 @@ public void wallJump(int gridHeight, int gridWidth, Position snake) {
 }
 
 public boolean suicide(Position snake) {
-    int headX = snake.getXPosition();
-    int headY = snake.getYPosition();
+    int headX = snake.getX();
+    int headY = snake.getY();
 
     for (int i = 0; i < snake.getSize() - 1; i++) {
         int bodyX = snakePosition.get(i).get(0);
@@ -79,11 +79,11 @@ public boolean suicide(Position snake) {
 public ArrayList<ArrayList<Integer>> getPosition() {
     return snakePosition;
 }
-public int getXPosition() {
+public int getX() {
     return snakePosition.get(snakePosition.size() - 1).get(0);
 }
 
-public int getYPosition() {
+public int getY() {
     return snakePosition.get(snakePosition.size() - 1).get(1);
 }
 

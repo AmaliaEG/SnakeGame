@@ -30,10 +30,10 @@ public class Main extends Application {
         sizeInput.close();
 
         canvas = new Draw();
-        canvas.X_GRID_FROM_USER = gridX;
-        canvas.Y_GRID_FROM_USER = gridY;
+        canvas.gridXInput = gridX;
+        canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
-        canvas.createGrid(primaryStage);
+        canvas.initializeScene(primaryStage);
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
@@ -131,8 +131,8 @@ public class Main extends Application {
 
     public boolean checkForPoint(Position snake, Point p) {
         boolean apple = false;
-        int snakeNextX = snake.getXPosition();
-        int snakeNextY = snake.getYPosition();
+        int snakeNextX = snake.getX();
+        int snakeNextY = snake.getY();
 
         if (north) {
             snakeNextY -= 1;
