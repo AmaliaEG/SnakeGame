@@ -106,6 +106,6 @@ public class Draw extends Application {
         double textY = HEIGHT_CANVAS / 2;
         gameOverText.setX(textX);
         gameOverText.setY(textY);
-        gridRoot.getChildren().add(gameOverText);
+        ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
     }
 }
