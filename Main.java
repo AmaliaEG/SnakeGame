@@ -10,6 +10,7 @@ public class Main extends Application {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
     public boolean apple = false;
+    public boolean firstMove = true;
     public boolean gameOver = false;
     public int lastDirection = 0;
     private Draw canvas;
@@ -56,6 +57,7 @@ public class Main extends Application {
                             south = false;
                             east = false;
                             west = false;
+                            firstMove = false;
                         }
                         break;
                     case DOWN:
@@ -64,10 +66,11 @@ public class Main extends Application {
                             south = true;
                             east = false;
                             west = false;
+                            firstMove = false;
                         }
                         break;
                     case RIGHT:
-                        if (!(lastDirection == 4)) {
+                        if (!(lastDirection == 4) && !(firstMove)) {
                             north = false;
                             south = false;
                             east = true;
@@ -80,6 +83,7 @@ public class Main extends Application {
                             south = false;
                             east = false;
                             west = true;
+                            firstMove = false;
                         }
                         break;
                     default:
