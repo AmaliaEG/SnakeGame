@@ -77,13 +77,15 @@ public class Draw extends Application {
         snakeRoot.getChildren().add(head);
     }
 
-    public void drawPoint(Point p) {
+    public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
         pointRoot.getChildren().clear();
-        int pointX = p.getX();
-        int pointY = p.getY();
-        Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
-        pointSpawn.setFill(Color.RED);
-        pointRoot.getChildren().add(pointSpawn);
+        for (ArrayList<Integer> point : pointList) {
+            int pointX = point.get(0);
+            int pointY = point.get(1);
+            Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
+            pointSpawn.setFill(Color.RED);
+            pointRoot.getChildren().add(pointSpawn);
+        }
     }
 
     public void drawScore(int score) {

@@ -40,8 +40,8 @@ public class Main extends Application {
         canvas.drawSnake(snake);
         
         Point p = new Point(gridX, gridY);
-        p.generateRandomPoint(snake);
-        canvas.drawPoint(p);
+        p.generateRandomPoint(snake, 3);
+        canvas.drawPoint(p.getPointList());
 
         canvas.drawScore(snake.getScore());
 
@@ -97,7 +97,9 @@ public class Main extends Application {
                         if (apple) {
                             apple = false;
                             snake.getBigger(pointX, pointY, canvas);
-                            canvas.drawPoint(p);
+                            p.deletePoint(pointX, pointY);
+                            p.generateRandomPoint(snake, 1);
+                            canvas.drawPoint(p.getPointList());
                         } else if (north) {
                             lastDirection = 1;
                             snake.moveBody(snake, 0, -1);
@@ -131,9 +133,10 @@ public class Main extends Application {
 
     public boolean checkForPoint(Position snake, Point p) {
         boolean apple = false;
+    
         int snakeNextX = snake.getX();
         int snakeNextY = snake.getY();
-
+    
         if (north) {
             snakeNextY -= 1;
         } else if (south) {
@@ -143,13 +146,15 @@ public class Main extends Application {
         } else if (west) {
             snakeNextX -= 1;
         }
-
-        pointX = p.getX();
-        pointY = p.getY();
-
-        if (snakeNextX == pointX && snakeNextY == pointY) {
-            apple = true;
-            p.generateRandomPoint(snake);
+    
+        for (ArrayList<Integer> point : p.getPointList()) {
+            pointX = point.get(0);
+            pointY = point.get(1);
+    
+            if (snakeNextX == pointX && snakeNextY == pointY) {
+                apple = true;
+                break;
+            }
         }
         return apple;
     }
