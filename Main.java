@@ -12,7 +12,7 @@ public class Main extends Application {
     public boolean apple = false;
     public boolean gameOver = false;
     public int lastDirection = 0;
-    private Point canvas;
+    private Draw canvas;
     int pointX;
     int pointY;
 
@@ -29,7 +29,7 @@ public class Main extends Application {
         int gridY = sizeInput.nextInt();
         sizeInput.close();
 
-        canvas = new Point();
+        canvas = new Draw();
         canvas.X_GRID_FROM_USER = gridX;
         canvas.Y_GRID_FROM_USER = gridY;
         canvas.calculateCanvasSize();
