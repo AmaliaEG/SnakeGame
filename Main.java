@@ -13,8 +13,7 @@ public class Main extends Application {
     public boolean gameOver = false;
     public int lastDirection = 0;
     private Draw canvas;
-    int pointX;
-    int pointY;
+    int pointX, pointY;
 
     public static void main(String[] args) {
         launch(args);
@@ -34,6 +33,7 @@ public class Main extends Application {
         canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage);
+        canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
@@ -91,7 +91,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 if (!gameOver) {
-                    if (now - lastUpdateTime >= 200000000) {
+                    if (now - lastUpdateTime >= 150000000) {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now;
                         if (apple) {

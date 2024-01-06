@@ -32,7 +32,7 @@ public class Draw extends Application {
     @Override
     public void start(Stage primaryStage) {
         calculateCanvasSize();
-        createGrid();
+        drawGrid();
         initializeScene(primaryStage);
     }
 
@@ -44,13 +44,13 @@ public class Draw extends Application {
     }
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(snakeRoot, pointRoot, scoreRoot, gridRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
 
-    public void createGrid() {
+    public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
             lineVertical.setStroke(Color.WHITE);
