@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Point {
 
@@ -13,18 +14,15 @@ public class Point {
     }
 
     public void generateRandomPoint(Position snake) {
-        randomX = random.nextInt(maxX);
-        randomY = random.nextInt(maxY);
-        while (occupiedSpaces(randomX, randomY, snake)) {
+        do {
             randomX = random.nextInt(maxX);
             randomY = random.nextInt(maxY);
-        }
+        } while (occupiedSpaces(randomX, randomY, snake));
     }
 
     public boolean occupiedSpaces(int randomX, int randomY, Position snake) {
-        ArrayList<ArrayList<Integer>> snakePosition = snake.getPosition();
-        for (int i = 0; i < snake.getSize(); i++) {
-            if ((randomX == snakePosition.get(i).get(0)) && (randomY == snakePosition.get(i).get(1))) {
+        for (ArrayList<Integer> bodyPart : snake.getPosition()) {
+            if (randomX == bodyPart.get(0) && randomY == bodyPart.get(1)) {
                 return true;
             }
         }
@@ -34,6 +32,7 @@ public class Point {
     public int getX() {
         return randomX;
     }
+
     public int getY() {
         return randomY;
     }
