@@ -4,17 +4,23 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 public class Draw extends Application {
 
     public static final int MAX_CANVAS = 600;
-    int HEIGHT_CANVAS;
-    int WIDTH_CANVAS;
-    int X_GRID_FROM_USER;
-    int Y_GRID_FROM_USER;
-    int tileSize;
-    private Group root = new Group();
+    private int HEIGHT_CANVAS;
+    private int WIDTH_CANVAS;
+    public int X_GRID_FROM_USER;
+    public int Y_GRID_FROM_USER;
+    private int tileSize;
+    private Group gridRoot = new Group();
+    private Group snakeRoot = new Group();
+    private Group pointRoot = new Group();
+    private Group scoreRoot = new Group();
 
     public static void main(String[] args) {
         launch(args);
@@ -22,6 +28,8 @@ public class Draw extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        calculateCanvasSize();
+        createGrid(primaryStage);
     }
 
     public void calculateCanvasSize() {
@@ -32,58 +40,70 @@ public class Draw extends Application {
     }
 
     public void createGrid(Stage primaryStage) {
-        Group gridLines = new Group();
-
         for (int i = 0; i <= X_GRID_FROM_USER; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.FORESTGREEN);
-            gridLines.getChildren().add(lineVertical);
+            lineVertical.setStroke(Color.WHITE);
+            gridRoot.getChildren().add(lineVertical);
         }
 
         for (int i = 0; i <= Y_GRID_FROM_USER; i++) {
             Line lineHorizontal = new Line(0, i * tileSize, WIDTH_CANVAS, i * tileSize);
-            lineHorizontal.setStroke(Color.FORESTGREEN);
-            gridLines.getChildren().add(lineHorizontal);
+            lineHorizontal.setStroke(Color.WHITE);
+            gridRoot.getChildren().add(lineHorizontal);
         }
 
-        Scene scene = new Scene(root, WIDTH_CANVAS, HEIGHT_CANVAS, Color.DARKGREEN);
-        root.getChildren().add(gridLines);
+        Scene scene = new Scene(new Group(gridRoot, snakeRoot, pointRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public void drawSnake(Position snake) {
-        root.getChildren().removeIf(node -> node instanceof Group);
-        Group snakeBody = new Group();
+        snakeRoot.getChildren().clear();
 
-        Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize, tileSize);
-        head.setFill(Color.MAGENTA);
-        snakeBody.getChildren().add(head);
-        
         ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
             Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
-            tail.setFill(Color.LIGHTPINK);
-            snakeBody.getChildren().add(tail);
+            tail.setFill(Color.FORESTGREEN);
+            snakeRoot.getChildren().add(tail);
         }
-        root.getChildren().add(snakeBody);
+
+        Rectangle head = new Rectangle(snake.getXPosition() * tileSize, snake.getYPosition() * tileSize, tileSize, tileSize);
+        head.setFill(Color.DARKGREEN);
+        snakeRoot.getChildren().add(head);
     }
 
-       public void drawPoint(int[][] dataXY) {
-        root.getChildren().removeIf(node -> node instanceof Group);
-        
-        Group point = new Group();
-        
-        for (int i = 0; i < dataXY.length; i++) {
-            Rectangle pointSpawn = new Rectangle(dataXY[i][0]*tileSize, dataXY[i][1]*tileSize, tileSize, tileSize);
-            pointSpawn.setFill(Color.RED);
-            point.getChildren().add(pointSpawn);
-        }
-        root.getChildren().add(point);
+    public void drawPoint(Point p) {
+        pointRoot.getChildren().clear();
+        int pointX = p.getX();
+        int pointY = p.getY();
+        Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
+        pointSpawn.setFill(Color.RED);
+        pointRoot.getChildren().add(pointSpawn);
     }
 
-    public Group getRoot() {
-        return root;
+    public void drawScore(int score) {
+        scoreRoot.getChildren().clear();
+        Text scoreText = new Text("Score: " + score);
+        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
+        scoreText.setFill(Color.FORESTGREEN);
+        double textX = WIDTH_CANVAS / 2 - scoreText.getLayoutBounds().getWidth() / 2;;
+        double textY = HEIGHT_CANVAS / 7;
+        scoreText.setX(textX);
+        scoreText.setY(textY);
+        scoreRoot.getChildren().add(scoreText);
+    }
+
+    public void drawGameOver(Stage primaryStage) {
+        Text gameOverText = new Text("Game Over");
+        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        gameOverText.setFill(Color.WHITE);
+
+        double textX = WIDTH_CANVAS / 2 - gameOverText.getLayoutBounds().getWidth() / 2;
+        double textY = HEIGHT_CANVAS / 2;
+
+        gameOverText.setX(textX);
+        gameOverText.setY(textY);
+
+        gridRoot.getChildren().add(gameOverText);
     }
 }
- 
