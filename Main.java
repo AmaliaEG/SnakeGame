@@ -13,8 +13,7 @@ public class Main extends Application {
     public boolean gameOver = false;
     public int lastDirection = 0;
     private Draw canvas;
-    int pointX;
-    int pointY;
+    int pointX, pointY;
 
     public static void main(String[] args) {
         launch(args);
@@ -30,10 +29,11 @@ public class Main extends Application {
         sizeInput.close();
 
         canvas = new Draw();
-        canvas.X_GRID_FROM_USER = gridX;
-        canvas.Y_GRID_FROM_USER = gridY;
+        canvas.gridXInput = gridX;
+        canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
-        canvas.createGrid(primaryStage);
+        canvas.initializeScene(primaryStage);
+        canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
@@ -91,7 +91,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 if (!gameOver) {
-                    if (now - lastUpdateTime >= 200000000) {
+                    if (now - lastUpdateTime >= 150000000) {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now;
                         if (apple) {
@@ -131,8 +131,8 @@ public class Main extends Application {
 
     public boolean checkForPoint(Position snake, Point p) {
         boolean apple = false;
-        int snakeNextX = snake.getXPosition();
-        int snakeNextY = snake.getYPosition();
+        int snakeNextX = snake.getX();
+        int snakeNextY = snake.getY();
 
         if (north) {
             snakeNextY -= 1;
