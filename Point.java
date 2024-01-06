@@ -1,46 +1,40 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Random;
-import javax.swing.*;
+import java.util.*;
 
-public class Point extends JPanel{
-    private class Tile {
-        int x;
-        int y;
+public class Point {
 
-        Tile(int x, int y) {
-            this.x = x;
-            this.y = y;
+    private int maxX, maxY;
+    private int randomX;
+    private int randomY;
+    private Random random = new Random();
+
+    public Point(int gridX, int gridY) {
+        this.maxX = gridX;
+        this.maxY = gridY;
+    }
+
+    public void generateRandomPoint(Position snake) {
+        randomX = random.nextInt(maxX);
+        randomY = random.nextInt(maxY);
+        while (occupiedSpaces(randomX, randomY, snake)) {
+            randomX = random.nextInt(maxX);
+            randomY = random.nextInt(maxY);
         }
     }
 
-    int gridX;
-    int gridY;
-    int canvasSize;
-    int tileAmount;
-    int tileSize = 25;
-
-    Point(int gridX, int gridY, int canvasSize) {
-        this.gridX = gridX;
-        this.gridY = gridY;
-        this.canvasSize = canvasSize;
-
-        setPreferredSize(new Dimension(this.canvasSize, this.canvasSize));
-        setBackground(Color.BLACK);
-    }
-
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        drawGrid(g);
-    }
-
-    public void drawGrid(Graphics g){
-        tileSize = canvasSize/gridX;
-
-        for (int i = 0; i < tileSize; i++) {
-            g.drawLine(i*tileSize, 0, i*tileSize, canvasSize);
-            g.drawLine(0, i*tileSize, canvasSize, i*tileSize);
+    public boolean occupiedSpaces(int randomX, int randomY, Position snake) {
+        ArrayList<ArrayList<Integer>> snakePosition = snake.getPosition();
+        for (int i = 0; i < snake.getSize(); i++) {
+            if ((randomX == snakePosition.get(i).get(0)) && (randomY == snakePosition.get(i).get(1))) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    public int getX() {
+        return randomX;
+    }
+    public int getY() {
+        return randomY;
     }
 }
