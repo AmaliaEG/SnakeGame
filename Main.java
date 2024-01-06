@@ -10,6 +10,7 @@ public class Main extends Application {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
     public boolean apple = false;
+    public boolean gameOver = false;
     public int lastDirection = 0;
     private Draw canvas;
     int pointX;
@@ -41,6 +42,8 @@ public class Main extends Application {
         Point p = new Point(gridX, gridY);
         p.generateRandomPoint(snake);
         canvas.drawPoint(p);
+
+        canvas.drawScore(snake.getScore());
 
         Scene scene = primaryStage.getScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -87,32 +90,39 @@ public class Main extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                if (!gameOver) {
+                    if (now - lastUpdateTime >= 200000000) {
+                        apple = checkForPoint(snake, p);
+                        lastUpdateTime = now;
+                        if (apple) {
+                            apple = false;
+                            snake.getBigger(pointX, pointY, canvas);
+                            canvas.drawPoint(p);
+                        } else if (north) {
+                            lastDirection = 1;
+                            snake.moveBody(snake, 0, -1);
+                        } else if (south) {
+                            lastDirection = 2;
+                            snake.moveBody(snake, 0, 1);
+                        } else if (east) {
+                            lastDirection = 3;
+                            snake.moveBody(snake, 1, 0);
+                        } else if (west) {
+                            lastDirection = 4;
+                            snake.moveBody(snake, -1, 0);
+                        }
 
-                if (now - lastUpdateTime >= 200000000) {
-                    apple = checkForPoint(snake, p);
-                    lastUpdateTime = now;
-                    if (apple) {
-                        apple = false;
-                        snake.getBigger(pointX, pointY);
-                        canvas.drawPoint(p);
-                    } else if (north) {
-                        lastDirection = 1;
-                        snake.moveBody(snake, 0, -1);
-                    } else if (south) {
-                        lastDirection = 2;
-                        snake.moveBody(snake, 0, 1);
-                    } else if (east) {
-                        lastDirection = 3;
-                        snake.moveBody(snake, 1, 0);
-                    } else if (west) {
-                        lastDirection = 4;
-                        snake.moveBody(snake, -1, 0);
+                        snake.wallJump(gridY, gridX, snake);
+                        snake.suicide(snake);
+                        if (snake.suicide(snake)) {
+                            gameOver = true;
+                        }
+                        canvas.drawSnake(snake);
+                        System.out.println(snake);
                     }
-
-                    snake.wallJump(gridY, gridX, snake);
-                    snake.suicide(snake);
-                    canvas.drawSnake(snake);
-                    System.out.println(snake);
+                } else {
+                    canvas.drawGameOver(primaryStage);
+                    stop();
                 }
             }
         };

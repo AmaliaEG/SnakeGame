@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Position{
-    // private int score = 0;
+    public int score = 0;
     private int n, m;
     public ArrayList<ArrayList<Integer>> snakePosition = new ArrayList<ArrayList<Integer>>();
 
@@ -34,12 +34,13 @@ public ArrayList<ArrayList<Integer>> moveBody(Position snake, int headX, int hea
     return snakePosition;
 }
 
-public void getBigger(int x, int y) {
+public void getBigger(int x, int y, Draw canvas) {
     ArrayList<Integer> newHead = new ArrayList<Integer>();
     newHead.add(x);
     newHead.add(y);
     snakePosition.add(newHead);
-    // score++;
+    score += 100;
+    canvas.drawScore(score);
 }
 
 public void wallJump(int gridHeight, int gridWidth, Position snake) {
@@ -59,18 +60,20 @@ public void wallJump(int gridHeight, int gridWidth, Position snake) {
     }
 }
 
-public void suicide(Position snake) {
+public boolean suicide(Position snake) {
     int headX = snake.getXPosition();
     int headY = snake.getYPosition();
+
     for (int i = 0; i < snake.getSize() - 1; i++) {
         int bodyX = snakePosition.get(i).get(0);
         int bodyY = snakePosition.get(i).get(1);
 
         if (headX == bodyX && headY == bodyY) {
-            snakePosition.clear();
-            break;
+            return true;
         }
     }
+
+    return false;
 }
 
 public ArrayList<ArrayList<Integer>> getPosition() {
@@ -86,6 +89,10 @@ public int getYPosition() {
 
 public int getSize() {
     return snakePosition.size();
+}
+
+public int getScore() {
+    return score;
 }
 
 public String toString() {
