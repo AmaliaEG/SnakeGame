@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -9,7 +8,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
-public class Draw extends Application {
+public class Draw {
 
     public static final int MAX_CANVAS = 600;
 
@@ -25,30 +24,25 @@ public class Draw extends Application {
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
 
-    public static void main(String[] args) {
-        launch(args);
+    public Draw(int gridXInput, int gridYInput) {
+        this.gridXInput = gridXInput;
+        this.gridYInput = gridYInput;
+        calculateCanvasSize();
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        calculateCanvasSize();
-        drawGrid();
-        initializeScene(primaryStage);
-    }
 
     public void calculateCanvasSize() {
         int maxGridSize = Math.max(gridXInput, gridYInput);
-        this.tileSize = MAX_CANVAS / maxGridSize;
+        this.tileSize = MAX_CANVAS / maxGridSize; // Creates the tilesizes based on the constant variable Max_Canvas and the highest value of n and m.
         this.WIDTH_CANVAS = tileSize * gridXInput;
         this.HEIGHT_CANVAS = tileSize * gridYInput;
     }
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK); // Creates a scene that, and also a group containing all the lesser groups.
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
@@ -72,7 +66,7 @@ public class Draw extends Application {
             tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
-        Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
+        Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize); // Creates head after body, for the sake of it visually being above its body when it bites itself.
         head.setFill(Color.DARKGREEN);
         snakeRoot.getChildren().add(head);
     }
