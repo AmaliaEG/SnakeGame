@@ -16,7 +16,7 @@ public class Main extends Application {
     private Draw canvas;
     int pointX, pointY, pointType;
     public boolean gamePause = false;
-
+    private long speed = 150000000;
 
     public static void main(String[] args) {
         launch(args);
@@ -105,7 +105,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 if (!gameOver) {
-                    if (now - lastUpdateTime >= 150000000) {
+                    if (now - lastUpdateTime >= speed) {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now;
                         if (!gamePause) { // Pause until gamePause is false.
@@ -113,6 +113,7 @@ public class Main extends Application {
                         if (apple) {
                             apple = false;
                             snake.getBigger(pointX, pointY, canvas);
+                            speed = acceleration(speed);
                             p.deletePoint(pointX, pointY, pointType);
                             p.generateRandomPoint(snake, 1);
                             canvas.drawPoint(p.getPointList());
@@ -149,9 +150,18 @@ public class Main extends Application {
         timer.start();
     }
 
+    public long acceleration(long speed) {
+        if (speed < 15000000) {
+            ;
+        } else {
+            speed *= 0.99;
+        }
+        return speed;
+    }
+
+
     public boolean checkForPoint(Position snake, Point p) {
         boolean apple = false;
-    
         int snakeNextX = snake.getX();
         int snakeNextY = snake.getY();
     
