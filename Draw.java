@@ -75,6 +75,7 @@ public class Draw{
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
         pointRoot.getChildren().clear();
+        mysteryBoxRoot.getChildren().clear();
         for (ArrayList<Integer> point : pointList) {
             int pointX = point.get(0);
             int pointY = point.get(1);

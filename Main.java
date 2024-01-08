@@ -14,7 +14,7 @@ public class Main extends Application {
     public boolean gameOver = false;
     public int lastDirection = 0;
     private Draw canvas;
-    int pointX, pointY;
+    int pointX, pointY, pointType;
     public boolean gamePause = false;
 
 
@@ -36,7 +36,7 @@ public class Main extends Application {
         canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage);
-        
+
         canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);
@@ -168,6 +168,7 @@ public class Main extends Application {
         for (ArrayList<Integer> point : p.getPointList()) {
             pointX = point.get(0);
             pointY = point.get(1);
+            pointType = point.get(2);
     
             if (snakeNextX == pointX && snakeNextY == pointY) {
                 apple = true;
