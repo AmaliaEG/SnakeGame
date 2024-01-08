@@ -18,6 +18,7 @@ public class Main extends Application {
     int pointX, pointY, pointType;
     public boolean gamePause = false;
     private long speed = 150000000;
+    private Random random = new Random();
 
     public static void main(String[] args) {
         launch(args);
@@ -43,7 +44,7 @@ public class Main extends Application {
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
         canvas.drawSnake(snake);
-        
+
         Point p = new Point(gridX, gridY);
         p.generateRandomPoint(snake, 3);
         canvas.drawPoint(p.getPointList());
@@ -110,30 +111,41 @@ public class Main extends Application {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now;
                         if (!gamePause) { // Pause until gamePause is false.
-
-                        if (apple) {
-                            apple = false;
-                            snake.getBigger(pointX, pointY, canvas);
-                            speed = acceleration(speed);
-                            p.deletePoint(pointX, pointY, pointType);
-                            p.generateRandomPoint(snake, 1);
-                            canvas.drawPoint(p.getPointList());
-                        } else if (north) {
-                            lastDirection = 1;
-                            snake.moveBody(snake, 0, -1);
-                        } else if (south) {
-                            lastDirection = 2;
-                            snake.moveBody(snake, 0, 1);
-                        } else if (east) {
-                            lastDirection = 3;
-                            snake.moveBody(snake, 1, 0);
-                        } else if (west) {
-                            lastDirection = 4;
-                            snake.moveBody(snake, -1, 0);
+                            if (apple) {
+                                if (powerUp) {
+                                    int surprise = random.nextInt(10);
+                                    switch (surprise) {
+                                        case 1:
+                                            break;
+                                        case 2:
+                                            break;
+                                        case 3:
+                                            snake.multiplier += 1;
+                                            break;
+                                    }
+                                } else {
+                                    speed = acceleration(speed);
+                                }
+                                snake.getBigger(pointX, pointY, pointType, canvas);
+                                p.deletePoint(pointX, pointY, pointType);
+                                p.generateRandomPoint(snake, 1);
+                                canvas.drawPoint(p.getPointList());
+                                apple = false;
+                                powerUp = false;
+                            } else if (north) {
+                                lastDirection = 1;
+                                snake.moveBody(snake, 0, -1);
+                            } else if (south) {
+                                lastDirection = 2;
+                                snake.moveBody(snake, 0, 1);
+                            } else if (east) {
+                                lastDirection = 3;
+                                snake.moveBody(snake, 1, 0);
+                            } else if (west) {
+                                lastDirection = 4;
+                                snake.moveBody(snake, -1, 0);
+                            }
                         }
-
-                    }
-
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);
                         if (snake.suicide(snake)) {
@@ -160,12 +172,11 @@ public class Main extends Application {
         return speed;
     }
 
-
     public boolean checkForPoint(Position snake, Point p) {
         boolean apple = false;
         int snakeNextX = snake.getX();
         int snakeNextY = snake.getY();
-    
+
         if (north) {
             snakeNextY -= 1;
         } else if (south) {
@@ -175,12 +186,12 @@ public class Main extends Application {
         } else if (west) {
             snakeNextX -= 1;
         }
-    
+
         for (ArrayList<Integer> point : p.getPointList()) {
             pointX = point.get(0);
             pointY = point.get(1);
             pointType = point.get(2);
-    
+
             if (snakeNextX == pointX && snakeNextY == pointY) {
                 if (pointType == 0) {
                     powerUp = true;

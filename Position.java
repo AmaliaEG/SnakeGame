@@ -4,6 +4,7 @@ import java.util.List;
 public class Position{
     public int score = 0;
     private int n, m;
+    public int multiplier = 1;
     public ArrayList<ArrayList<Integer>> snakePosition = new ArrayList<ArrayList<Integer>>();
 
     public Position(int n, int m) {
@@ -30,9 +31,11 @@ public class Position{
         return snakePosition;
     }
 
-    public void getBigger(int x, int y, Draw canvas) {
+    public void getBigger(int x, int y, int pointType, Draw canvas) {
         snakePosition.add(new ArrayList<>(List.of(x, y)));
-        score += 100;
+        if (pointType != 0) {
+            score += 100 * multiplier;
+        }
         canvas.drawScore(score);
     }
 
