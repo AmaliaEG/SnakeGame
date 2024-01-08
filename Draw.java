@@ -75,19 +75,17 @@ public class Draw{
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
         pointRoot.getChildren().clear();
-        mysteryBoxRoot.getChildren().clear();
         for (ArrayList<Integer> point : pointList) {
             int pointX = point.get(0);
             int pointY = point.get(1);
             int pointType = point.get(2);
             Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
             if (pointType == 0) {
-                pointSpawn.setFill(Color.RED);
-                pointRoot.getChildren().add(pointSpawn);  
-            } else if (pointType == 1) {
                 pointSpawn.setFill(Color.YELLOW);
-                mysteryBoxRoot.getChildren().add(pointSpawn);
+            } else {
+                pointSpawn.setFill(Color.RED);
             }
+            pointRoot.getChildren().add(pointSpawn);  
         }
     }
 
