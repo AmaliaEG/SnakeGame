@@ -7,6 +7,7 @@ public class Point {
     public ArrayList<ArrayList<Integer>> pointList = new ArrayList<ArrayList<Integer>>();
     private int randomX;
     private int randomY;
+    public int type;
     private Random random = new Random();
 
     public Point(int gridX, int gridY) {
@@ -21,9 +22,11 @@ public class Point {
                 randomY = random.nextInt(maxY);
             } while (occupiedSpaces(randomX, randomY, snake));
             
+            type = random.nextInt(2);
             ArrayList<Integer> point = new ArrayList<>();
             point.add(randomX);
             point.add(randomY);
+            point.add(type);
             pointList.add(point);
         }
     }
@@ -42,10 +45,10 @@ public class Point {
         return false;
     }
 
-    public void deletePoint(int pointX, int pointY) {
+    public void deletePoint(int pointX, int pointY, int pointType) {
         for (int i = 0; i < pointList.size(); i++) {
             ArrayList<Integer> point = pointList.get(i);
-            if (point.get(0) == pointX && point.get(1) == pointY) {
+            if (point.get(0) == pointX && point.get(1) == pointY && point.get(2) == pointType) {
                 pointList.remove(i);
                 break;
             }
