@@ -61,7 +61,7 @@ public class Main extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) { // switch case, that looks at the following 4 key options
-                    case ENTER:
+                    case ENTER: // Pause function
                         if (gamePause) {
                             gamePause = false;
                         } else {
@@ -118,7 +118,7 @@ public class Main extends Application {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and
                                               // lastupdatetime is 0.
-                        if (!gamePause) {
+                        if (!gamePause) { // Pause until gamePause is false.
                             if (apple) {
                                 apple = false;
                                 snake.getBigger(pointX, pointY, canvas);
