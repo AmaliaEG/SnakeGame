@@ -15,6 +15,8 @@ public class Main extends Application {
     public int lastDirection = 0;
     private Draw canvas;
     int pointX, pointY;
+    public boolean gamePause = false;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -29,7 +31,7 @@ public class Main extends Application {
         int gridY = sizeInput.nextInt();
         sizeInput.close();
 
-        canvas = new Draw();
+        canvas = new Draw(gridX, gridY);
         canvas.gridXInput = gridX;
         canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
@@ -105,10 +107,12 @@ public class Main extends Application {
                     if (now - lastUpdateTime >= 150000000) {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now;
+                        if (!gamePause) { // Pause until gamePause is false.
+
                         if (apple) {
                             apple = false;
                             snake.getBigger(pointX, pointY, canvas);
-                            p.deletePoint(pointX, pointY);
+                            p.deletePoint(pointX, pointY, pointType);
                             p.generateRandomPoint(snake, 1);
                             canvas.drawPoint(p.getPointList());
                         } else if (north) {
@@ -124,6 +128,8 @@ public class Main extends Application {
                             lastDirection = 4;
                             snake.moveBody(snake, -1, 0);
                         }
+
+                    }
 
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);

@@ -25,16 +25,8 @@ public class Draw extends Application {
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
     private Group mysteryBoxRoot = new Group();
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) {
-        calculateCanvasSize();
-        drawGrid();
-        initializeScene(primaryStage);
-    }
+
 
     public void calculateCanvasSize() {
         int maxGridSize = Math.max(gridXInput, gridYInput);
