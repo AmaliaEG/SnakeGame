@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
+import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
 import javafx.geometry.*;
+import javafx.event.EventHandler;
 
 public class FrontPage extends Application{
     public static void main(String[] args) {
@@ -49,7 +50,29 @@ public class FrontPage extends Application{
         StackPane.setMargin(costumize, new Insets(110, 0, 30, 0));
         StackPane.setMargin(quit, new Insets(0, 0, 150, 0));
 
-       
+        //Actions for buttons
+        game.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GamePage.show(frontStage);
+            }
+        });
+
+        costumize.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //CustomizePage.show(frontStage);
+                System.out.println("costumize");
+            }
+        });
+
+        quit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("quit");
+                frontStage.close();
+            }
+        });
         
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);
