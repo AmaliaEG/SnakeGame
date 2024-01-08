@@ -61,13 +61,6 @@ public class Main extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) { // switch case, that looks at the following 4 key options
-                    case ENTER: // Pause function
-                        if (gamePause) {
-                            gamePause = false;
-                        } else {
-                            gamePause = true;
-                        }
-                        break;
                     case UP:
                         if (!(lastDirection == 2)) {
                             north = true;
