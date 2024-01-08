@@ -15,14 +15,19 @@ public class Main extends Application {
     public int lastDirection = 0;
     private Draw canvas;
     int pointX, pointY;
+    public boolean gamePause = false;
 
-    // Both the main method and the start override method, are only necessary for the main class, which is the one you run to run the whole code, it is the entry point of the program.
+    // Both the main method and the start override method, are only necessary for
+    // the main class, which is the one you run to run the whole code, it is the
+    // entry point of the program.
     // Therefore i removed it from the draw class.
     public static void main(String[] args) {
-        launch(args); // initializes the start method, launch is a method provided by Application class.
+        launch(args); // initializes the start method, launch is a method provided by Application
+                      // class.
     }
 
-    @Override // Overrides the start method in the super class which is the application class, we use the Stage parameter to create the application
+    @Override // Overrides the start method in the super class which is the application class,
+              // we use the Stage parameter to create the application
     public void start(Stage primaryStage) {
         Scanner sizeInput = new Scanner(System.in);
         System.out.print("Input a grid width between 5-100 (inclusive): ");
@@ -35,14 +40,15 @@ public class Main extends Application {
         canvas.gridXInput = gridX;
         canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
-        canvas.initializeScene(primaryStage); // Seperate method from all the draw methods, it initializes the scene, and layers the groups so that the snake is above the grid etc.
+        canvas.initializeScene(primaryStage); // Seperate method from all the draw methods, it initializes the scene,
+                                              // and layers the groups so that the snake is above the grid etc.
 
         canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
         canvas.drawSnake(snake);
-        
+
         Point p = new Point(gridX, gridY);
         p.generateRandomPoint(snake);
         canvas.drawPoint(p);
@@ -50,10 +56,18 @@ public class Main extends Application {
         canvas.drawScore(snake.getScore());
 
         Scene scene = primaryStage.getScene();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() { // sets up an event handler for key press events, this method is from the Scene class.
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() { // sets up an event handler for key press events, this
+                                                             // method is from the Scene class.
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) { // switch case, that looks at the following 4 key options
+                    case ENTER:
+                        if (gamePause) {
+                            gamePause = false;
+                        } else {
+                            gamePause = true;
+                        }
+                        break;
                     case UP:
                         if (!(lastDirection == 2)) {
                             north = true;
@@ -73,7 +87,9 @@ public class Main extends Application {
                         }
                         break;
                     case RIGHT:
-                        if (!(lastDirection == 4) && !(firstMove)) { // Since the snake looks left by default, firstMove variable makes sure the first option cant be right.
+                        if (!(lastDirection == 4) && !(firstMove)) { // Since the snake looks left by default, firstMove
+                                                                     // variable makes sure the first option cant be
+                                                                     // right.
                             north = false;
                             south = false;
                             east = true;
@@ -100,23 +116,26 @@ public class Main extends Application {
                 if (!gameOver) {
                     if (now - lastUpdateTime >= 150000000) { // Now is the current time in nanoseconds.
                         apple = checkForPoint(snake, p);
-                        lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and lastupdatetime is 0.
-                        if (apple) {
-                            apple = false;
-                            snake.getBigger(pointX, pointY, canvas);
-                            canvas.drawPoint(p);
-                        } else if (north) {
-                            lastDirection = 1;
-                            snake.moveBody(snake, 0, -1);
-                        } else if (south) {
-                            lastDirection = 2;
-                            snake.moveBody(snake, 0, 1);
-                        } else if (east) {
-                            lastDirection = 3;
-                            snake.moveBody(snake, 1, 0);
-                        } else if (west) {
-                            lastDirection = 4;
-                            snake.moveBody(snake, -1, 0);
+                        lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and
+                                              // lastupdatetime is 0.
+                        if (!gamePause) {
+                            if (apple) {
+                                apple = false;
+                                snake.getBigger(pointX, pointY, canvas);
+                                canvas.drawPoint(p);
+                            } else if (north) {
+                                lastDirection = 1;
+                                snake.moveBody(snake, 0, -1);
+                            } else if (south) {
+                                lastDirection = 2;
+                                snake.moveBody(snake, 0, 1);
+                            } else if (east) {
+                                lastDirection = 3;
+                                snake.moveBody(snake, 1, 0);
+                            } else if (west) {
+                                lastDirection = 4;
+                                snake.moveBody(snake, -1, 0);
+                            }
                         }
 
                         snake.wallJump(gridY, gridX, snake);
@@ -125,7 +144,7 @@ public class Main extends Application {
                             gameOver = true;
                         }
                         canvas.drawSnake(snake);
-                        System.out.println(snake);  // Here for debugging purposes
+                        System.out.println(snake); // Here for debugging purposes
                     }
                 } else {
                     canvas.drawGameOver(primaryStage);
@@ -136,7 +155,9 @@ public class Main extends Application {
         timer.start(); // Starts the animation timer, now the handle method will be called each frame.
     }
 
-    public boolean checkForPoint(Position snake, Point p) { // Method to check the box that the snake is about to go on, this is neccesary for a possible point to become the new snake head.
+    public boolean checkForPoint(Position snake, Point p) { // Method to check the box that the snake is about to go on,
+                                                            // this is neccesary for a possible point to become the new
+                                                            // snake head.
         int snakeNextX = snake.getX();
         int snakeNextY = snake.getY();
 
