@@ -26,6 +26,11 @@ public class Draw extends Application {
     private Group scoreRoot = new Group();
     private Group mysteryBoxRoot = new Group();
 
+    public Draw(int gridXInput, int gridYInput) {
+        this.gridXInput = gridXInput;
+        this.gridYInput = gridYInput;
+        calculateCanvasSize();
+    }
 
 
     public void calculateCanvasSize() {
