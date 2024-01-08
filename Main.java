@@ -10,6 +10,7 @@ public class Main extends Application {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
     public boolean apple = false;
+    public boolean powerUp = false;
     public boolean firstMove = true;
     public boolean gameOver = false;
     public int lastDirection = 0;
