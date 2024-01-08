@@ -10,7 +10,6 @@ public class Main extends Application {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
     public boolean apple = false;
-    public boolean powerUp = false;
     public boolean firstMove = true;
     public boolean gameOver = false;
     public int lastDirection = 0;
@@ -193,9 +192,6 @@ public class Main extends Application {
             pointType = point.get(2);
 
             if (snakeNextX == pointX && snakeNextY == pointY) {
-                if (pointType == 0) {
-                    powerUp = true;
-                }
                 apple = true;
                 break;
             }
