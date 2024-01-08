@@ -2,15 +2,22 @@ import java.util.ArrayList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import javafx.scene.image.*;
+
 
 public class Draw{
-
     public static final int MAX_CANVAS = 600;
+
+    // User defined visual properties for the game
+    int backroundColor = 0;
+    int snakeColor = 0;
+    Image img = new Image("Skins\\pxArt__2_-removebg-preview.png");
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
@@ -38,6 +45,7 @@ public class Draw{
         this.WIDTH_CANVAS = tileSize * gridXInput;
         this.HEIGHT_CANVAS = tileSize * gridYInput;
     }
+    
 
     public void initializeScene(Stage primaryStage) {
         Scene scene = new Scene(new Group(gridRoot, pointRoot, mysteryBoxRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
@@ -69,7 +77,8 @@ public class Draw{
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
-        head.setFill(Color.DARKGREEN);
+        head.setFill(new ImagePattern(img));
+        //head.setFill(Color.DARKGREEN);
         snakeRoot.getChildren().add(head);
     }
 
@@ -81,11 +90,12 @@ public class Draw{
             int pointType = point.get(2);
             Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
             if (pointType == 0) {
-                pointSpawn.setFill(Color.YELLOW);
-            } else {
                 pointSpawn.setFill(Color.RED);
+                pointRoot.getChildren().add(pointSpawn);  
+            } else if (pointType == 1) {
+                pointSpawn.setFill(Color.YELLOW);
+                mysteryBoxRoot.getChildren().add(pointSpawn);
             }
-            pointRoot.getChildren().add(pointSpawn);  
         }
     }
 
