@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -9,7 +8,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
-public class Draw extends Application {
+public class Draw{
 
     public static final int MAX_CANVAS = 600;
 
@@ -24,17 +23,14 @@ public class Draw extends Application {
     private Group snakeRoot = new Group();
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
+    private Group mysteryBoxRoot = new Group();
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
+    public Draw(int gridXInput, int gridYInput) {
+        this.gridXInput = gridXInput;
+        this.gridYInput = gridYInput;
         calculateCanvasSize();
-        drawGrid();
-        initializeScene(primaryStage);
     }
+
 
     public void calculateCanvasSize() {
         int maxGridSize = Math.max(gridXInput, gridYInput);
@@ -44,7 +40,7 @@ public class Draw extends Application {
     }
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, mysteryBoxRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -79,12 +75,19 @@ public class Draw extends Application {
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
         pointRoot.getChildren().clear();
+        mysteryBoxRoot.getChildren().clear();
         for (ArrayList<Integer> point : pointList) {
             int pointX = point.get(0);
             int pointY = point.get(1);
+            int pointType = point.get(2);
             Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
-            pointSpawn.setFill(Color.RED);
-            pointRoot.getChildren().add(pointSpawn);
+            if (pointType == 0) {
+                pointSpawn.setFill(Color.RED);
+                pointRoot.getChildren().add(pointSpawn);  
+            } else if (pointType == 1) {
+                pointSpawn.setFill(Color.YELLOW);
+                mysteryBoxRoot.getChildren().add(pointSpawn);
+            }
         }
     }
 
