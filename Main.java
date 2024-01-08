@@ -15,7 +15,6 @@ public class Main extends Application {
     public int lastDirection = 0;
     private Draw canvas;
     int pointX, pointY;
-    public boolean gamePause = false;
 
     // Both the main method and the start override method, are only necessary for
     // the main class, which is the one you run to run the whole code, it is the
@@ -111,7 +110,6 @@ public class Main extends Application {
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and
                                               // lastupdatetime is 0.
-                        if (!gamePause) { // Pause until gamePause is false.
                             if (apple) {
                                 apple = false;
                                 snake.getBigger(pointX, pointY, canvas);
@@ -129,7 +127,7 @@ public class Main extends Application {
                                 lastDirection = 4;
                                 snake.moveBody(snake, -1, 0);
                             }
-                        }
+                        
 
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);
