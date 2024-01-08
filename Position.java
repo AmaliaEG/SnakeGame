@@ -33,7 +33,7 @@ public class Position{
 
     public void getBigger(int x, int y, int pointType, Draw canvas) {
         snakePosition.add(new ArrayList<>(List.of(x, y)));
-        if (pointType != 0) {
+        if (!(pointType == 0)) {
             score += 100 * multiplier;
         }
         canvas.drawScore(score);

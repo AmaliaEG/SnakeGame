@@ -30,7 +30,6 @@ public class Draw{
     private Group snakeRoot = new Group();
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
-    private Group mysteryBoxRoot = new Group();
 
     public Draw(int gridXInput, int gridYInput) {
         this.gridXInput = gridXInput;
@@ -48,7 +47,7 @@ public class Draw{
     
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, mysteryBoxRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -84,19 +83,17 @@ public class Draw{
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
         pointRoot.getChildren().clear();
-        mysteryBoxRoot.getChildren().clear();
         for (ArrayList<Integer> point : pointList) {
             int pointX = point.get(0);
             int pointY = point.get(1);
             int pointType = point.get(2);
             Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
             if (pointType == 0) {
-                pointSpawn.setFill(Color.RED);
-                pointRoot.getChildren().add(pointSpawn);  
-            } else if (pointType == 1) {
                 pointSpawn.setFill(Color.YELLOW);
-                mysteryBoxRoot.getChildren().add(pointSpawn);
+            } else {
+                pointSpawn.setFill(Color.RED);
             }
+            pointRoot.getChildren().add(pointSpawn);  
         }
     }
 

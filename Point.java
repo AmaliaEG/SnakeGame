@@ -21,8 +21,8 @@ public class Point {
                 randomX = random.nextInt(maxX);
                 randomY = random.nextInt(maxY);
             } while (occupiedSpaces(randomX, randomY, snake));
-            
-            type = random.nextInt(2);
+
+            type = random.nextInt(10);
             ArrayList<Integer> point = new ArrayList<>();
             point.add(randomX);
             point.add(randomY);

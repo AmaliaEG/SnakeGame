@@ -116,8 +116,10 @@ public class Main extends Application {
                                     int surprise = random.nextInt(10);
                                     switch (surprise) {
                                         case 1:
+                                            speed *= 0.9;
                                             break;
                                         case 2:
+                                            speed *= 1.1;
                                             break;
                                         case 3:
                                             snake.multiplier += 1;
@@ -193,6 +195,9 @@ public class Main extends Application {
             pointType = point.get(2);
 
             if (snakeNextX == pointX && snakeNextY == pointY) {
+                if (pointType == 0) {
+                    powerUp = true;
+                }
                 apple = true;
                 break;
             }
