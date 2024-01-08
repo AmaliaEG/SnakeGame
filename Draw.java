@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -9,7 +8,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
-public class Draw extends Application {
+public class Draw{
 
     public static final int MAX_CANVAS = 600;
 

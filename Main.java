@@ -36,6 +36,7 @@ public class Main extends Application {
         canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage);
+        
         canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);
