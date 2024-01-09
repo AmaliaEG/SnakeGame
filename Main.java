@@ -59,6 +59,7 @@ public class Main extends Application {
                     case ENTER: // Pause function
                         if (gamePause) {
                             gamePause = false;
+                            canvas.drawGameNotPaused(primaryStage);
                         } else {
                             gamePause = true;
                         }
@@ -147,7 +148,10 @@ public class Main extends Application {
                                 lastDirection = 4;
                                 snake.moveBody(snake, -1, 0);
                             }
+                        } else {
+                            canvas.drawGameIsPaused(primaryStage);
                         }
+
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);
                         if (snake.suicide(snake)) {

@@ -30,6 +30,7 @@ public class Draw{
     private Group snakeRoot = new Group();
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
+    private Group gamePause = new Group();
 
     public Draw(int gridXInput, int gridYInput) {
         this.gridXInput = gridXInput;
@@ -47,7 +48,7 @@ public class Draw{
     
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -118,5 +119,20 @@ public class Draw{
         gameOverText.setX(textX);
         gameOverText.setY(textY);
         ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
+    }
+
+    public void drawGameIsPaused(Stage primaryStage) {
+        Text gamePauseText = new Text("Pause");
+        gamePauseText.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        gamePauseText.setFill(Color.WHITE);
+        double textX = WIDTH_CANVAS / 2 - gamePauseText.getLayoutBounds().getWidth() / 2;
+        double textY = HEIGHT_CANVAS / 2;
+        gamePauseText.setX(textX);
+        gamePauseText.setY(textY);
+        gamePause.getChildren().add(gamePauseText);    
+    }
+
+    public void drawGameNotPaused(Stage primaryStage) {
+        gamePause.getChildren().clear();    
     }
 }
