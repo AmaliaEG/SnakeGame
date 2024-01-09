@@ -16,8 +16,11 @@ public class Draw {
     // User defined visual properties for the game
     int backroundColor = 0;
     int snakeColor = 0;
-    Image imgSnakeHead = new Image("Skins\\cottageCoreSnakeHead.png");
-    Image imgSnakeBody = new Image("Skins\\cottageCoreSnakeBody.png");
+    Image imgSnakeHead = new Image("Skins\\cottageCoreHead.png");
+    Image imgSnakeBody = new Image("Skins\\cottageCoreFlower6.png");
+    Image imgBluePearl = new Image("Skins\\cottageCoreFood.png");
+    Image imgGoldPearl = new Image("Skins\\cottageCoreGold.png");
+
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
@@ -47,7 +50,7 @@ public class Draw {
 
     public void initializeScene(Stage primaryStage) {
         Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS,
-                HEIGHT_CANVAS, Color.BLACK);
+                HEIGHT_CANVAS, Color.GREEN);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -55,13 +58,13 @@ public class Draw {
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.WHITE);
+            lineVertical.setStroke(Color.DARKGREEN);
             gridRoot.getChildren().add(lineVertical);
         }
 
         for (int i = 0; i <= gridYInput; i++) {
             Line lineHorizontal = new Line(0, i * tileSize, WIDTH_CANVAS, i * tileSize);
-            lineHorizontal.setStroke(Color.WHITE);
+            lineHorizontal.setStroke(Color.DARKGREEN);
             gridRoot.getChildren().add(lineHorizontal);
         }
     }
@@ -74,7 +77,7 @@ public class Draw {
                     tileSize);
 
             tail.setFill(new ImagePattern(imgSnakeBody));
-            // tail.setFill(Color.FORESTGREEN);
+            //tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
@@ -109,9 +112,11 @@ public class Draw {
             int pointType = point.get(2);
             Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
             if (pointType == 0) {
-                pointSpawn.setFill(Color.YELLOW);
+                pointSpawn.setFill(new ImagePattern(imgGoldPearl));
+                //pointSpawn.setFill(Color.YELLOW);
             } else {
-                pointSpawn.setFill(Color.RED);
+                pointSpawn.setFill(new ImagePattern(imgBluePearl));
+                //pointSpawn.setFill(Color.RED);
             }
             pointRoot.getChildren().add(pointSpawn);
         }
