@@ -8,20 +8,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
-import javafx.scene.image.*;
+import javafx.scene.image.Image;
 
-
-public class Draw{
+public class Draw {
     public static final int MAX_CANVAS = 600;
 
     // User defined visual properties for the game
     int backroundColor = 0;
     int snakeColor = 0;
-    Image img = new Image("Skins\\pxArt__2_-removebg-preview.png");
+    Image imgSnakeHead = new Image("Skins\\cottageCoreSnakeHead.png");
+    Image imgSnakeBody = new Image("Skins\\cottageCoreSnakeBody.png");
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
-    
+
     public int gridXInput;
     public int gridYInput;
     private int tileSize;
@@ -38,21 +38,19 @@ public class Draw{
         calculateCanvasSize();
     }
 
-
     public void calculateCanvasSize() {
         int maxGridSize = Math.max(gridXInput, gridYInput);
         this.tileSize = MAX_CANVAS / maxGridSize;
         this.WIDTH_CANVAS = tileSize * gridXInput;
         this.HEIGHT_CANVAS = tileSize * gridYInput;
     }
-    
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS,
+                HEIGHT_CANVAS, Color.BLACK);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
@@ -68,17 +66,38 @@ public class Draw{
         }
     }
 
-    public void drawSnake(Position snake) {
+    public void drawSnake(Position snake, int lastDirection) {
         snakeRoot.getChildren().clear();
         ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
-            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
-            tail.setFill(Color.FORESTGREEN);
+            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
+                    tileSize);
+
+            tail.setFill(new ImagePattern(imgSnakeBody));
+            // tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
-        head.setFill(new ImagePattern(img));
-        //head.setFill(Color.DARKGREEN);
+        head.setFill(new ImagePattern(imgSnakeHead));
+
+        switch (lastDirection) {
+            case 1: // UP
+                head.setRotate(0);
+                break;
+            case 2: // DOWN
+                head.setRotate(180);
+                break;
+            case 3: // RIGHT
+                head.setRotate(90);
+                break;
+            case 4: // LEFT
+                head.setRotate(270);
+                break;
+            default:
+                head.setRotate(270);
+                break;
+        }
+        // head.setFill(Color.DARKGREEN);
         snakeRoot.getChildren().add(head);
     }
 
@@ -94,7 +113,7 @@ public class Draw{
             } else {
                 pointSpawn.setFill(Color.RED);
             }
-            pointRoot.getChildren().add(pointSpawn);  
+            pointRoot.getChildren().add(pointSpawn);
         }
     }
 
@@ -103,7 +122,8 @@ public class Draw{
         Text scoreText = new Text("Score: " + score);
         scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
         scoreText.setFill(Color.FORESTGREEN);
-        double textX = WIDTH_CANVAS / 2 - scoreText.getLayoutBounds().getWidth() / 2;;
+        double textX = WIDTH_CANVAS / 2 - scoreText.getLayoutBounds().getWidth() / 2;
+        ;
         double textY = HEIGHT_CANVAS / 7;
         scoreText.setX(textX);
         scoreText.setY(textY);
@@ -129,10 +149,10 @@ public class Draw{
         double textY = HEIGHT_CANVAS / 2;
         gamePauseText.setX(textX);
         gamePauseText.setY(textY);
-        gamePause.getChildren().add(gamePauseText);    
+        gamePause.getChildren().add(gamePauseText);
     }
 
     public void drawGameNotPaused(Stage primaryStage) {
-        gamePause.getChildren().clear();    
+        gamePause.getChildren().clear();
     }
 }

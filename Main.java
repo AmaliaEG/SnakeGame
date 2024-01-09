@@ -43,7 +43,7 @@ public class Main extends Application {
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
-        canvas.drawSnake(snake);
+        canvas.drawSnake(snake, lastDirection);
 
         Point p = new Point(gridX, gridY);
         p.generateRandomPoint(snake, 3);
@@ -157,7 +157,7 @@ public class Main extends Application {
                         if (snake.suicide(snake)) {
                             gameOver = true;
                         }
-                        canvas.drawSnake(snake);
+                        canvas.drawSnake(snake, lastDirection);
                         System.out.println(snake);
                     }
                 } else {
