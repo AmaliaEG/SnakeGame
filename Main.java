@@ -5,10 +5,13 @@ import javafx.scene.*;
 import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.geometry.*;
 
 public class Main extends Application {
     private long lastUpdateTime = 0;
@@ -41,25 +44,36 @@ public class Main extends Application {
         Label labelY = new Label("Input a grid width between 5-100 (inclusive): ");
         TextField textFieldX = new TextField();
         TextField textFieldY = new TextField();
-        the_root.getChildren().addAll(labelX, textFieldX, labelY, textFieldY);
+        Button createButton = new Button("Create");
+        the_root.getChildren().addAll(labelX, textFieldX, labelY, textFieldY, createButton);
+
+        the_root.setAlignment(Pos.CENTER);
+        VBox.setMargin(labelX, new Insets(0, 0, 3, 0));
+        VBox.setMargin(labelY, new Insets(15, 0, 3, 0));
+        VBox.setMargin(textFieldX, new Insets(2, 0, 0, 0));
+        VBox.setMargin(textFieldY, new Insets(2, 0, 0, 0));
+        VBox.setMargin(createButton, new Insets(25, 0, 0, 0));
+
+        textFieldX.setMaxWidth(100);
+        textFieldY.setMaxWidth(100);
+
+        the_root.setPrefWidth(200);
 
         Scene inputScene = new Scene(the_root, 500, 500);
         primaryStage.setScene(inputScene);
 
-        inputScene.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER){
-                try{
-                    gridX = Integer.parseInt(textFieldX.getText());
-                    gridY = Integer.parseInt(textFieldY.getText());
+        createButton.setOnAction(event -> {
+            try{
+                gridX = Integer.parseInt(textFieldX.getText());
+                gridY = Integer.parseInt(textFieldY.getText());
 
-                    if (gridX >= 5 && gridX <= 100 && gridY >= 5 && gridY <= 100){
-                        startGame(primaryStage, gridX, gridY);
-                    } else{
-                        System.out.println("Invalid size.");
-                    }
-                } catch (NumberFormatException e){
-                    System.out.println("Invalid input.");
+                if (gridX >= 5 && gridX <= 100 && gridY >= 5 && gridY <= 100){
+                    startGame(primaryStage, gridX, gridY);
+                } else{
+                    System.out.println("Invalid size.");
                 }
+            } catch (NumberFormatException e){
+                System.out.println("Invalid input.");
             }
         });
 
