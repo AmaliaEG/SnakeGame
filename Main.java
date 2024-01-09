@@ -5,6 +5,10 @@ import javafx.scene.*;
 import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyCode;
 
 public class Main extends Application {
     private long lastUpdateTime = 0;
@@ -20,18 +24,58 @@ public class Main extends Application {
     private long speed = 150000000;
     private Random random = new Random();
 
+    private int gridX;
+    private int gridY;
+
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
     public void start(Stage primaryStage) {
-        Scanner sizeInput = new Scanner(System.in);
+        showGridSizeInput(primaryStage);
+    }
+
+    private void showGridSizeInput(Stage primaryStage){
+        VBox the_root = new VBox();
+        Label labelX = new Label("Input a grid width between 5-100 (inclusive): ");
+        Label labelY = new Label("Input a grid width between 5-100 (inclusive): ");
+        TextField textFieldX = new TextField();
+        TextField textFieldY = new TextField();
+        the_root.getChildren().addAll(labelX, textFieldX, labelY, textFieldY);
+
+        Scene inputScene = new Scene(the_root, 500, 500);
+        primaryStage.setScene(inputScene);
+
+        inputScene.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                try{
+                    gridX = Integer.parseInt(textFieldX.getText());
+                    gridY = Integer.parseInt(textFieldY.getText());
+
+                    if (gridX >= 5 && gridX <= 100 && gridY >= 5 && gridY <= 100){
+                        startGame(primaryStage, gridX, gridY);
+                    } else{
+                        System.out.println("Invalid size.");
+                    }
+                } catch (NumberFormatException e){
+                    System.out.println("Invalid input.");
+                }
+            }
+        });
+
+        primaryStage.show();
+    }
+    
+
+
+    //@Override
+    private void startGame(Stage primaryStage, int gridX, int gridY) {
+        /*Scanner sizeInput = new Scanner(System.in);
         System.out.print("Input a grid width between 5-100 (inclusive): ");
         int gridX = sizeInput.nextInt();
         System.out.print("Input a grid height between 5-100 (inclusive): ");
         int gridY = sizeInput.nextInt();
-        sizeInput.close();
+        sizeInput.close();*/
 
         canvas = new Draw(gridX, gridY);
         canvas.gridXInput = gridX;
