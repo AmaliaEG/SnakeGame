@@ -1,5 +1,5 @@
 import javafx.application.Application;
-import javafx.scene.Group;
+//import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
-import javafx.scene.input.*;
+//import javafx.scene.input.*;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
 
@@ -73,6 +73,8 @@ public class FrontPage extends Application{
                 frontStage.close();
             }
         });
+
+        
         
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);

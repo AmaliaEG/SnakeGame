@@ -1,15 +1,27 @@
-import java.beans.EventHandler;
+import javafx.application.Application;
+//import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+//import javafx.scene.input.*;
+import javafx.geometry.*;
+import javafx.event.EventHandler;
 
-import org.w3c.dom.Text;
 
-public class GameOver extends Application{
+public class GameOverPage extends Application{
     private Button restart = new Button ("Restart Game");
     private Button quit = new Button ("Quit Game");
-    private Text title = new text ("GAME OVER!");
+    private Text title = new Text ("GAME OVER!");
 
     @Override
-    public void end (Stage GameOver){
-     frontStage.setTitle("Game Over");
+    public void start (Stage gameOver){
+     gameOver.setTitle("Game Over");
         
         //Head Title
         title.setFont(Font.font("Arial", FontWeight.BOLD, 40));
@@ -34,7 +46,7 @@ public class GameOver extends Application{
         restart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GamePage.show(frontStage);
+                GamePage.show(gameOver);
             }
         });
 
@@ -42,12 +54,12 @@ public class GameOver extends Application{
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("quit");
-                frontStage.close();
+                gameOver.close();
             }
         });
         Scene scene = new Scene(root, 500, 500);
-        frontStage.setScene(scene);
-        frontStage.show();
+        gameOver.setScene(scene);
+        gameOver.show();
 
     }
 }
