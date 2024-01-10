@@ -54,6 +54,7 @@ public class FrontPage extends Application{
             public void handle(ActionEvent event) {
                 Main main = new Main(frontStage);
                 // Ved ikke hvorfor den lyser gul under, it legit creates an instance and das it.
+                // Ari - den lyser gul fordi den sigr at den ikke bliver brugt. 
             }
         });
 
