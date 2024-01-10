@@ -81,8 +81,6 @@ public class Draw {
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
-        head.setFill(new ImagePattern(imgSnakeHead));
-
         switch (lastDirection) {
             case 1: // UP
                 head.setRotate(0);
@@ -100,7 +98,9 @@ public class Draw {
                 head.setRotate(270);
                 break;
         }
-        // head.setFill(Color.DARKGREEN);
+        
+        head.setFill(new ImagePattern(imgSnakeHead));
+
         snakeRoot.getChildren().add(head);
     }
 
