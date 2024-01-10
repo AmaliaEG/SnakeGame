@@ -8,41 +8,33 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class FrontPage extends Application{
+public class CustomizePage extends Application{
     public static void main(String[] args) {
         launch(args);
     }
 
     private Button game = new Button();
-    private Button costumize = new Button();
-    private Button quit = new Button();
-    private Text title = new Text("Snake!");
 
     @Override   
     public void start(Stage frontStage) {
-        frontStage.setTitle("Snake Game");
+        frontStage.setTitle("Customization");
         
-        //Head Title
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 40));
-        title.setFill(Color.PINK);
-        StackPane.setAlignment(title, Pos.TOP_CENTER);
-        StackPane.setMargin(title, new Insets(130, 0, 0, 0));
+        Label maps = new Label("Maps");
+        Label points = new Label("Points");
+        Label snake = new Label("Snakes");
 
         this.game.setText("Game");
-        this.costumize.setText("Costumize");
-        this.quit.setText("Quit");
 
         StackPane root = new StackPane();
 
-        root.getChildren().addAll(title, game, costumize, quit);
-
-        //Aligns the buttons
-        StackPane.setAlignment(game, Pos.TOP_CENTER);
-        StackPane.setAlignment(costumize, Pos.CENTER);
-        StackPane.setAlignment(quit, Pos.BOTTOM_CENTER);
+        root.getChildren().addAll(maps, points, snake, game);
+        root.setAlignment(Pos.CENTER);
 
         StackPane.setMargin(game, new Insets(230, 0, 30, 0));
         StackPane.setMargin(costumize, new Insets(110, 0, 30, 0));
@@ -59,8 +51,8 @@ public class FrontPage extends Application{
         costumize.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                CustomizePage.show(frontStage);
-                //System.out.println("costumize");
+                //CustomizePage.show(frontStage);
+                System.out.println("costumize");
             }
         });
 
