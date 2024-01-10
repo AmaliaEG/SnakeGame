@@ -1,29 +1,27 @@
-import javafx.application.Application;
-//import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 import javafx.scene.text.Text;
-import javafx.scene.control.Button;
-//import javafx.scene.input.*;
-import javafx.geometry.*;
+import javafx.stage.Stage;
 import javafx.event.EventHandler;
 
+public class GameOverPage {
+    private Button restart = new Button("Restart Game");
+    private Button quit = new Button("Quit Game");
+    private Text title = new Text("GAME OVER!");
+    private Stage primaryStage;
 
-public class GameOverPage extends Application{
-    private Button restart = new Button ("Restart Game");
-    private Button quit = new Button ("Quit Game");
-    private Text title = new Text ("GAME OVER!");
+    public GameOverPage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        primaryStage.setTitle("Game Over");
 
-    @Override
-    public void start (Stage gameOver){
-     gameOver.setTitle("Game Over");
-        
-        //Head Title
+        // Head Title
         title.setFont(Font.font("Arial", FontWeight.BOLD, 40));
         title.setFill(Color.PINK);
         StackPane.setAlignment(title, Pos.TOP_CENTER);
@@ -36,7 +34,7 @@ public class GameOverPage extends Application{
 
         root.getChildren().addAll(restart, quit, title);
 
-        //Aligns the buttons
+        // Aligns the buttons
         StackPane.setAlignment(restart, Pos.TOP_CENTER);
         StackPane.setAlignment(quit, Pos.CENTER);
 
@@ -46,7 +44,7 @@ public class GameOverPage extends Application{
         restart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GamePage.show(gameOver);
+                primaryStage.show();
             }
         });
 
@@ -54,12 +52,11 @@ public class GameOverPage extends Application{
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("quit");
-                gameOver.close();
+                primaryStage.close();
             }
         });
         Scene scene = new Scene(root, 500, 500);
-        gameOver.setScene(scene);
-        gameOver.show();
-
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

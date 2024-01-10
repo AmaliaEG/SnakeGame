@@ -1,4 +1,3 @@
-import javafx.application.Application;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 import javafx.scene.*;
@@ -9,11 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.StackPane;
 import javafx.geometry.*;
 
-public class Main extends Application {
+public class Main {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
     public boolean apple = false;
@@ -26,15 +23,10 @@ public class Main extends Application {
     public boolean gamePause = false;
     private long speed = 150000000;
     private Random random = new Random();
-
     private int gridX;
     private int gridY;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    public void start(Stage primaryStage) {
+    public Main(Stage primaryStage) {
         showGridSizeInput(primaryStage);
     }
 
@@ -219,12 +211,16 @@ public class Main extends Application {
                         System.out.println(snake);
                     }
                 } else {
-                    canvas.drawGameOver(primaryStage);
                     stop();
+                    showGameOverPage(primaryStage);
                 }
             }
         };
         timer.start();
+    }
+
+    private void showGameOverPage(Stage primaryStage) {
+        GameOverPage gameOverPage = new GameOverPage(primaryStage);
     }
 
     public long acceleration(long speed) {
@@ -266,4 +262,6 @@ public class Main extends Application {
         }
         return apple;
     }
+
+    
 }

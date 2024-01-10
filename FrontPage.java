@@ -9,7 +9,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
-//import javafx.scene.input.*;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
 
@@ -54,7 +53,8 @@ public class FrontPage extends Application{
         game.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GamePage.show(frontStage);
+                Main main = new Main(frontStage);
+                // Ved ikke hvorfor den lyser gul under, it legit creates an instance and das it.
             }
         });
 
