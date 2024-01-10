@@ -52,7 +52,8 @@ public class FrontPage extends Application{
         game.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GamePage.show(frontStage);
+                Main main = new Main(frontStage);
+                // Ved ikke hvorfor den lyser gul under, it legit creates an instance and das it.
             }
         });
 
