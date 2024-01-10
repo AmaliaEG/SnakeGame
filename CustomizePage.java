@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CustomizePage extends Application{
+    private Draw draw;
     public static void main(String[] args) {
         launch(args);
     }
@@ -89,7 +90,7 @@ public class CustomizePage extends Application{
             }
         });
 
-        /*costumize.setOnAction(new EventHandler<ActionEvent>() {
+        skel_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //CustomizePage.show(frontStage);
@@ -97,13 +98,20 @@ public class CustomizePage extends Application{
             }
         });
 
-        quit.setOnAction(new EventHandler<ActionEvent>() {
+        skel_p.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("quit");
                 frontStage.close();
             }
-        });*/
+        });
+
+        skel_s.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                draw.setSnakeSkin(skeleton_s);
+            }
+        });
 
         
         

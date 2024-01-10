@@ -16,11 +16,12 @@ public class Draw {
     // User defined visual properties for the game
     int backroundColor = 0;
     int snakeColor = 0;
-    Image imgSnakeHead = new Image("Skins\\cottageCoreHead.png");
+    /*Image imgSnakeHead = new Image("Skins\\cottageCoreHead.png");
     Image imgSnakeBody = new Image("Skins\\cottageCoreFlower6.png");
     Image imgBluePearl = new Image("Skins\\cottageCoreFood.png");
     Image imgGoldPearl = new Image("Skins\\cottageCoreGold.png");
-
+    */
+    private Image imgSnakeHead;
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
@@ -102,6 +103,10 @@ public class Draw {
         head.setFill(new ImagePattern(imgSnakeHead));
 
         snakeRoot.getChildren().add(head);
+    }
+
+    public void setSnakeSkin(Image imgSnakeHead) {
+        this.imgSnakeHead = imgSnakeHead;
     }
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
