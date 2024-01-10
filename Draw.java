@@ -20,6 +20,11 @@ public class Draw {
     Image imgSnakeBody = new Image("Skins\\cottageCoreFlower6.png");
     Image imgBluePearl = new Image("Skins\\cottageCoreFood.png");
     Image imgGoldPearl = new Image("Skins\\cottageCoreGold.png");
+<<<<<<< Updated upstream
+=======
+    
+    //private Image imgSnakeHead;
+>>>>>>> Stashed changes
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
