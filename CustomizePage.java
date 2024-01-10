@@ -24,6 +24,11 @@ public class CustomizePage extends Application{
     private Button skel_bg = new Button();
     private Button skel_p = new Button();
     private Button skel_s = new Button();
+
+    private Button cot_bg = new Button();
+    private Button cot_p = new Button();
+    private Button cot_s = new Button();
+
     private Button game = new Button();
 
     @Override   
@@ -33,9 +38,6 @@ public class CustomizePage extends Application{
         Label maps = new Label("Maps");
         Label points = new Label("Points");
         Label snake = new Label("Snakes");
-        TextField textFieldM = new TextField();
-        TextField textFieldP = new TextField();
-        TextField textFieldS = new TextField();
 
         //Images
         Image skeleton_bg = new Image("Skins\\SkeletonSnakeBackground.png");
@@ -44,6 +46,13 @@ public class CustomizePage extends Application{
         ImageView skeleton_back = new ImageView(skeleton_bg);
         ImageView skeleton_point = new ImageView(skeleton_p);
         ImageView skeleton_snake = new ImageView(skeleton_s);
+
+        Image cottage_bg = new Image("\\Skins\\cottageCoreFlower6.png");
+        Image cottage_p = new Image("\\Skins\\cottageCoreFood.png");
+        Image cottage_s = new Image("\\Skins\\cottageCoreHead.png"); 
+        ImageView cottage_back = new ImageView(cottage_bg);
+        ImageView cottage_point = new ImageView(cottage_p);
+        ImageView cottage_snake = new ImageView(cottage_s);
 
         double width = 50;
         double height = 50;
@@ -55,30 +64,45 @@ public class CustomizePage extends Application{
         
         skeleton_snake.setFitWidth(width);
         skeleton_snake.setFitHeight(height);
+
+        cottage_back.setFitWidth(width);
+        cottage_back.setFitHeight(height);
+
+        cottage_point.setFitWidth(width);
+        cottage_point.setFitHeight(height);
+        
+        cottage_snake.setFitWidth(width);
+        cottage_snake.setFitHeight(height);
         
         //Buttons
         skel_bg.setGraphic(skeleton_back);
         skel_p.setGraphic(skeleton_point);
         skel_s.setGraphic(skeleton_snake);
+
+        cot_bg.setGraphic(cottage_back);
+        cot_p.setGraphic(cottage_point);
+        cot_s.setGraphic(cottage_snake);
         
         this.game.setText("Game");
 
         StackPane root = new StackPane();
 
-        root.getChildren().addAll(maps, skel_bg, points, skel_p, snake, skel_s, game);
+        root.getChildren().addAll(maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
         root.setAlignment(Pos.CENTER);
 
         StackPane.setMargin(maps, new Insets(0, 0, 380, 0));
-        StackPane.setMargin(skel_bg, new Insets(0, 0, 280, 0));
-        StackPane.setMargin(points, new Insets(0, 0, 150, 0));
-        StackPane.setMargin(skel_p, new Insets(0, 0, 50, 0));
-        StackPane.setMargin(snake, new Insets(80, 0, 0, 0));
-        StackPane.setMargin(skel_s, new Insets(180, 0, 0, 0));
-        StackPane.setMargin(game, new Insets(330, 0, 0, 0));
+        StackPane.setMargin(skel_bg, new Insets(0, 0, 280, 80));
+        StackPane.setMargin(cot_bg, new Insets(0, 80, 280, 0));
 
-        textFieldM.setMaxWidth(100);
-        textFieldP.setMaxWidth(100);
-        textFieldS.setMaxWidth(100);
+        StackPane.setMargin(points, new Insets(0, 0, 150, 0));
+        StackPane.setMargin(skel_p, new Insets(0, 0, 50, 80));
+        StackPane.setMargin(cot_p, new Insets(0, 80, 50, 0));
+
+        StackPane.setMargin(snake, new Insets(80, 0, 0, 0));
+        StackPane.setMargin(skel_s, new Insets(180, 0, 0, 80));
+        StackPane.setMargin(cot_s, new Insets(180, 80, 0, 0));
+
+        StackPane.setMargin(game, new Insets(330, 0, 0, 0));
 
         root.setPrefWidth(20);
 
@@ -93,16 +117,14 @@ public class CustomizePage extends Application{
         skel_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //CustomizePage.show(frontStage);
-                System.out.println("costumize");
+                draw.setSnakeSkin(skeleton_bg);
             }
         });
 
         skel_p.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("quit");
-                frontStage.close();
+                draw.setSnakeSkin(skeleton_p);
             }
         });
 
@@ -113,8 +135,27 @@ public class CustomizePage extends Application{
             }
         });
 
-        
-        
+        cot_bg.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                draw.setSnakeSkin(cottage_bg);
+            }
+        });
+
+        cot_p.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                draw.setSnakeSkin(cottage_p);
+            }
+        });
+
+        cot_s.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                draw.setSnakeSkin(cottage_s);
+            }
+        });
+
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);
         frontStage.show();
