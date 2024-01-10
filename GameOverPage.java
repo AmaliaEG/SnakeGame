@@ -27,7 +27,7 @@ public class GameOverPage {
         StackPane.setAlignment(title, Pos.TOP_CENTER);
         StackPane.setMargin(title, new Insets(130, 0, 0, 0));
 
-        this.restart.setText("Restart Game");
+        this.restart.setText("Return to frontpage");
         this.quit.setText("Quit Game");
 
         StackPane root = new StackPane();
@@ -38,23 +38,25 @@ public class GameOverPage {
         StackPane.setAlignment(restart, Pos.TOP_CENTER);
         StackPane.setAlignment(quit, Pos.CENTER);
 
-        StackPane.setMargin(restart, new Insets(230, 0, 30, 0));
+        StackPane.setMargin(restart , new Insets(230, 0, 30, 0));
         StackPane.setMargin(quit, new Insets(110, 0, 30, 0));
 
         restart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                primaryStage.show();
+                primaryStage.close();
+                FrontPage frontPage = new FrontPage();
+                frontPage.start(new Stage());
             }
         });
 
         quit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("quit");
                 primaryStage.close();
             }
         });
+
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
