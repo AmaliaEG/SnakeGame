@@ -61,8 +61,7 @@ public class FrontPage extends Application{
         costumize.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                CustomizePage.show(frontStage);
-                //System.out.println("costumize");
+                CustomizePage customizePage = new CustomizePage(frontStage);
             }
         });
 

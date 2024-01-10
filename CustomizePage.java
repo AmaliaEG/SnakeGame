@@ -16,11 +16,9 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class CustomizePage extends Application{
+public class CustomizePage {
     private Draw draw;
-    public static void main(String[] args) {
-        launch(args);
-    }
+
     private Button skel_bg = new Button();
     private Button skel_p = new Button();
     private Button skel_s = new Button();
@@ -31,8 +29,7 @@ public class CustomizePage extends Application{
 
     private Button game = new Button();
 
-    @Override   
-    public void start(Stage frontStage) {
+    public CustomizePage(Stage frontStage) {
         frontStage.setTitle("Customization");
         
         Label maps = new Label("Maps");
