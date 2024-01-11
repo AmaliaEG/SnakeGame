@@ -58,6 +58,8 @@ public class Draw {
 
     private Button game = new Button();
 
+    private Button front = new Button();
+
     public void setSnakeSkin(String snkH, String snkB) {
         Image body = new Image("\\Skins\\SkeletonSnakeHead.png");
         Image head = new Image("\\Skins\\SkeletonSnakeBody.png");
@@ -125,10 +127,11 @@ public class Draw {
         cot_s.setGraphic(cottage_snake);
         
         this.game.setText("Game");
+        this.front.setText("Back");
 
         StackPane root = new StackPane();
 
-        root.getChildren().addAll(maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
+        root.getChildren().addAll(front, maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
         root.setAlignment(Pos.CENTER);
 
         StackPane.setMargin(maps, new Insets(0, 0, 380, 0));
@@ -145,6 +148,8 @@ public class Draw {
 
         StackPane.setMargin(game, new Insets(330, 0, 0, 0));
 
+        StackPane.setMargin(front, new Insets(0, 370, 420, 0));
+
         root.setPrefWidth(20);
 
         //Actions for buttons
@@ -152,6 +157,14 @@ public class Draw {
             @Override
             public void handle(ActionEvent event) {
                 Main main = new Main(frontStage);
+            }
+        });
+
+        front.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FrontPage front = new FrontPage();
+                front.start(frontStage);
             }
         });
 
