@@ -61,6 +61,7 @@ public class FrontPage extends Application{
         costumize.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                Draw canvas = new Draw();
                 CustomizePage customizePage = new CustomizePage(frontStage);
             }
         });

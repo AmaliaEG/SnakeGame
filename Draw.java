@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 
 public class Draw {
+    private CustomizePage customizePage;
     public static final int MAX_CANVAS = 600;
 
     // User defined visual properties for the game

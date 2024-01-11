@@ -106,6 +106,8 @@ public class Main {
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage);
 
+        CustomizePage customizePages = new CustomizePage(primaryStage, canvas);
+
         canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);

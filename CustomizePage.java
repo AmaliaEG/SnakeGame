@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CustomizePage {
-    public Draw draw;
+    private Draw draw;
 
     private Button skel_bg = new Button();
     private Button skel_p = new Button();
@@ -29,7 +29,8 @@ public class CustomizePage {
 
     private Button game = new Button();
 
-    public CustomizePage(Stage frontStage) {
+    public CustomizePage(Stage frontStage, Draw draw) {
+        this.draw = draw;
         frontStage.setTitle("Customization");
         
         Label maps = new Label("Maps");
@@ -129,12 +130,14 @@ public class CustomizePage {
             }
         });
 
-        skel_s.setOnAction(new EventHandler<ActionEvent>() {
+        skel_s.setOnAction(event -> draw.setSnakeSkin(new Image("\\Skins\\SkeletonSnakeHead.png"), new Image("\\Skins\\SkeletonSnakeBody.png")));
+            
+        /*new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(skeleton_s, skeleton_body);
+                draw.setSnakeSkin(skeleton_s);
             }
-        });
+        });*/
 
         cot_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -153,7 +156,7 @@ public class CustomizePage {
         cot_s.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(cottage_s, cottage_bg);
+                draw.setSnakeSkin(cottage_s);
             }
         });
 
