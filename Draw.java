@@ -16,12 +16,12 @@ public class Draw {
     // User defined visual properties for the game
     int backroundColor = 0;
     int snakeColor = 0;
-    Image imgSnakeHead = new Image("Skins\\cottageCoreHead.png");
-    Image imgSnakeBody = new Image("Skins\\cottageCoreFlower6.png");
-    Image imgBluePearl = new Image("Skins\\cottageCoreFood.png");
-    Image imgGoldPearl = new Image("Skins\\cottageCoreGold.png");
-    
-    //private Image imgSnakeHead;
+
+    public Image imgSnakeHead = new Image("\\Skins\\SkeletonSnakeHead.png"); 
+    public Image imgSnakeBody = new Image("\\Skins\\SkeletonSnakeBody.png");
+    public Image imgFoodRed = new Image("\\Skins\\cottageCoreFood.png"); 
+    public Image imgFoodYellow = new Image("\\Skins\\cottageCoreGold.png");
+    public Image imgBackground = new Image("\\Skins\\SkeletonSnakeBackground.png");
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
@@ -82,6 +82,7 @@ public class Draw {
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
+
         switch (lastDirection) {
             case 1: // UP
                 head.setRotate(0);
@@ -105,8 +106,18 @@ public class Draw {
         snakeRoot.getChildren().add(head);
     }
 
-    public void setSnakeSkin(Image imgSnakeHead) {
-        this.imgSnakeHead = imgSnakeHead;
+    public void setSnakeSkin(Image snkH, Image snkB) {
+        imgSnakeHead = snkH;
+        imgSnakeBody = snkB;
+    }
+
+    public void setPointSkin(String imgFoodRed, String imgFoodYellow) {
+        this.imgFoodRed = new Image(imgFoodRed);
+        this.imgFoodYellow = new Image(imgFoodYellow);
+    }
+
+    public void setBackground(Image imgBackground) {
+        this.imgBackground = imgBackground;
     }
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
@@ -117,10 +128,10 @@ public class Draw {
             int pointType = point.get(2);
             Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
             if (pointType == 0) {
-                pointSpawn.setFill(new ImagePattern(imgGoldPearl));
+                pointSpawn.setFill(new ImagePattern(imgFoodYellow));
                 //pointSpawn.setFill(Color.YELLOW);
             } else {
-                pointSpawn.setFill(new ImagePattern(imgBluePearl));
+                pointSpawn.setFill(new ImagePattern(imgFoodRed));
                 //pointSpawn.setFill(Color.RED);
             }
             pointRoot.getChildren().add(pointSpawn);

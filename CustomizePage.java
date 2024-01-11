@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CustomizePage {
-    private Draw draw;
+    public Draw draw;
 
     private Button skel_bg = new Button();
     private Button skel_p = new Button();
@@ -37,15 +37,19 @@ public class CustomizePage {
         Label snake = new Label("Snakes");
 
         //Images
-        Image skeleton_bg = new Image("Skins\\SkeletonSnakeBackground.png");
+        Image skeleton_bg = new Image("\\Skins\\SkeletonSnakeBackground.png");
         Image skeleton_p = new Image("\\Skins\\FlowerPoint.png");
         Image skeleton_s = new Image("\\Skins\\SkeletonSnakeHead.png");
+        Image skeleton_body = new Image("\\Skins\\SkeletonSnakeBody.png");
+        Image skeleton_tail = new Image("\\Skins\\SkeletonSnakeTail.png");
+
         ImageView skeleton_back = new ImageView(skeleton_bg);
         ImageView skeleton_point = new ImageView(skeleton_p);
         ImageView skeleton_snake = new ImageView(skeleton_s);
 
         Image cottage_bg = new Image("\\Skins\\cottageCoreFlower6.png");
         Image cottage_p = new Image("\\Skins\\cottageCoreFood.png");
+        Image cottage_p_gold = new Image("\\Skins\\cottageCoreGold.png");
         Image cottage_s = new Image("\\Skins\\cottageCoreHead.png"); 
         ImageView cottage_back = new ImageView(cottage_bg);
         ImageView cottage_point = new ImageView(cottage_p);
@@ -114,42 +118,42 @@ public class CustomizePage {
         skel_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(skeleton_bg);
+                draw.setBackground(skeleton_bg);
             }
         });
 
         skel_p.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(skeleton_p);
+                draw.setPointSkin("\\Skins\\FlowerPoint.png", "\\Skins\\SkeletonSnakeTail.png");
             }
         });
 
         skel_s.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(skeleton_s);
+                draw.setSnakeSkin(skeleton_s, skeleton_body);
             }
         });
 
         cot_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(cottage_bg);
+                draw.setBackground(cottage_s);
             }
         });
 
         cot_p.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(cottage_p);
+                draw.setPointSkin("\\Skins\\cottageCoreGold.png", "\\Skins\\cottageCoreGold.png");
             }
         });
 
         cot_s.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(cottage_s);
+                draw.setSnakeSkin(cottage_s, cottage_bg);
             }
         });
 
