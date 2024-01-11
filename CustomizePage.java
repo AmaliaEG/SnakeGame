@@ -28,9 +28,11 @@ public class CustomizePage {
     private Button cot_s = new Button();
 
     private Button game = new Button();
+    
+    private Button front = new Button();
 
-    public CustomizePage(Stage frontStage, Draw draw) {
-        this.draw = draw;
+
+    public CustomizePage(Stage frontStage) {
         frontStage.setTitle("Customization");
         
         Label maps = new Label("Maps");
@@ -85,11 +87,12 @@ public class CustomizePage {
         cot_p.setGraphic(cottage_point);
         cot_s.setGraphic(cottage_snake);
         
-        this.game.setText("Game");
+        this.game.setText("Start game");
+        this.front.setText("Back");
 
         StackPane root = new StackPane();
 
-        root.getChildren().addAll(maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
+        root.getChildren().addAll(front, maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
         root.setAlignment(Pos.CENTER);
 
         StackPane.setMargin(maps, new Insets(0, 0, 380, 0));
@@ -106,6 +109,8 @@ public class CustomizePage {
 
         StackPane.setMargin(game, new Insets(330, 0, 0, 0));
 
+        StackPane.setMargin(front, new Insets(0, 370, 420, 0));
+
         root.setPrefWidth(20);
 
         //Actions for buttons
@@ -116,47 +121,59 @@ public class CustomizePage {
             }
         });
 
+        front.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FrontPage front = new FrontPage();
+                front.start(frontStage);
+            }
+        });
+
         skel_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setBackground(skeleton_bg);
+                //draw.setBackground(skeleton_bg);
+                System.out.println("You have pressed the skeleton background button");
             }
         });
 
         skel_p.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setPointSkin("\\Skins\\FlowerPoint.png", "\\Skins\\SkeletonSnakeTail.png");
+                //draw.setPointSkin("\\Skins\\FlowerPoint.png", "\\Skins\\SkeletonSnakeTail.png");
+                System.out.println("You have pressed the skeleton point button");
             }
         });
-
-        skel_s.setOnAction(event -> draw.setSnakeSkin(new Image("\\Skins\\SkeletonSnakeHead.png"), new Image("\\Skins\\SkeletonSnakeBody.png")));
-            
-        /*new EventHandler<ActionEvent>() {
+  
+        skel_s.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(skeleton_s);
+                //draw.setSnakeSkin(skeleton_s);
+                System.out.println("You have pressed the skeleton skin button");
             }
-        });*/
+        });
 
         cot_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setBackground(cottage_s);
+                //draw.setBackground(cottage_s);
+                System.out.println("You have pressed the cottage-core background button");
             }
         });
 
         cot_p.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setPointSkin("\\Skins\\cottageCoreGold.png", "\\Skins\\cottageCoreGold.png");
+                //draw.setPointSkin("\\Skins\\cottageCoreGold.png", "\\Skins\\cottageCoreGold.png");
+                System.out.println("You have pressed the cottage-core point button");
             }
         });
 
         cot_s.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                draw.setSnakeSkin(cottage_s);
+                //draw.setSnakeSkin(cottage_s);
+                System.out.println("You have pressed the cottage-core skin button");
             }
         });
 

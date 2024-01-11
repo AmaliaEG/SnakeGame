@@ -31,7 +31,7 @@ public class FrontPage extends Application{
         StackPane.setAlignment(title, Pos.TOP_CENTER);
         StackPane.setMargin(title, new Insets(130, 0, 0, 0));
 
-        this.game.setText("Game");
+        this.game.setText("Start game");
         this.costumize.setText("Costumize");
         this.quit.setText("Quit");
 
@@ -61,7 +61,6 @@ public class FrontPage extends Application{
         costumize.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Draw canvas = new Draw();
                 CustomizePage customizePage = new CustomizePage(frontStage);
             }
         });
@@ -73,8 +72,6 @@ public class FrontPage extends Application{
                 frontStage.close();
             }
         });
-
-        
         
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);
