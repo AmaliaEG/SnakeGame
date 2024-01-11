@@ -100,19 +100,17 @@ public class Main {
         }
         
 
-        canvas = new Draw(gridX, gridY);
+        canvas = new Draw(primaryStage, gridX, gridY);
         canvas.gridXInput = gridX;
         canvas.gridYInput = gridY;
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage);
 
-        CustomizePage customizePages = new CustomizePage(primaryStage, canvas);
-
         canvas.drawGrid();
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
-        canvas.drawSnake(snake, lastDirection);
+        canvas.drawSnake(snake, lastDirection, canvas.imgSnakeHead, canvas.imgSnakeBody);
 
         Point p = new Point(gridX, gridY);
         p.generateRandomPoint(snake, 3);
@@ -226,8 +224,8 @@ public class Main {
                         if (snake.suicide(snake)) {
                             gameOver = true;
                         }
-                        canvas.drawSnake(snake, lastDirection);
-                        System.out.println(snake);
+                        canvas.drawSnake(snake, lastDirection, canvas.imgSnakeHead, canvas.imgSnakeBody);
+                        //System.out.println(snake);
                     }
                 } else {
                     stop();

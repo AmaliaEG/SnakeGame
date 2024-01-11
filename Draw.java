@@ -9,16 +9,26 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.event.ActionEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.geometry.*;
+import javafx.event.EventHandler;
 
 public class Draw {
-    private CustomizePage customizePage;
+    private Position position;
+
     public static final int MAX_CANVAS = 600;
 
     // User defined visual properties for the game
     int backroundColor = 0;
     int snakeColor = 0;
 
-    public Image imgSnakeHead = new Image("\\Skins\\SkeletonSnakeHead.png"); 
+    public Image imgSnakeHead = new Image("\\Skins\\SkeletonSnakeHead.png");
     public Image imgSnakeBody = new Image("\\Skins\\SkeletonSnakeBody.png");
     public Image imgFoodRed = new Image("\\Skins\\cottageCoreFood.png"); 
     public Image imgFoodYellow = new Image("\\Skins\\cottageCoreGold.png");
@@ -37,10 +47,167 @@ public class Draw {
     private Group scoreRoot = new Group();
     private Group gamePause = new Group();
 
-    public Draw(int gridXInput, int gridYInput) {
+    //Costumize Page
+    private Button skel_bg = new Button();
+    private Button skel_p = new Button();
+    private Button skel_s = new Button();
+
+    private Button cot_bg = new Button();
+    private Button cot_p = new Button();
+    private Button cot_s = new Button();
+
+    private Button game = new Button();
+
+    public void setSnakeSkin(String snkH, String snkB) {
+        Image body = new Image("\\Skins\\SkeletonSnakeHead.png");
+        Image head = new Image("\\Skins\\SkeletonSnakeBody.png");
+        drawSnake(position, 4, head, body);
+    }
+
+    public Draw(Stage frontStage, int gridXInput, int gridYInput) {
+        this.position = new Position(gridXInput, gridYInput);
         this.gridXInput = gridXInput;
         this.gridYInput = gridYInput;
         calculateCanvasSize();
+
+        frontStage.setTitle("Customization");
+        
+        Label maps = new Label("Maps");
+        Label points = new Label("Points");
+        Label snake = new Label("Snakes");
+
+        //Images
+        Image skeleton_bg = new Image("\\Skins\\SkeletonSnakeBackground.png");
+        Image skeleton_p = new Image("\\Skins\\FlowerPoint.png");
+        Image skeleton_s = new Image("\\Skins\\SkeletonSnakeHead.png");
+        Image skeleton_body = new Image("\\Skins\\SkeletonSnakeBody.png");
+        Image skeleton_tail = new Image("\\Skins\\SkeletonSnakeTail.png");
+
+        ImageView skeleton_back = new ImageView(skeleton_bg);
+        ImageView skeleton_point = new ImageView(skeleton_p);
+        ImageView skeleton_snake = new ImageView(skeleton_s);
+
+        Image cottage_bg = new Image("\\Skins\\cottageCoreFlower6.png");
+        Image cottage_p = new Image("\\Skins\\cottageCoreFood.png");
+        Image cottage_p_gold = new Image("\\Skins\\cottageCoreGold.png");
+        Image cottage_s = new Image("\\Skins\\cottageCoreHead.png"); 
+        ImageView cottage_back = new ImageView(cottage_bg);
+        ImageView cottage_point = new ImageView(cottage_p);
+        ImageView cottage_snake = new ImageView(cottage_s);
+
+        double width = 50;
+        double height = 50;
+        skeleton_back.setFitWidth(width);
+        skeleton_back.setFitHeight(height);
+
+        skeleton_point.setFitWidth(width);
+        skeleton_point.setFitHeight(height);
+        
+        skeleton_snake.setFitWidth(width);
+        skeleton_snake.setFitHeight(height);
+
+        cottage_back.setFitWidth(width);
+        cottage_back.setFitHeight(height);
+
+        cottage_point.setFitWidth(width);
+        cottage_point.setFitHeight(height);
+        
+        cottage_snake.setFitWidth(width);
+        cottage_snake.setFitHeight(height);
+        
+        //Buttons
+        skel_bg.setGraphic(skeleton_back);
+        skel_p.setGraphic(skeleton_point);
+        skel_s.setGraphic(skeleton_snake);
+
+        cot_bg.setGraphic(cottage_back);
+        cot_p.setGraphic(cottage_point);
+        cot_s.setGraphic(cottage_snake);
+        
+        this.game.setText("Game");
+
+        StackPane root = new StackPane();
+
+        root.getChildren().addAll(maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
+        root.setAlignment(Pos.CENTER);
+
+        StackPane.setMargin(maps, new Insets(0, 0, 380, 0));
+        StackPane.setMargin(skel_bg, new Insets(0, 0, 280, 80));
+        StackPane.setMargin(cot_bg, new Insets(0, 80, 280, 0));
+
+        StackPane.setMargin(points, new Insets(0, 0, 150, 0));
+        StackPane.setMargin(skel_p, new Insets(0, 0, 50, 80));
+        StackPane.setMargin(cot_p, new Insets(0, 80, 50, 0));
+
+        StackPane.setMargin(snake, new Insets(80, 0, 0, 0));
+        StackPane.setMargin(skel_s, new Insets(180, 0, 0, 80));
+        StackPane.setMargin(cot_s, new Insets(180, 80, 0, 0));
+
+        StackPane.setMargin(game, new Insets(330, 0, 0, 0));
+
+        root.setPrefWidth(20);
+
+        //Actions for buttons
+        game.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Main main = new Main(frontStage);
+            }
+        });
+
+        skel_bg.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //setBackground(new Image("\\Skins\\SkeletonSnakeBackground.png"));
+            }
+        });
+
+        skel_p.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //setPointSkin("\\Skins\\FlowerPoint.png", "\\Skins\\SkeletonSnakeTail.png");
+                System.out.println("Flower point ooon");
+            }
+        });
+
+        skel_s.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setSnakeSkin("\\Skins\\SkeletonSnakeHead.png", "\\Skins\\SkeletonSnakeBody.png");
+                System.out.println("Skeleton skin ooon");
+                
+            }
+        });
+
+        cot_bg.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //setBackground(cottage_s);
+            }
+        });
+
+        cot_p.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //setPointSkin("\\Skins\\cottageCoreGold.png", "\\Skins\\cottageCoreGold.png");
+                System.out.println("Cottage point ooon");
+            }
+        });
+
+        cot_s.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setSnakeSkin("\\Skins\\cottageCoreHead.png", "\\Skins\\cottageCoreFlower6.png");
+                //Image body = new Image("\\Skins\\cottageCoreFlower6.png");
+                //Image head = new Image("\\Skins\\cottageCoreHead.png");
+                //drawSnake(position, 4);
+                System.out.println("Cottage skin ooon");
+            }
+        });
+
+        Scene scene = new Scene(root, 500, 500);
+        frontStage.setScene(scene);
+        frontStage.show();
     }
 
     public void calculateCanvasSize() {
@@ -52,10 +219,21 @@ public class Draw {
 
     public void initializeScene(Stage primaryStage) {
         Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS,
-                HEIGHT_CANVAS, Color.GREEN);
+            HEIGHT_CANVAS, Color.GREEN);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    
+
+    /*public void setPointSkin(String imgFoodRed, String imgFoodYellow) {
+        this.imgFoodRed = new Image(imgFoodRed);
+        this.imgFoodYellow = new Image(imgFoodYellow);
+    }
+
+    public void setBackground(Image imgBackground) {
+        this.imgBackground = imgBackground;
+    }*/
 
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
@@ -71,9 +249,10 @@ public class Draw {
         }
     }
 
-    public void drawSnake(Position snake, int lastDirection) {
+    public void drawSnake(Position snake, int lastDirection, Image imgSnakeHead, Image imgSnakeBody) {
         snakeRoot.getChildren().clear();
         ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
+        int size = dataXY.size();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
             Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
                     tileSize);
@@ -82,43 +261,32 @@ public class Draw {
             //tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
-        Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
 
-        switch (lastDirection) {
-            case 1: // UP
-                head.setRotate(0);
-                break;
-            case 2: // DOWN
-                head.setRotate(180);
-                break;
-            case 3: // RIGHT
-                head.setRotate(90);
-                break;
-            case 4: // LEFT
-                head.setRotate(270);
-                break;
-            default:
-                head.setRotate(270);
-                break;
+        if(!dataXY.isEmpty()){
+            Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
+
+            switch (lastDirection) {
+                case 1: // UP
+                    head.setRotate(0);
+                    break;
+                case 2: // DOWN
+                    head.setRotate(180);
+                    break;
+                case 3: // RIGHT
+                    head.setRotate(90);
+                    break;
+                case 4: // LEFT
+                    head.setRotate(270);
+                    break;
+                default:
+                    head.setRotate(270);
+                    break;
+            }
+            
+            head.setFill(new ImagePattern(imgSnakeHead));
+
+            snakeRoot.getChildren().add(head);
         }
-        
-        head.setFill(new ImagePattern(imgSnakeHead));
-
-        snakeRoot.getChildren().add(head);
-    }
-
-    public void setSnakeSkin(Image snkH, Image snkB) {
-        imgSnakeHead = snkH;
-        imgSnakeBody = snkB;
-    }
-
-    public void setPointSkin(String imgFoodRed, String imgFoodYellow) {
-        this.imgFoodRed = new Image(imgFoodRed);
-        this.imgFoodYellow = new Image(imgFoodYellow);
-    }
-
-    public void setBackground(Image imgBackground) {
-        this.imgBackground = imgBackground;
     }
 
     public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
