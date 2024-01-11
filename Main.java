@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.geometry.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 public class Main {
     private long lastUpdateTime = 0;
@@ -25,6 +28,10 @@ public class Main {
     private Random random = new Random();
     private int gridX;
     private int gridY;
+
+    String background_music = "Sound\\Blanks.mp3";
+    Media sound = new Media(new File(background_music).toURI().toString());
+    MediaPlayer mediaBG = new MediaPlayer(sound);
 
     public Main(Stage primaryStage) {
         showGridSizeInput(primaryStage);
@@ -82,6 +89,16 @@ public class Main {
         System.out.print("Input a grid height between 5-100 (inclusive): ");
         int gridY = sizeInput.nextInt();
         sizeInput.close();*/
+
+        try {
+            mediaBG.setVolume(1.5);
+            mediaBG.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaBG.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Could not play the music");
+        }
+        
 
         canvas = new Draw(gridX, gridY);
         canvas.gridXInput = gridX;
@@ -221,6 +238,7 @@ public class Main {
 
     private void showGameOverPage(Stage primaryStage) {
         GameOverPage gameOverPage = new GameOverPage(primaryStage);
+        mediaBG.stop();
     }
 
     public long acceleration(long speed) {
