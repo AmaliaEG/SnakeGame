@@ -9,12 +9,15 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 public class Draw {
-
     public static final int MAX_CANVAS = 600;
+
+    // User defined visual properties for the game
+    int backroundColor = 0;
+    int snakeColor = 0;
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
-    
+
     public int gridXInput;
     public int gridYInput;
     private int tileSize;
@@ -23,6 +26,7 @@ public class Draw {
     private Group snakeRoot = new Group();
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
+    private Group gamePause = new Group();
 
     public Draw(int gridXInput, int gridYInput) {
         this.gridXInput = gridXInput;
@@ -30,16 +34,16 @@ public class Draw {
         calculateCanvasSize();
     }
 
-
     public void calculateCanvasSize() {
         int maxGridSize = Math.max(gridXInput, gridYInput);
-        this.tileSize = MAX_CANVAS / maxGridSize; // Creates the tilesizes based on the constant variable Max_Canvas and the highest value of n and m.
+        this.tileSize = MAX_CANVAS / maxGridSize;
         this.WIDTH_CANVAS = tileSize * gridXInput;
         this.HEIGHT_CANVAS = tileSize * gridYInput;
     }
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot), WIDTH_CANVAS, HEIGHT_CANVAS, Color.BLACK); // Creates a scene that, and also a group containing all the lesser groups.
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS,
+                HEIGHT_CANVAS, Color.GREEN);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -47,13 +51,13 @@ public class Draw {
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.WHITE);
+            lineVertical.setStroke(Color.DARKGREEN);
             gridRoot.getChildren().add(lineVertical);
         }
 
         for (int i = 0; i <= gridYInput; i++) {
             Line lineHorizontal = new Line(0, i * tileSize, WIDTH_CANVAS, i * tileSize);
-            lineHorizontal.setStroke(Color.WHITE);
+            lineHorizontal.setStroke(Color.DARKGREEN);
             gridRoot.getChildren().add(lineHorizontal);
         }
     }
@@ -62,12 +66,15 @@ public class Draw {
         snakeRoot.getChildren().clear();
         ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
         for (int i = dataXY.size() - 2; i >= 0; i--) {
-            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize, tileSize);
+            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
+                    tileSize);
+
             tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
-        Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize); // Creates head after body, for the sake of it visually being above its body when it bites itself.
-        head.setFill(Color.DARKGREEN);
+        Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
+
+        head.setFill(Color.DARKSEAGREEN);
         snakeRoot.getChildren().add(head);
     }
 
@@ -85,7 +92,8 @@ public class Draw {
         Text scoreText = new Text("Score: " + score);
         scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
         scoreText.setFill(Color.FORESTGREEN);
-        double textX = WIDTH_CANVAS / 2 - scoreText.getLayoutBounds().getWidth() / 2;;
+        double textX = WIDTH_CANVAS / 2 - scoreText.getLayoutBounds().getWidth() / 2;
+        ;
         double textY = HEIGHT_CANVAS / 7;
         scoreText.setX(textX);
         scoreText.setY(textY);
@@ -101,5 +109,20 @@ public class Draw {
         gameOverText.setX(textX);
         gameOverText.setY(textY);
         ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
+    }
+
+    public void drawGameIsPaused(Stage primaryStage) {
+        Text gamePauseText = new Text("Pause");
+        gamePauseText.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        gamePauseText.setFill(Color.WHITE);
+        double textX = WIDTH_CANVAS / 2 - gamePauseText.getLayoutBounds().getWidth() / 2;
+        double textY = HEIGHT_CANVAS / 2;
+        gamePauseText.setX(textX);
+        gamePauseText.setY(textY);
+        gamePause.getChildren().add(gamePauseText);
+    }
+
+    public void drawGameNotPaused(Stage primaryStage) {
+        gamePause.getChildren().clear();
     }
 }
