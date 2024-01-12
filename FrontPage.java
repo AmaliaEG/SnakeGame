@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -10,6 +11,13 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class FrontPage extends Application{
     public static void main(String[] args) {
@@ -21,12 +29,37 @@ public class FrontPage extends Application{
     private Button quit = new Button();
     private Text title = new Text("Snake!");
 
+
     @Override   
     public void start(Stage frontStage) {
-        frontStage.setTitle("Snake Game");
         
+        frontStage.setTitle("Snake Game");
+
+        Image backgroundImage = new Image("\\pages\\Background.png");
+        ImageView background = new ImageView(backgroundImage);
+
+        /*Image[] frames = new Image[totalFrames];
+        for (int i = 0; i < totalFrames; i++) {
+            frames[i] = new Image(getClass().getClassLoader().getResourceAsStream("Images/frame" + (i + 1) + ".png"));
+        }
+
+        background.setImage(frames[currentFrame]);
+
+        Timeline timeline = new Timeline(new KeyFrame(
+            Duration.millis(200),
+            ae -> {
+                currentFrame = (currentFrame + 1) % totalFrames;
+                background.setImage(frames[currentFrame]);
+            }));
+        
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();*/
+
+        Font.loadFont(getClass().getResourceAsStream("\\pages\\Pixeboy-z8XGD.ttf"), 12);
+        Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
+                
         //Head Title
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 40));
+        title.setFont(Font.font("Pixeboy", FontWeight.BOLD, 60));
         title.setFill(Color.PINK);
         StackPane.setAlignment(title, Pos.TOP_CENTER);
         StackPane.setMargin(title, new Insets(130, 0, 0, 0));
@@ -35,7 +68,28 @@ public class FrontPage extends Application{
         this.costumize.setText("Costumize");
         this.quit.setText("Quit");
 
+        game.setFont(buttonFont);
+        costumize.setFont(buttonFont);
+        quit.setFont(buttonFont);
+
+        game.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        costumize.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        quit.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        
+        String hover = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
+
+        game.setOnMouseEntered(e -> game.setStyle(hover));
+        game.setOnMouseExited(e -> game.setStyle("-fx-background-color: transparent; -fx-border-width: 0"));
+
+        costumize.setOnMouseEntered(e -> costumize.setStyle(hover));
+        costumize.setOnMouseExited(e -> costumize.setStyle("-fx-background-color: transparent; -fx-border-width: 0"));
+
+        quit.setOnMouseEntered(e -> quit.setStyle(hover));
+        quit.setOnMouseExited(e -> quit.setStyle("-fx-background-color: transparent; -fx-border-width: 0"));
+
         StackPane root = new StackPane();
+
+        root.getChildren().add(background);
 
         root.getChildren().addAll(title, game, costumize, quit);
 
