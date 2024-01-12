@@ -106,7 +106,7 @@ public class Main {
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage);
 
-        CustomizePage customizePages = new CustomizePage(primaryStage, canvas);
+        //CustomizePage customizePages = new CustomizePage(primaryStage);
 
         canvas.drawGrid();
 
