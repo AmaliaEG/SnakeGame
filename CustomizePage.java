@@ -15,6 +15,11 @@ import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.animation.FadeTransition;
+import javafx.animation.FillTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class CustomizePage {
     private Draw draw;
@@ -92,6 +97,8 @@ public class CustomizePage {
 
         StackPane root = new StackPane();
 
+        root.setStyle("-fx-background-color: pink;");
+
         root.getChildren().addAll(front, maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
         root.setAlignment(Pos.CENTER);
 
@@ -113,7 +120,16 @@ public class CustomizePage {
 
         root.setPrefWidth(20);
 
-        //Actions for buttons
+        Duration duration = Duration.seconds(1);
+        KeyFrame frame = new KeyFrame(duration, event -> {
+            fadeToRandomColor(root);
+        });
+
+        Timeline timeline = new Timeline(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        
+            //Actions for buttons
         game.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -180,5 +196,22 @@ public class CustomizePage {
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);
         frontStage.show();
+    }
+
+    private void fadeToRandomColor(StackPane root){
+        String randomColor = getRandomColor();
+        KeyValue keyValue = new KeyValue(root.styleProperty(), "-fx-background-color: " + randomColor + ";");
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
+        
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+    }
+
+    private String getRandomColor(){
+        int red = (int) (Math.random() * 256);
+        int green = (int) (Math.random() * 256);
+        int blue = (int) (Math.random() * 256);
+
+        return String.format("#%02X%02X%02X", red, green, blue);
     }
 }
