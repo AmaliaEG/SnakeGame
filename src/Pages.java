@@ -225,66 +225,8 @@ public class Pages {
 
         root.setPrefWidth(20);
 
-        /*
-        skel_bg.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // draw.setBackground(skeleton_bg);
-                System.out.println("You have pressed the skeleton background button");
-            }
-        });
-
-        skel_p.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // draw.setPointSkin("\\Skins\\FlowerPoint.png",
-                // "\\Skins\\SkeletonSnakeTail.png");
-                System.out.println("You have pressed the skeleton point button");
-            }
-        });
-
-        skel_s.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // draw.setSnakeSkin(skeleton_s);
-                System.out.println("You have pressed the skeleton skin button");
-            }
-        });
-
-        cot_bg.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // draw.setBackground(cottage_s);
-                System.out.println("You have pressed the cottage-core background button");
-            }
-        });
-
-        cot_p.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // draw.setPointSkin("\\Skins\\cottageCoreGold.png",
-                // "\\Skins\\cottageCoreGold.png");
-
-                System.out.println("You have pressed the cottage-core point button");
-            }
-        });
-
-        cot_s.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // draw.setSnakeSkin(cottage_s);
-                if (gameBoard != null) {
-                    gameBoard.setSnakeSkin(cottage_s, cottage_bg);
-                    System.out.println("You have pressed the cottage-core skin button");
-                }
-
-            }
-        });  */
-
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
-
 }

@@ -122,7 +122,7 @@ public class Main extends Application {
                         if (!gamePause) { // Pause until gamePause is false.
                             if (apple) {
                                 if (powerUp) {
-                                    powerUpCollision();
+                                    powerUpCollision(primaryStage);
                                 }
                                 appleCollision();
                             } else if (north) {
@@ -234,20 +234,25 @@ public class Main extends Application {
         this.powerUp = false;
     }
 
-    private void powerUpCollision() {
-        int surprise = random.nextInt(10);
+    private void powerUpCollision(Stage primaryStage) {
+        int surprise = random.nextInt(8);
+        String ability = "Nothing :P";
+
         switch (surprise) {
             case 1:
                 this.speed *= 0.9;
+                ability = "Slow down";
                 break;
             case 2:
                 this.speed *= 1.1;
+                ability = "Speed up";
                 break;
             case 3:
+                ability = "Bonus Points";
                 this.snake.multiplier += 1;
                 break;
         }
-        //appleCollision();
+        gameBoard.drawPowerUp(primaryStage, ability);
     }
 
 }

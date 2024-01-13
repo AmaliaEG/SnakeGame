@@ -12,16 +12,18 @@ import javafx.scene.image.Image;
 
 public class Draw {
     public static final int MAX_CANVAS = 600;
+    private static final int SCENE_HEIGHT = 650;
 
     // User defined visual properties for the game
     int backroundColor = 0;
     int snakeColor = 0;
 
-    public Image imgSnakeHead = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeHead.png").toString()); 
+    public Image imgSnakeHead = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeHead.png").toString());
     public Image imgSnakeBody = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBody.png").toString());
-    public Image imgFoodRed = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFood.png").toString()); 
+    public Image imgFoodRed = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFood.png").toString());
     public Image imgFoodYellow = new Image(ClassLoader.getSystemResource("Skins/cottageCoreGold.png").toString());
-    public Image imgBackground = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBackground.png").toString());
+    public Image imgBackground = new Image(
+            ClassLoader.getSystemResource("Skins/SkeletonSnakeBackground.png").toString());
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;
@@ -35,6 +37,8 @@ public class Draw {
     private Group pointRoot = new Group();
     private Group scoreRoot = new Group();
     private Group gamePause = new Group();
+    private Group powerUp = new Group();
+
 
     public Draw() {
 
@@ -50,8 +54,7 @@ public class Draw {
     }
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS,
-                HEIGHT_CANVAS, Color.GREEN);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause, powerUp), WIDTH_CANVAS, SCENE_HEIGHT, Color.GREEN);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -78,7 +81,7 @@ public class Draw {
                     tileSize);
 
             tail.setFill(new ImagePattern(imgSnakeBody));
-            //tail.setFill(Color.FORESTGREEN);
+            // tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
@@ -100,10 +103,68 @@ public class Draw {
                 head.setRotate(270);
                 break;
         }
-        
+
         head.setFill(new ImagePattern(imgSnakeHead));
 
         snakeRoot.getChildren().add(head);
+    }
+
+    public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
+        pointRoot.getChildren().clear();
+        for (ArrayList<Integer> point : pointList) {
+            int pointX = point.get(0);
+            int pointY = point.get(1);
+            int pointType = point.get(2);
+            Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
+            if (pointType == 0) {
+                pointSpawn.setFill(new ImagePattern(imgFoodYellow));
+                // pointSpawn.setFill(Color.YELLOW);
+            } else {
+                pointSpawn.setFill(new ImagePattern(imgFoodRed));
+                // pointSpawn.setFill(Color.RED);
+            }
+            pointRoot.getChildren().add(pointSpawn);
+        }
+    }
+
+    public void drawScore(int score) {
+        scoreRoot.getChildren().clear();
+        Text scoreText = new Text("Score: " + score);
+        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
+        scoreText.setFill(Color.rgb(255, 255, 255, 0.5));
+        scoreText.setStroke(Color.rgb(255, 255, 255, 0.7));
+        double textX = 12;
+        double textY = SCENE_HEIGHT-12;
+        scoreText.setX(textX);
+        scoreText.setY(textY);
+        scoreRoot.getChildren().add(scoreText);
+    }
+
+    public void drawGameOver(Stage primaryStage) {
+        Text gameOverText = new Text("Game Over");
+        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 70));
+        gameOverText.setFill(Color.WHITE);
+        double textX = WIDTH_CANVAS / 2 - gameOverText.getLayoutBounds().getWidth() / 2;
+        double textY = HEIGHT_CANVAS / 2;
+        gameOverText.setX(textX);
+        gameOverText.setY(textY);
+        ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
+    }
+
+    public void drawGameIsPaused(Stage primaryStage) {
+        Text gamePauseText = new Text("Pause");
+        gamePauseText.setFont(Font.font("Arial", FontWeight.BOLD, 70));
+        gamePauseText.setFill(Color.WHITE);
+        gamePauseText.setStroke(Color.BLACK);
+        double textX = WIDTH_CANVAS / 2 - gamePauseText.getLayoutBounds().getWidth() / 2;
+        double textY = HEIGHT_CANVAS / 2;
+        gamePauseText.setX(textX);
+        gamePauseText.setY(textY);
+        gamePause.getChildren().add(gamePauseText);
+    }
+
+    public void drawGameNotPaused(Stage primaryStage) {
+        gamePause.getChildren().clear();
     }
 
     public void setSnakeSkin(Image imgSnakeHead, Image imgSnakeBody) {
@@ -120,60 +181,16 @@ public class Draw {
         this.imgBackground = imgBackground;
     }
 
-    public void drawPoint(ArrayList<ArrayList<Integer>> pointList) {
-        pointRoot.getChildren().clear();
-        for (ArrayList<Integer> point : pointList) {
-            int pointX = point.get(0);
-            int pointY = point.get(1);
-            int pointType = point.get(2);
-            Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
-            if (pointType == 0) {
-                pointSpawn.setFill(new ImagePattern(imgFoodYellow));
-                //pointSpawn.setFill(Color.YELLOW);
-            } else {
-                pointSpawn.setFill(new ImagePattern(imgFoodRed));
-                //pointSpawn.setFill(Color.RED);
-            }
-            pointRoot.getChildren().add(pointSpawn);
-        }
-    }
-
-    public void drawScore(int score) {
-        scoreRoot.getChildren().clear();
-        Text scoreText = new Text("Score: " + score);
-        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
-        scoreText.setFill(Color.FORESTGREEN);
-        double textX = WIDTH_CANVAS / 2 - scoreText.getLayoutBounds().getWidth() / 2;
-        ;
-        double textY = HEIGHT_CANVAS / 7;
-        scoreText.setX(textX);
-        scoreText.setY(textY);
-        scoreRoot.getChildren().add(scoreText);
-    }
-
-    public void drawGameOver(Stage primaryStage) {
-        Text gameOverText = new Text("Game Over");
-        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        gameOverText.setFill(Color.WHITE);
-        double textX = WIDTH_CANVAS / 2 - gameOverText.getLayoutBounds().getWidth() / 2;
-        double textY = HEIGHT_CANVAS / 2;
-        gameOverText.setX(textX);
-        gameOverText.setY(textY);
-        ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
-    }
-
-    public void drawGameIsPaused(Stage primaryStage) {
-        Text gamePauseText = new Text("Pause");
-        gamePauseText.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        gamePauseText.setFill(Color.WHITE);
-        double textX = WIDTH_CANVAS / 2 - gamePauseText.getLayoutBounds().getWidth() / 2;
-        double textY = HEIGHT_CANVAS / 2;
-        gamePauseText.setX(textX);
-        gamePauseText.setY(textY);
-        gamePause.getChildren().add(gamePauseText);
-    }
-
-    public void drawGameNotPaused(Stage primaryStage) {
-        gamePause.getChildren().clear();
+    public void drawPowerUp(Stage primaryStage, String ability){
+        powerUp.getChildren().clear();
+        Text powerUpInfo = new Text("+ " + ability);
+        powerUpInfo.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        powerUpInfo.setFill(Color.rgb(255, 255, 255, 0.5));
+        powerUpInfo.setStroke(Color.rgb(0, 0,0, 0.5));
+        double textX = WIDTH_CANVAS / 2;
+        double textY = SCENE_HEIGHT - 12;
+        powerUpInfo.setX(textX);
+        powerUpInfo.setY(textY);
+        powerUp.getChildren().add(powerUpInfo);
     }
 }
