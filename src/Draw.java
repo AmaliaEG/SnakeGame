@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 
 public class Draw {
-    private CustomizePage customizePage;
     public static final int MAX_CANVAS = 600;
 
     // User defined visual properties for the game
@@ -37,13 +36,13 @@ public class Draw {
     private Group scoreRoot = new Group();
     private Group gamePause = new Group();
 
-    public Draw(int gridXInput, int gridYInput) {
-        this.gridXInput = gridXInput;
-        this.gridYInput = gridYInput;
-        calculateCanvasSize();
+    public Draw() {
+
     }
 
-    public void calculateCanvasSize() {
+    public void calculateCanvasSize(int gridXInput, int gridYInput) {
+        this.gridXInput = gridXInput;
+        this.gridYInput = gridYInput;
         int maxGridSize = Math.max(gridXInput, gridYInput);
         this.tileSize = MAX_CANVAS / maxGridSize;
         this.WIDTH_CANVAS = tileSize * gridXInput;
@@ -107,14 +106,14 @@ public class Draw {
         snakeRoot.getChildren().add(head);
     }
 
-    public void setSnakeSkin(Image snkH, Image snkB) {
-        imgSnakeHead = snkH;
-        imgSnakeBody = snkB;
+    public void setSnakeSkin(Image imgSnakeHead, Image imgSnakeBody) {
+        this.imgSnakeHead = imgSnakeHead;
+        this.imgSnakeBody = imgSnakeBody;
     }
 
-    public void setPointSkin(String imgFoodRed, String imgFoodYellow) {
-        this.imgFoodRed = new Image(imgFoodRed);
-        this.imgFoodYellow = new Image(imgFoodYellow);
+    public void setPointSkin(Image imgFoodRed, Image imgFoodYellow) {
+        this.imgFoodRed = imgFoodRed;
+        this.imgFoodYellow = imgFoodYellow;
     }
 
     public void setBackground(Image imgBackground) {

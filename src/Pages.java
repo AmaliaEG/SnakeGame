@@ -26,47 +26,29 @@ import javax.swing.DefaultRowSorter;
 public class Pages {
     private static final String DEFAULT = "-fx-background-color: transparent; -fx-border-width: 0;";
     private static final String HOVER = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
-    private static final Font LABEL_FONT = Font.font("Pixeboy", FontWeight.BOLD, 20);
+    private static final Font BUTTON_FONT = Font.loadFont(Pages.class.getResourceAsStream("pages/Pixeboy-z8XGD.ttf"),
+            18);
+    private static final Font LABEL_FONT = Font.loadFont(Pages.class.getResourceAsStream("pages/Pixeboy-z8XGD.ttf"),
+            22);
+    private static final double buttonImageSize = 50;
 
-    public static void frontPage(Stage primaryStage, Main main) {
-        Font.loadFont(Pages.class.getResourceAsStream("pages/Pixeboy-z8XGD.ttf"), 12);
-
+    public static void frontPage(Stage primaryStage, Main main, Draw gameBoard) {
         Text title = new Text("Snake!");
         title.setFont(Font.font("Pixeboy", FontWeight.BOLD, 60));
         title.setFill(Color.PINK);
 
-        Button startGameButton = styleButton("Start game", "-fx-text-fill: white;", e -> gameBoardInitialization(primaryStage, main));
-        Button costumizeButton = styleButton("Costumize", "-fx-text-fill: white;", e -> gameCustomize(primaryStage, main));
+        Button startGameButton = styleButton("Start game", "-fx-text-fill: white;",
+                e -> gameBoardInitialization(primaryStage, main));
+        Button costumizeButton = styleButton("Costumize", "-fx-text-fill: white;",
+                e -> gameCustomize(primaryStage, main, gameBoard));
         Button quitButton = styleButton("Quit", "-fx-text-fill: white;", e -> primaryStage.close());
 
         Image backgroundImage = new Image(ClassLoader.getSystemResource("pages/Background.png").toString());
         ImageView background = new ImageView(backgroundImage);
 
-        Font.loadFont(Pages.class.getResourceAsStream("/pages/Pixeboy-z8XGD.ttf"), 12);
-
         // Head Title
         StackPane.setAlignment(title, Pos.TOP_CENTER);
         StackPane.setMargin(title, new Insets(130, 0, 0, 0));
-
-        // String hover = "-fx-text-fill: white; -fx-background-color: #4CAF50;
-        // -FX-BORDER-COLOR: #4CAF50;";
-
-        /*
-         * startGameButton.setOnMouseEntered(e -> startGameButton.setStyle(hover));
-         * startGameButton.setOnMouseExited(e -> startGameButton.
-         * setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;"
-         * ));
-         * 
-         * costumizeButton.setOnMouseEntered(e -> costumizeButton.setStyle(hover));
-         * costumizeButton.setOnMouseExited(e -> costumizeButton.
-         * setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;"
-         * ));
-         * 
-         * quitButton.setOnMouseEntered(e -> quitButton.setStyle(hover));
-         * quitButton.setOnMouseExited(e -> quitButton.
-         * setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;"
-         * ));
-         */
 
         StackPane root = new StackPane();
 
@@ -110,8 +92,6 @@ public class Pages {
             }
         });
 
-
-
         labelX.setFont(LABEL_FONT);
         labelY.setFont(LABEL_FONT);
 
@@ -140,52 +120,30 @@ public class Pages {
 
     public static Button styleButton(String text, String textColor, EventHandler<ActionEvent> handler) {
         Button button = new Button(text);
-        button.setFont(Font.font("Pixeboy", FontWeight.BOLD, 25));
+        button.setFont(BUTTON_FONT);
         button.setStyle("-fx-background-color: transparent; -fx-border-width: 0; " + textColor);
         button.setOnAction(handler);
         button.setOnMouseEntered(e -> button.setStyle(HOVER));
         button.setOnMouseExited(e -> button.setStyle(DEFAULT));
         return button;
     }
-    public static Button styleCustomButton(Image cutomPicture, double imageSize, EventHandler<ActionEvent> handler) {
+
+    public static Button styleCustomButton(Image cutomPicture, EventHandler<ActionEvent> handler) {
         Button button = new Button();
         ImageView imageView = new ImageView(cutomPicture);
-        imageView.setFitHeight(imageSize);
-        imageView.setFitWidth(imageSize);
-        button.setGraphic(imageView);     
+        imageView.setFitHeight(buttonImageSize);
+        imageView.setFitWidth(buttonImageSize);
+        button.setGraphic(imageView);
         button.setStyle("-fx-background-color: transparent; -fx-border-width: 0; ");
         button.setOnAction(handler);
         button.setOnMouseEntered(e -> button.setStyle(HOVER));
         button.setOnMouseExited(e -> button.setStyle(DEFAULT));
         return button;
-    } 
+    }
 
-    private static void gameCustomize(Stage primaryStage, Main main) {
-        double imageSize = 50;
-        
-        Button skel_bg = new Button();
-        Button skel_p = new Button();
-        Button skel_s = new Button();
-
-        Button cot_bg = new Button();
-        Button cot_p = new Button();
-        Button cot_s = new Button();
-
-        Button game = new Button();
-        Button front = new Button();
-
+    private static void gameCustomize(Stage primaryStage, Main main, Draw gameBoard) {
         Stage customStage = new Stage();
-
         customStage.setTitle("Customization");
-
-        Label maps = new Label("Maps");
-        Label points = new Label("Points");
-        Label snake = new Label("Snakes");
-        Font labelFont = Font.font("Pixeboy", FontWeight.BOLD, 30);
-        Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
-        maps.setFont(labelFont);
-        points.setFont(labelFont);
-        snake.setFont(labelFont);
 
         // Images
         Image skeleton_bg = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBackground.png").toString());
@@ -194,97 +152,59 @@ public class Pages {
         Image skeleton_body = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBody.png").toString());
         Image skeleton_tail = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeTail.png").toString());
 
-        ImageView skeleton_back = new ImageView(skeleton_bg);
-        ImageView skeleton_point = new ImageView(skeleton_p);
-        ImageView skeleton_snake = new ImageView(skeleton_s);
-
         Image cottage_bg = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFlower6.png").toString());
         Image cottage_p = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFood.png").toString());
         Image cottage_p_gold = new Image(ClassLoader.getSystemResource("Skins/cottageCoreGold.png").toString());
         Image cottage_s = new Image(ClassLoader.getSystemResource("Skins/cottageCoreHead.png").toString());
-        
-
-        ImageView cottage_back = new ImageView(cottage_bg);
-        ImageView cottage_point = new ImageView(cottage_p);
-        ImageView cottage_snake = new ImageView(cottage_s);
-
-
-
-        skeleton_back.setFitWidth(imageSize);
-        skeleton_back.setFitHeight(imageSize);
-
-        skeleton_point.setFitWidth(imageSize);
-        skeleton_point.setFitHeight(imageSize);
-
-        skeleton_snake.setFitWidth(imageSize);
-        skeleton_snake.setFitHeight(imageSize);
-
-        cottage_back.setFitWidth(imageSize);
-        cottage_back.setFitHeight(imageSize);
-
-        cottage_point.setFitWidth(imageSize);
-        cottage_point.setFitHeight(imageSize);
-
-        cottage_snake.setFitWidth(imageSize);
-        cottage_snake.setFitHeight(imageSize);
 
         // Buttons
-        skel_bg.setGraphic(skeleton_back);
-        skel_p.setGraphic(skeleton_point);
-        skel_s.setGraphic(skeleton_snake);
+        Button skel_bg = styleCustomButton(skeleton_bg, e ->{
+            gameBoard.setBackground(skeleton_bg);
 
-        cot_bg.setGraphic(cottage_back);
-        cot_p.setGraphic(cottage_point);
-        cot_s.setGraphic(cottage_snake);
+        });
 
-        game.setText("Start game");
-        front.setText("Back");
+        Button skel_p = styleCustomButton(skeleton_p, e ->{
+            gameBoard.setPointSkin(skeleton_p, cottage_p_gold);
 
-        game.setFont(buttonFont);
-        front.setFont(buttonFont);
+        });
 
-        game.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        front.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        Button skel_s = styleCustomButton(skeleton_s, e ->{
+            gameBoard.setSnakeSkin(skeleton_s, skeleton_body);
+        });
 
-        skel_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        skel_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        skel_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        cot_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        cot_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        cot_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        Button cot_bg = styleCustomButton(cottage_bg, e ->{
+            gameBoard.setBackground(skeleton_bg);
+        });
+        Button cot_p = styleCustomButton(cottage_p, e ->{
+            gameBoard.setPointSkin(cottage_p, cottage_p_gold);
+        });
 
-        String hoverText = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
-        String hoverButton = "-fx-background-color: transparent; -FX-BORDER-COLOR: #4CAF50;";
+        Button cot_s = styleCustomButton(cottage_s, e ->{
+            gameBoard.setSnakeSkin(cottage_s, cottage_bg);
+        });
 
-        game.setOnMouseEntered(e -> game.setStyle(hoverText));
-        game.setOnMouseExited(e -> game.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+        Button gameButton = styleButton("Start Game", "", e -> {
+            main.startGame(primaryStage, 20, 20);
+        });
+        Button frontPageButton = styleButton("Back", "", e -> {
+            frontPage(primaryStage, main, gameBoard);
+            customStage.close();
+        });
 
-        front.setOnMouseEntered(e -> front.setStyle(hoverText));
-        front.setOnMouseExited(e -> front.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+        Label maps = new Label("Maps");
+        Label points = new Label("Points");
+        Label snake = new Label("Snakes");
 
-        skel_bg.setOnMouseEntered(e -> skel_bg.setStyle(hoverButton));
-        skel_bg.setOnMouseExited(e -> skel_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
-
-        skel_p.setOnMouseEntered(e -> skel_p.setStyle(hoverButton));
-        skel_p.setOnMouseExited(e -> skel_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
-
-        skel_s.setOnMouseEntered(e -> skel_s.setStyle(hoverButton));
-        skel_s.setOnMouseExited(e -> skel_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
-
-        cot_bg.setOnMouseEntered(e -> cot_bg.setStyle(hoverButton));
-        cot_bg.setOnMouseExited(e -> cot_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
-
-        cot_p.setOnMouseEntered(e -> cot_p.setStyle(hoverButton));
-        cot_p.setOnMouseExited(e -> cot_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
-
-        cot_s.setOnMouseEntered(e -> cot_s.setStyle(hoverButton));
-        cot_s.setOnMouseExited(e -> cot_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+        maps.setFont(LABEL_FONT);
+        points.setFont(LABEL_FONT);
+        snake.setFont(LABEL_FONT);
 
         StackPane root = new StackPane();
 
         root.setStyle("-fx-background-color: pink;");
 
-        root.getChildren().addAll(front, maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s, game);
+        root.getChildren().addAll(frontPageButton, maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s,
+                gameButton);
         root.setAlignment(Pos.CENTER);
 
         StackPane.setMargin(maps, new Insets(0, 0, 380, 0));
@@ -299,20 +219,13 @@ public class Pages {
         StackPane.setMargin(skel_s, new Insets(180, 0, 0, 80));
         StackPane.setMargin(cot_s, new Insets(180, 80, 0, 0));
 
-        StackPane.setMargin(game, new Insets(330, 0, 0, 0));
+        StackPane.setMargin(gameButton, new Insets(330, 0, 0, 0));
 
-        StackPane.setMargin(front, new Insets(0, 370, 420, 0));
+        StackPane.setMargin(frontPageButton, new Insets(0, 370, 420, 0));
 
         root.setPrefWidth(20);
-        game.setOnAction(e -> { 
-            main.startGame(primaryStage, 20, 20);
-        });
 
-        front.setOnAction(e -> { 
-            frontPage(primaryStage, main);
-            customStage.close();
-        });
-
+        /*
         skel_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -351,6 +264,7 @@ public class Pages {
             public void handle(ActionEvent event) {
                 // draw.setPointSkin("\\Skins\\cottageCoreGold.png",
                 // "\\Skins\\cottageCoreGold.png");
+
                 System.out.println("You have pressed the cottage-core point button");
             }
         });
@@ -359,9 +273,13 @@ public class Pages {
             @Override
             public void handle(ActionEvent event) {
                 // draw.setSnakeSkin(cottage_s);
-                System.out.println("You have pressed the cottage-core skin button");
+                if (gameBoard != null) {
+                    gameBoard.setSnakeSkin(cottage_s, cottage_bg);
+                    System.out.println("You have pressed the cottage-core skin button");
+                }
+
             }
-        });
+        });  */
 
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);

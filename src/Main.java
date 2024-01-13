@@ -18,7 +18,7 @@ import java.io.File;
 
 public class Main extends Application {
 
-    private Draw gameBoard;
+    private Draw gameBoard = new Draw();
     private Position snake;
     private Point p;
     private Scene scene;
@@ -45,7 +45,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Pages.frontPage(primaryStage, this);
+        Pages.frontPage(primaryStage, this, gameBoard);
     }
 
 
@@ -54,11 +54,8 @@ public class Main extends Application {
         this.gridY = gridY;
 
         setBackgroundMusic();
-
-        this.gameBoard = new Draw(gridX, gridY);
-        gameBoard.gridXInput = gridX;
-        gameBoard.gridYInput = gridY;
-        gameBoard.calculateCanvasSize();
+        
+        gameBoard.calculateCanvasSize(gridX, gridY);
         gameBoard.initializeScene(primaryStage);
         gameBoard.drawGrid();
 
