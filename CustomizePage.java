@@ -1,27 +1,16 @@
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.animation.FadeTransition;
-import javafx.animation.FillTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+
 
 public class CustomizePage {
     private Draw draw;
