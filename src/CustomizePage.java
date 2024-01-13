@@ -154,6 +154,7 @@ public class CustomizePage {
         root.setPrefWidth(20);
         
         //Actions for buttons
+        /* 
         game.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -167,7 +168,7 @@ public class CustomizePage {
                 FrontPage front = new FrontPage();
                 front.start(frontStage);
             }
-        });
+        }); */
 
         skel_bg.setOnAction(new EventHandler<ActionEvent>() {
             @Override

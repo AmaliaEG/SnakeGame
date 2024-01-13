@@ -13,7 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class FrontPage extends Application{
+public class FrontPage /*extends Application*/ { /* 
     public static void main(String[] args) {
         launch(args);
     }
@@ -107,5 +107,5 @@ public class FrontPage extends Application{
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);
         frontStage.show();
-    }
+    } */
 }
