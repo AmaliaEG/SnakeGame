@@ -1,7 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -30,10 +29,10 @@ public class FrontPage extends Application{
         
         frontStage.setTitle("Snake Game");
 
-        Image backgroundImage = new Image("\\pages\\Background.png");
+        Image backgroundImage = new Image(ClassLoader.getSystemResource("pages/Background.png").toString());
         ImageView background = new ImageView(backgroundImage);
 
-        Font.loadFont(getClass().getResourceAsStream("\\pages\\Pixeboy-z8XGD.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("pages/Pixeboy-z8XGD.ttf"), 12);
         Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
                 
         //Head Title
