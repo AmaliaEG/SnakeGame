@@ -11,6 +11,9 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
 import java.io.File;
 
 public class Main {
@@ -39,11 +42,28 @@ public class Main {
 
     private void showGridSizeInput(Stage primaryStage){
         VBox the_root = new VBox();
-        Label labelX = new Label("Input a grid width between 5-100 (inclusive): ");
-        Label labelY = new Label("Input a grid width between 5-100 (inclusive): ");
+        Label labelX = new Label("Input a grid width between 5-100 (inclusive) ");
+        Label labelY = new Label("Input a grid width between 5-100 (inclusive) ");
         TextField textFieldX = new TextField();
         TextField textFieldY = new TextField();
         Button createButton = new Button("Create");
+
+        Font.loadFont(getClass().getResourceAsStream("\\pages\\Pixeboy-z8XGD.ttf"), 12);
+        Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
+        Font labelFont = Font.font("Pixeboy", FontWeight.BOLD, 20);
+        
+        labelX.setFont(labelFont);
+        labelY.setFont(labelFont);
+        createButton.setFont(buttonFont);
+
+        createButton.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        
+        String hover = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
+
+        createButton.setOnMouseEntered(e -> createButton.setStyle(hover));
+        createButton.setOnMouseExited(e -> createButton.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        the_root.setStyle("-fx-background-color: pink;");
         the_root.getChildren().addAll(labelX, textFieldX, labelY, textFieldY, createButton);
 
         the_root.setAlignment(Pos.CENTER);

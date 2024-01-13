@@ -20,6 +20,8 @@ import javafx.animation.FillTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 
 public class CustomizePage {
     private Draw draw;
@@ -36,13 +38,17 @@ public class CustomizePage {
     
     private Button front = new Button();
 
-
     public CustomizePage(Stage frontStage) {
         frontStage.setTitle("Customization");
         
         Label maps = new Label("Maps");
         Label points = new Label("Points");
         Label snake = new Label("Snakes");
+        Font labelFont = Font.font("Pixeboy", FontWeight.BOLD, 30);
+        Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
+        maps.setFont(labelFont);
+        points.setFont(labelFont);
+        snake.setFont(labelFont);
 
         //Images
         Image skeleton_bg = new Image("\\Skins\\SkeletonSnakeBackground.png");
@@ -95,6 +101,46 @@ public class CustomizePage {
         this.game.setText("Start game");
         this.front.setText("Back");
 
+        game.setFont(buttonFont);
+        front.setFont(buttonFont);
+
+        game.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        front.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+
+        skel_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        skel_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        skel_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        cot_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        cot_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        cot_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        
+        String hoverText = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
+        String hoverButton = "-fx-background-color: transparent; -FX-BORDER-COLOR: #4CAF50;";
+
+        game.setOnMouseEntered(e -> game.setStyle(hoverText));
+        game.setOnMouseExited(e -> game.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        front.setOnMouseEntered(e -> front.setStyle(hoverText));
+        front.setOnMouseExited(e -> front.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        skel_bg.setOnMouseEntered(e -> skel_bg.setStyle(hoverButton));
+        skel_bg.setOnMouseExited(e -> skel_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        skel_p.setOnMouseEntered(e -> skel_p.setStyle(hoverButton));
+        skel_p.setOnMouseExited(e -> skel_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        skel_s.setOnMouseEntered(e -> skel_s.setStyle(hoverButton));
+        skel_s.setOnMouseExited(e -> skel_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        cot_bg.setOnMouseEntered(e -> cot_bg.setStyle(hoverButton));
+        cot_bg.setOnMouseExited(e -> cot_bg.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        cot_p.setOnMouseEntered(e -> cot_p.setStyle(hoverButton));
+        cot_p.setOnMouseExited(e -> cot_p.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
+        cot_s.setOnMouseEntered(e -> cot_s.setStyle(hoverButton));
+        cot_s.setOnMouseExited(e -> cot_s.setStyle("-fx-background-color: transparent; -fx-border-width: 0;"));
+
         StackPane root = new StackPane();
 
         root.setStyle("-fx-background-color: pink;");
@@ -119,17 +165,8 @@ public class CustomizePage {
         StackPane.setMargin(front, new Insets(0, 370, 420, 0));
 
         root.setPrefWidth(20);
-
-        Duration duration = Duration.seconds(1);
-        KeyFrame frame = new KeyFrame(duration, event -> {
-            fadeToRandomColor(root);
-        });
-
-        Timeline timeline = new Timeline(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
         
-            //Actions for buttons
+        //Actions for buttons
         game.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -196,22 +233,5 @@ public class CustomizePage {
         Scene scene = new Scene(root, 500, 500);
         frontStage.setScene(scene);
         frontStage.show();
-    }
-
-    private void fadeToRandomColor(StackPane root){
-        String randomColor = getRandomColor();
-        KeyValue keyValue = new KeyValue(root.styleProperty(), "-fx-background-color: " + randomColor + ";");
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
-        
-        Timeline timeline = new Timeline(keyFrame);
-        timeline.play();
-    }
-
-    private String getRandomColor(){
-        int red = (int) (Math.random() * 256);
-        int green = (int) (Math.random() * 256);
-        int blue = (int) (Math.random() * 256);
-
-        return String.format("#%02X%02X%02X", red, green, blue);
     }
 }

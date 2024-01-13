@@ -11,13 +11,8 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 public class FrontPage extends Application{
     public static void main(String[] args) {
@@ -38,23 +33,6 @@ public class FrontPage extends Application{
         Image backgroundImage = new Image("\\pages\\Background.png");
         ImageView background = new ImageView(backgroundImage);
 
-        /*Image[] frames = new Image[totalFrames];
-        for (int i = 0; i < totalFrames; i++) {
-            frames[i] = new Image(getClass().getClassLoader().getResourceAsStream("Images/frame" + (i + 1) + ".png"));
-        }
-
-        background.setImage(frames[currentFrame]);
-
-        Timeline timeline = new Timeline(new KeyFrame(
-            Duration.millis(200),
-            ae -> {
-                currentFrame = (currentFrame + 1) % totalFrames;
-                background.setImage(frames[currentFrame]);
-            }));
-        
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();*/
-
         Font.loadFont(getClass().getResourceAsStream("\\pages\\Pixeboy-z8XGD.ttf"), 12);
         Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
                 
@@ -72,20 +50,20 @@ public class FrontPage extends Application{
         costumize.setFont(buttonFont);
         quit.setFont(buttonFont);
 
-        game.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        costumize.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-        quit.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
+        game.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;");
+        costumize.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;");
+        quit.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;");
         
         String hover = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
 
         game.setOnMouseEntered(e -> game.setStyle(hover));
-        game.setOnMouseExited(e -> game.setStyle("-fx-background-color: transparent; -fx-border-width: 0"));
+        game.setOnMouseExited(e -> game.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;"));
 
         costumize.setOnMouseEntered(e -> costumize.setStyle(hover));
-        costumize.setOnMouseExited(e -> costumize.setStyle("-fx-background-color: transparent; -fx-border-width: 0"));
+        costumize.setOnMouseExited(e -> costumize.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;"));
 
         quit.setOnMouseEntered(e -> quit.setStyle(hover));
-        quit.setOnMouseExited(e -> quit.setStyle("-fx-background-color: transparent; -fx-border-width: 0"));
+        quit.setOnMouseExited(e -> quit.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;"));
 
         StackPane root = new StackPane();
 
