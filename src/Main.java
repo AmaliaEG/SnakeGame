@@ -1,4 +1,5 @@
 import javafx.animation.AnimationTimer;
+import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.input.KeyEvent;
@@ -13,24 +14,26 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 import java.io.File;
 
 public class Main {
-    private long lastUpdateTime = 0;
-    private boolean north, south, east, west;
-    public boolean apple = false;
-    public boolean powerUp = false;
-    public boolean firstMove = true;
-    public boolean gameOver = false;
-    public int lastDirection = 0;
-    private Draw canvas;
-    int pointX, pointY, pointType;
-    public boolean gamePause = false;
     private long speed = 150000000;
     private Random random = new Random();
     private int gridX;
     private int gridY;
+    private Draw gameBoard;
+    private long lastUpdateTime = 0;
+    private boolean north, south, east, west;
+
+    public boolean apple, powerUp, gameOver = false;
+    public boolean firstMove = true;
+    public int lastDirection = 0;
+    private Draw canvas;    
+    
+    public boolean gamePause = false;
+
+    int pointX, pointY, pointType;
+
 
     String background_music = "Sound/Blanks.mp3";
     Media sound = new Media(ClassLoader.getSystemResource(background_music).toString());
@@ -48,7 +51,7 @@ public class Main {
         TextField textFieldY = new TextField();
         Button createButton = new Button("Create");
 
-        Font.loadFont(getClass().getResourceAsStream("\\pages\\Pixeboy-z8XGD.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/pages/Pixeboy-z8XGD.ttf"), 12);
         Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
         Font labelFont = Font.font("Pixeboy", FontWeight.BOLD, 20);
         
@@ -120,25 +123,25 @@ public class Main {
         }
         
 
-        canvas = new Draw(gridX, gridY);
-        canvas.gridXInput = gridX;
-        canvas.gridYInput = gridY;
-        canvas.calculateCanvasSize();
-        canvas.initializeScene(primaryStage);
+        gameBoard = new Draw(gridX, gridY);
+        gameBoard.gridXInput = gridX;
+        gameBoard.gridYInput = gridY;
+        gameBoard.calculateCanvasSize();
+        gameBoard.initializeScene(primaryStage);
 
         //CustomizePage customizePages = new CustomizePage(primaryStage);
 
-        canvas.drawGrid();
+        gameBoard.drawGrid();
 
         Position snake = new Position(gridX, gridY);
         snake.spawnPoint();
-        canvas.drawSnake(snake, lastDirection);
+        gameBoard.drawSnake(snake, lastDirection);
 
         Point p = new Point(gridX, gridY);
         p.generateRandomPoint(snake, 3);
-        canvas.drawPoint(p.getPointList());
+        gameBoard.drawPoint(p.getPointList());
 
-        canvas.drawScore(snake.getScore());
+        gameBoard.drawScore(snake.getScore());
 
         Scene scene = primaryStage.getScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -148,7 +151,7 @@ public class Main {
                     case ENTER: // Pause function
                         if (gamePause) {
                             gamePause = false;
-                            canvas.drawGameNotPaused(primaryStage);
+                            gameBoard.drawGameNotPaused(primaryStage);
                         } else {
                             gamePause = true;
                         }
@@ -218,10 +221,10 @@ public class Main {
                                 } else {
                                     speed = acceleration(speed);
                                 }
-                                snake.getBigger(pointX, pointY, pointType, canvas);
+                                snake.getBigger(pointX, pointY, pointType, gameBoard);
                                 p.deletePoint(pointX, pointY, pointType);
                                 p.generateRandomPoint(snake, 1);
-                                canvas.drawPoint(p.getPointList());
+                                gameBoard.drawPoint(p.getPointList());
                                 apple = false;
                                 powerUp = false;
                             } else if (north) {
@@ -238,7 +241,7 @@ public class Main {
                                 snake.moveBody(snake, -1, 0);
                             }
                         } else {
-                            canvas.drawGameIsPaused(primaryStage);
+                            gameBoard.drawGameIsPaused(primaryStage);
                         }
 
                         snake.wallJump(gridY, gridX, snake);
@@ -246,7 +249,7 @@ public class Main {
                         if (snake.suicide(snake)) {
                             gameOver = true;
                         }
-                        canvas.drawSnake(snake, lastDirection);
+                        gameBoard.drawSnake(snake, lastDirection);
                         System.out.println(snake);
                     }
                 } else {

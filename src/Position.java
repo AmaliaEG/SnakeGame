@@ -31,12 +31,12 @@ public class Position{
         return snakePosition;
     }
 
-    public void getBigger(int x, int y, int pointType, Draw canvas) {
+    public void getBigger(int x, int y, int pointType, Draw gameBoard) {
         snakePosition.add(new ArrayList<>(List.of(x, y)));
         if (!(pointType == 0)) {
             score += 100 * multiplier;
         }
-        canvas.drawScore(score);
+        gameBoard.drawScore(score);
     }
 
     public void wallJump(int gridHeight, int gridWidth, Position snake) {
