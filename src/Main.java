@@ -177,27 +177,9 @@ public class Main {
                         if (!gamePause) { // Pause until gamePause is false.
                             if (apple) {
                                 if (powerUp) {
-                                    int surprise = random.nextInt(10);
-                                    switch (surprise) {
-                                        case 1:
-                                            speed *= 0.9;
-                                            break;
-                                        case 2:
-                                            speed *= 1.1;
-                                            break;
-                                        case 3:
-                                            snake.multiplier += 1;
-                                            break;
-                                    }
-                                } else {
-                                    speed = acceleration(speed);
+                                    powerUpCollision();
                                 }
-                                snake.getBigger(pointX, pointY, pointType, gameBoard);
-                                p.deletePoint(pointX, pointY, pointType);
-                                p.generateRandomPoint(snake, 1);
-                                gameBoard.drawPoint(p.getPointList());
-                                apple = false;
-                                powerUp = false;
+                                appleCollision();
                             } else if (north) {
                                 lastDirection = 1;
                                 snake.moveBody(snake, 0, -1);
@@ -262,13 +244,13 @@ public class Main {
         }
 
         for (ArrayList<Integer> point : p.getPointList()) {
-            pointX = point.get(0);
-            pointY = point.get(1);
-            pointType = point.get(2);
+            this.pointX = point.get(0);
+            this.pointY = point.get(1);
+            this.pointType = point.get(2);
 
             if (snakeNextX == pointX && snakeNextY == pointY) {
                 if (pointType == 0) {
-                    powerUp = true;
+                    this.powerUp = true;
                 }
                 apple = true;
                 break;
@@ -295,6 +277,32 @@ public class Main {
         this.east = east;
         this.west = west;
         this.firstMove = false;
+    }
+
+    private void appleCollision() {
+        this.speed =  acceleration(speed);
+        this.snake.getBigger(pointX, pointY, pointType, gameBoard);
+        this.p.deletePoint(pointX, pointY, pointType);
+        this.p.generateRandomPoint(snake, 1);
+        this.gameBoard.drawPoint(p.getPointList());
+        this.apple = false;
+        this.powerUp = false;
+    }
+
+    private void powerUpCollision() {
+        int surprise = random.nextInt(10);
+        switch (surprise) {
+            case 1:
+                this.speed *= 0.9;
+                break;
+            case 2:
+                this.speed *= 1.1;
+                break;
+            case 3:
+                this.snake.multiplier += 1;
+                break;
+        }
+        //appleCollision();
     }
 
 }
