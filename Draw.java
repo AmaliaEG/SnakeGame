@@ -18,11 +18,11 @@ public class Draw {
     int backroundColor = 0;
     int snakeColor = 0;
 
-    public Image imgSnakeHead = new Image("\\Skins\\SkeletonSnakeHead.png"); 
-    public Image imgSnakeBody = new Image("\\Skins\\SkeletonSnakeBody.png");
-    public Image imgFoodRed = new Image("\\Skins\\cottageCoreFood.png"); 
-    public Image imgFoodYellow = new Image("\\Skins\\cottageCoreGold.png");
-    public Image imgBackground = new Image("\\Skins\\SkeletonSnakeBackground.png");
+    public Image imgSnakeHead = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeHead.png").toString()); 
+    public Image imgSnakeBody = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBody.png").toString());
+    public Image imgFoodRed = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFood.png").toString()); 
+    public Image imgFoodYellow = new Image(ClassLoader.getSystemResource("Skins/cottageCoreGold.png").toString());
+    public Image imgBackground = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBackground.png").toString());
 
     private int HEIGHT_CANVAS;
     private int WIDTH_CANVAS;

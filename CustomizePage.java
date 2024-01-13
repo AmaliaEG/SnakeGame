@@ -1,31 +1,18 @@
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.animation.FadeTransition;
-import javafx.animation.FillTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+
 
 public class CustomizePage {
-    private Draw draw;
-
     private Button skel_bg = new Button();
     private Button skel_p = new Button();
     private Button skel_s = new Button();
@@ -51,20 +38,20 @@ public class CustomizePage {
         snake.setFont(labelFont);
 
         //Images
-        Image skeleton_bg = new Image("\\Skins\\SkeletonSnakeBackground.png");
-        Image skeleton_p = new Image("\\Skins\\FlowerPoint.png");
-        Image skeleton_s = new Image("\\Skins\\SkeletonSnakeHead.png");
-        Image skeleton_body = new Image("\\Skins\\SkeletonSnakeBody.png");
-        Image skeleton_tail = new Image("\\Skins\\SkeletonSnakeTail.png");
+        Image skeleton_bg = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBackground.png").toString());
+        Image skeleton_p = new Image(ClassLoader.getSystemResource("Skins/FlowerPoint.png").toString());
+        Image skeleton_s = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeHead.png").toString());
+        Image skeleton_body = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBody.png").toString());
+        Image skeleton_tail = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeTail.png").toString());
 
         ImageView skeleton_back = new ImageView(skeleton_bg);
         ImageView skeleton_point = new ImageView(skeleton_p);
         ImageView skeleton_snake = new ImageView(skeleton_s);
-
-        Image cottage_bg = new Image("\\Skins\\cottageCoreFlower6.png");
-        Image cottage_p = new Image("\\Skins\\cottageCoreFood.png");
-        Image cottage_p_gold = new Image("\\Skins\\cottageCoreGold.png");
-        Image cottage_s = new Image("\\Skins\\cottageCoreHead.png"); 
+        
+        Image cottage_bg = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFlower6.png").toString());
+        Image cottage_p = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFood.png").toString());
+        Image cottage_p_gold = new Image(ClassLoader.getSystemResource("Skins/cottageCoreGold.png").toString());
+        Image cottage_s = new Image(ClassLoader.getSystemResource("Skins/cottageCoreHead.png").toString()); 
         ImageView cottage_back = new ImageView(cottage_bg);
         ImageView cottage_point = new ImageView(cottage_p);
         ImageView cottage_snake = new ImageView(cottage_s);
