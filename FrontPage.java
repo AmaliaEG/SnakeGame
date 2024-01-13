@@ -30,10 +30,10 @@ public class FrontPage extends Application{
         
         frontStage.setTitle("Snake Game");
 
-        Image backgroundImage = new Image(ClassLoader.getSystemResource("pages/Background.png").toString());
+        Image backgroundImage = new Image("\\pages\\Background.png");
         ImageView background = new ImageView(backgroundImage);
 
-        Font.loadFont(getClass().getResourceAsStream(ClassLoader.getSystemResource("pages/Pixeboy-z8XGD.ttf").toString()), 12);
+        Font.loadFont(getClass().getResourceAsStream("\\pages\\Pixeboy-z8XGD.ttf"), 12);
         Font buttonFont = Font.font("Pixeboy", FontWeight.BOLD, 25);
                 
         //Head Title

@@ -32,8 +32,8 @@ public class Main {
     private int gridX;
     private int gridY;
 
-    String background_music = "Sound/Blanks.mp3";
-    Media sound = new Media(ClassLoader.getSystemResource(background_music).toString());
+    String background_music = "Sound\\Blanks.mp3";
+    Media sound = new Media(new File(background_music).toURI().toString());
     MediaPlayer mediaBG = new MediaPlayer(sound);
 
     public Main(Stage primaryStage) {

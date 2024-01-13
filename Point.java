@@ -54,8 +54,8 @@ public class Point {
             if (point.get(0) == pointX && point.get(1) == pointY && point.get(2) == pointType) {
                 pointList.remove(i);
                 try {
-                    String background_music = "Sound/Eat.mp3";
-                    Media sound = new Media(ClassLoader.getSystemResource(background_music).toString());
+                    String background_music = "Sound\\Eat.mp3";
+                    Media sound = new Media(new File(background_music).toURI().toString());
                     MediaPlayer mediaE = new MediaPlayer(sound);
                     
                     mediaE.setVolume(1.5);
