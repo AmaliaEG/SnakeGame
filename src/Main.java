@@ -160,8 +160,19 @@ public class Main extends Application {
     }
 
     private void showGameOverPage(Stage primaryStage) {
-        Pages.gameOverPage(primaryStage, this);        
         mediaBG.stop();
+        try {
+            String death_music = "Sound/Death.mp3";
+            Media sound = new Media(ClassLoader.getSystemResource(death_music).toString());
+            MediaPlayer mediaD = new MediaPlayer(sound);
+            
+            mediaD.setVolume(1.5);
+            mediaD.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Could not play the music");
+        }
+        Pages.gameOverPage(primaryStage, this);   
         clearGame(primaryStage);
     }
 
@@ -236,6 +247,17 @@ public class Main extends Application {
     }
 
     private void powerUpCollision(Stage primaryStage) {
+        try {
+            String PowerUp_music = "Sound/SpecialPower.mp3";
+            Media sound = new Media(ClassLoader.getSystemResource(PowerUp_music).toString());
+            MediaPlayer mediaPU = new MediaPlayer(sound);
+            
+            mediaPU.setVolume(1.5);
+            mediaPU.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Could not play the music");
+        }
         int surprise = random.nextInt(8);
         String ability = "Nothing :P";
 

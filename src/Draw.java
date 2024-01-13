@@ -9,6 +9,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 
 public class Draw {
     public static final int MAX_CANVAS = 600;
@@ -195,6 +196,7 @@ public class Draw {
     }
 
     public void clearDraw(Stage primaryStage){
-        ((Group) primaryStage.getScene().getRoot()).getChildren().clear();
+        StackPane root = (StackPane) primaryStage.getScene().getRoot();
+        root.getChildren().clear();
     }
 }
