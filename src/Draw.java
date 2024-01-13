@@ -193,4 +193,8 @@ public class Draw {
         powerUpInfo.setY(textY);
         powerUp.getChildren().add(powerUpInfo);
     }
+
+    public void clearDraw(Stage primaryStage){
+        ((Group) primaryStage.getScene().getRoot()).getChildren().clear();
+    }
 }

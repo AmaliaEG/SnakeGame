@@ -160,8 +160,9 @@ public class Main extends Application {
     }
 
     private void showGameOverPage(Stage primaryStage) {
-        GameOverPage gameOverPage = new GameOverPage(primaryStage);
+        Pages.gameOverPage(primaryStage, this);        
         mediaBG.stop();
+        clearGame(primaryStage);
     }
 
     public long acceleration(long newSpeed) {
@@ -253,6 +254,23 @@ public class Main extends Application {
                 break;
         }
         gameBoard.drawPowerUp(primaryStage, ability);
+    }
+
+    public void clearGame(Stage primaryStage){
+        apple = false; 
+        powerUp = false;
+        gameOver = false;
+        gamePause = false;
+        firstMove = true;
+        lastDirection = 0;
+        speed = 150_000_000;    
+        lastUpdateTime = 0;
+
+        snake = null;
+        p = null;
+
+        gameBoard.clearDraw(primaryStage);
+
     }
 
 }

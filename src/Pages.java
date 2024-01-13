@@ -158,34 +158,36 @@ public class Pages {
         Image cottage_s = new Image(ClassLoader.getSystemResource("Skins/cottageCoreHead.png").toString());
 
         // Buttons
-        Button skel_bg = styleCustomButton(skeleton_bg, e ->{
+        Button skel_bg = styleCustomButton(skeleton_bg, e -> {
             gameBoard.setBackground(skeleton_bg);
 
         });
 
-        Button skel_p = styleCustomButton(skeleton_p, e ->{
+        Button skel_p = styleCustomButton(skeleton_p, e -> {
             gameBoard.setPointSkin(skeleton_p, cottage_p_gold);
 
         });
 
-        Button skel_s = styleCustomButton(skeleton_s, e ->{
+        Button skel_s = styleCustomButton(skeleton_s, e -> {
             gameBoard.setSnakeSkin(skeleton_s, skeleton_body);
         });
 
-        Button cot_bg = styleCustomButton(cottage_bg, e ->{
+        Button cot_bg = styleCustomButton(cottage_bg, e -> {
             gameBoard.setBackground(skeleton_bg);
         });
-        Button cot_p = styleCustomButton(cottage_p, e ->{
+        Button cot_p = styleCustomButton(cottage_p, e -> {
             gameBoard.setPointSkin(cottage_p, cottage_p_gold);
         });
 
-        Button cot_s = styleCustomButton(cottage_s, e ->{
+        Button cot_s = styleCustomButton(cottage_s, e -> {
             gameBoard.setSnakeSkin(cottage_s, cottage_bg);
         });
 
         Button gameButton = styleButton("Start Game", "", e -> {
-            main.startGame(primaryStage, 20, 20);
+            gameBoardInitialization(primaryStage, main);
+            customStage.close();
         });
+
         Button frontPageButton = styleButton("Back", "", e -> {
             frontPage(primaryStage, main, gameBoard);
             customStage.close();
@@ -228,5 +230,40 @@ public class Pages {
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static void gameOverPage(Stage primaryStage, Main main) {
+        StackPane root = new StackPane();
+
+        Stage gameOverStage = new Stage();
+        gameOverStage.setTitle("Game Over");
+
+        Button restartButton = styleButton("Restart Gaame", "", e -> {
+            main.start(primaryStage);
+            gameOverStage.close();
+        });
+
+        Button quitButton = styleButton("Quit Game", "-fx-text-fill: white;", e -> primaryStage.close());
+
+        Text gameOvertitle = new Text("GAME OVER!");
+
+        gameOvertitle.setFont(Font.font("Pixeboy", FontWeight.BOLD, 60));
+        gameOvertitle.setFill(Color.PINK);
+
+        StackPane.setAlignment(gameOvertitle, Pos.TOP_CENTER);
+        StackPane.setMargin(gameOvertitle, new Insets(130, 0, 0, 0));
+
+        root.getChildren().addAll(restartButton, quitButton, gameOvertitle);
+
+        StackPane.setAlignment(restartButton, Pos.TOP_CENTER);
+        StackPane.setAlignment(quitButton, Pos.CENTER);
+
+        StackPane.setMargin(restartButton , new Insets(230, 0, 30, 0));
+        StackPane.setMargin(quitButton, new Insets(110, 0, 30, 0));
+        
+        Scene scene = new Scene(root, 500, 500);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
     }
 }
