@@ -1,12 +1,9 @@
-import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -17,11 +14,7 @@ import javafx.scene.text.Text;
 import javafx.geometry.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
 
-import javax.swing.DefaultRowSorter;
 
 public class Pages {
     private static final String DEFAULT = "-fx-background-color: transparent; -fx-border-width: 0;";

@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import java.io.File;
 
 public class Point {
 

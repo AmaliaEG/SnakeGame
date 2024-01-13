@@ -5,16 +5,9 @@ import javafx.scene.*;
 import javafx.scene.input.KeyEvent;
 import java.util.*;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.geometry.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import java.io.File;
+
 
 public class Main extends Application {
 
