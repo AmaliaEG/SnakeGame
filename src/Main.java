@@ -17,26 +17,26 @@ import javafx.scene.text.FontWeight;
 import java.io.File;
 
 public class Main {
-    private long speed = 150000000;
-    private Random random = new Random();
-    private int gridX;
-    private int gridY;
+
     private Draw gameBoard;
+    private Position snake;
+    private Point p;
+    private Scene scene;
+    private Random random = new Random();
+    private long speed = 150_000_000;    
     private long lastUpdateTime = 0;
+    private int gridX, gridY;
     private boolean north, south, east, west;
 
-    public boolean apple, powerUp, gameOver = false;
-    public boolean firstMove = true;
     public int lastDirection = 0;
-    private Draw canvas;    
-    
-    public boolean gamePause = false;
+    public boolean apple, powerUp, gameOver, gamePause = false;
+    public boolean firstMove = true;
 
     int pointX, pointY, pointType;
 
-
-    String background_music = "Sound/Blanks.mp3";
-    Media sound = new Media(ClassLoader.getSystemResource(background_music).toString());
+    // Music for the game
+    String background_music = ClassLoader.getSystemResource("Sound/Blanks.mp3").toString();
+    Media sound = new Media(background_music);
     MediaPlayer mediaBG = new MediaPlayer(sound);
 
     public Main(Stage primaryStage) {
@@ -46,7 +46,7 @@ public class Main {
     private void showGridSizeInput(Stage primaryStage){
         VBox the_root = new VBox();
         Label labelX = new Label("Input a grid width between 5-100 (inclusive) ");
-        Label labelY = new Label("Input a grid width between 5-100 (inclusive) ");
+        Label labelY = new Label("Input a grid height between 5-100 (inclusive) ");
         TextField textFieldX = new TextField();
         TextField textFieldY = new TextField();
         Button createButton = new Button("Create");
@@ -86,11 +86,11 @@ public class Main {
 
         createButton.setOnAction(event -> {
             try{
-                gridX = Integer.parseInt(textFieldX.getText());
-                gridY = Integer.parseInt(textFieldY.getText());
+                this.gridX = Integer.parseInt(textFieldX.getText());
+                this.gridY = Integer.parseInt(textFieldY.getText());
 
                 if (gridX >= 5 && gridX <= 100 && gridY >= 5 && gridY <= 100){
-                    startGame(primaryStage, gridX, gridY);
+                    startGame(primaryStage);
                 } else{
                     System.out.println("Invalid size.");
                 }
@@ -104,46 +104,30 @@ public class Main {
     
 
 
-    //@Override
-    private void startGame(Stage primaryStage, int gridX, int gridY) {
-        /*Scanner sizeInput = new Scanner(System.in);
-        System.out.print("Input a grid width between 5-100 (inclusive): ");
-        int gridX = sizeInput.nextInt();
-        System.out.print("Input a grid height between 5-100 (inclusive): ");
-        int gridY = sizeInput.nextInt();
-        sizeInput.close();*/
+    private void startGame(Stage primaryStage) {
+        setBackgroundMusic();
 
-        try {
-            mediaBG.setVolume(1.5);
-            mediaBG.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaBG.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Could not play the music");
-        }
-        
-
-        gameBoard = new Draw(gridX, gridY);
+        this.gameBoard = new Draw(gridX, gridY);
         gameBoard.gridXInput = gridX;
         gameBoard.gridYInput = gridY;
         gameBoard.calculateCanvasSize();
         gameBoard.initializeScene(primaryStage);
-
-        //CustomizePage customizePages = new CustomizePage(primaryStage);
-
         gameBoard.drawGrid();
 
-        Position snake = new Position(gridX, gridY);
+        this.snake = new Position(gridX, gridY);
         snake.spawnPoint();
+
         gameBoard.drawSnake(snake, lastDirection);
 
-        Point p = new Point(gridX, gridY);
+        this.p = new Point(gridX, gridY);
         p.generateRandomPoint(snake, 3);
+
         gameBoard.drawPoint(p.getPointList());
 
         gameBoard.drawScore(snake.getScore());
 
-        Scene scene = primaryStage.getScene();
+        scene = primaryStage.getScene();
+        
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -152,43 +136,30 @@ public class Main {
                         if (gamePause) {
                             gamePause = false;
                             gameBoard.drawGameNotPaused(primaryStage);
+                            mediaBG.play();
                         } else {
                             gamePause = true;
+                            mediaBG.pause();
                         }
                         break;
                     case UP:
                         if (!(lastDirection == 2)) {
-                            north = true;
-                            south = false;
-                            east = false;
-                            west = false;
-                            firstMove = false;
+                            directionChange(true, false, false, false);
                         }
                         break;
                     case DOWN:
                         if (!(lastDirection == 1)) {
-                            north = false;
-                            south = true;
-                            east = false;
-                            west = false;
-                            firstMove = false;
+                            directionChange(false, true, false, false);
                         }
                         break;
                     case RIGHT:
                         if (!(lastDirection == 4) && !(firstMove)) {
-                            north = false;
-                            south = false;
-                            east = true;
-                            west = false;
+                            directionChange(false, false, true, false);
                         }
                         break;
                     case LEFT:
                         if (!(lastDirection == 3)) {
-                            north = false;
-                            south = false;
-                            east = false;
-                            west = true;
-                            firstMove = false;
+                            directionChange(false, false, false, true);
                         }
                         break;
                     default:
@@ -266,13 +237,13 @@ public class Main {
         mediaBG.stop();
     }
 
-    public long acceleration(long speed) {
-        if (speed < 15000000) {
+    public long acceleration(long newSpeed) {
+        if (newSpeed < speed) {
             ;
         } else {
-            speed *= 0.99;
+            newSpeed *= 0.99;
         }
-        return speed;
+        return newSpeed;
     }
 
     public boolean checkForPoint(Position snake, Point p) {
@@ -306,5 +277,24 @@ public class Main {
         return apple;
     }
 
-    
+    private void setBackgroundMusic() {
+        try {
+            mediaBG.setVolume(1.5);
+            mediaBG.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaBG.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Could not play the music");
+        }
+
+    }
+
+    private void directionChange(boolean north, boolean south, boolean east, boolean west){
+        this.north = north;
+        this.south = south;
+        this.east = east;
+        this.west = west;
+        this.firstMove = false;
+    }
+
 }
