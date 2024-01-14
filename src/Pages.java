@@ -228,10 +228,12 @@ public class Pages {
     public static void gameOverPage(Stage primaryStage, Draw gameBoard) {
         StackPane root = new StackPane();
 
+        root.setStyle("-fx-background-color: purple;");
+
         Stage gameOverStage = new Stage();
         gameOverStage.setTitle("Game Over");
 
-        Button restartButton = styleButton("Restart Gaame", "", e -> {
+        Button restartButton = styleButton("Restart Game", "-fx-text-fill: white;", e -> {
             Main main = new Main();
             main.start(primaryStage);
             gameOverStage.close();
