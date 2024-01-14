@@ -82,29 +82,21 @@ public class Main extends Application {
                         break;
                     case UP:
                         if (!(lastDirection == 2)) {
-                            lastDirection = 0;
-
                             directionChange(true, false, false, false);
                         }
                         break;
                     case DOWN:
                         if (!(lastDirection == 0)) {
-                            lastDirection = 2;
-
                             directionChange(false, true, false, false);
                         }
                         break;
                     case RIGHT:
                         if (!(lastDirection == 3) && !(firstMove)) {
-                            lastDirection = 1;
-
                             directionChange(false, false, true, false);
                         }
                         break;
                     case LEFT:
                         if (!(lastDirection == 1)) {
-                            lastDirection = 3;
-
                             directionChange(false, false, false, true);
                         }
                         break;
@@ -255,7 +247,6 @@ public class Main extends Application {
 
     private void appleCollision() {
         this.speed =  acceleration(speed);
-        System.out.println("lastDirection = " + lastDirection);
         this.snake.getBigger(pointX, pointY, pointType, gameBoard, lastDirection);
         this.p.deletePoint(pointX, pointY, pointType);
         this.p.generateRandomPoint(snake, 1);
