@@ -236,7 +236,7 @@ public class Pages {
         Stage gameOverStage = new Stage();
         gameOverStage.setTitle("Game Over");
 
-        Button restartButton = styleButton("Restart Game", "-fx-text-fill: white;", e -> {
+        Button restartButton = styleButton("Return to frontPage", "-fx-text-fill: white;", e -> {
             Main main = new Main();
             main.start(primaryStage);
             gameOverStage.close();

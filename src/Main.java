@@ -153,7 +153,8 @@ public class Main extends Application {
                             gameOver = true;
                         }
                         gameBoard.drawSnake(snake, lastDirection);
-                        System.out.println(snake);
+                        // System.out.println(snake);
+                        // Debugging reasons, to see the snakes position.
                     }
                 } else {
                     stop();
