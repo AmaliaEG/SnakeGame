@@ -17,10 +17,10 @@ import javafx.scene.image.ImageView;
 
 
 public class Pages {
-    private static final String DEFAULT = "-fx-background-color: transparent; -fx-border-width: 0;";
+    private static final String DEFAULT = "-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;";
     private static final String HOVER = "-fx-text-fill: white; -fx-background-color: #4CAF50; -FX-BORDER-COLOR: #4CAF50;";
     private static final Font BUTTON_FONT = Font.loadFont(Pages.class.getResourceAsStream("pages/Pixeboy-z8XGD.ttf"),
-            18);
+            25);
     private static final Font LABEL_FONT = Font.loadFont(Pages.class.getResourceAsStream("pages/Pixeboy-z8XGD.ttf"),
             22);
     private static final double buttonImageSize = 50;
