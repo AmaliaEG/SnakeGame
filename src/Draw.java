@@ -12,8 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 
 public class Draw {
-    public static final int MAX_CANVAS = 600;
-    private static final int SCENE_HEIGHT = 650;
+
+    public static final int MAX_CANVAS = 575;
+    private static final int SCENE_HEIGHT = 625;
 
     // User defined visual properties for the game
     int backroundColor = 0;
@@ -123,16 +124,6 @@ public class Draw {
         scoreRoot.getChildren().add(scoreText);
     }
 
-    public void drawGameOver(Stage primaryStage) {
-        Text gameOverText = new Text("Game Over");
-        gameOverText.setFont(Font.font("Arial", FontWeight.BOLD, 70));
-        gameOverText.setFill(Color.WHITE);
-        double textX = WIDTH_CANVAS / 2 - gameOverText.getLayoutBounds().getWidth() / 2;
-        double textY = HEIGHT_CANVAS / 2;
-        gameOverText.setX(textX);
-        gameOverText.setY(textY);
-        ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
-    }
 
     public void drawGameIsPaused(Stage primaryStage) {
         Text gamePauseText = new Text("Pause");
