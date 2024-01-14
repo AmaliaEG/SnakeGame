@@ -141,10 +141,10 @@ public class Main extends Application {
 
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);
+                        gameBoard.drawSnake(snake, lastDirection);
                         if (snake.suicide(snake)) {
                             gameOver = true;
                         }
-                        gameBoard.drawSnake(snake, lastDirection);
                         // System.out.println(snake);
                         // Debugging reasons, to see the snakes position.
                     }
@@ -246,7 +246,7 @@ public class Main extends Application {
     }
 
     private void appleCollision() {
-        this.speed =  acceleration(speed);
+        this.speed = acceleration(speed);
         this.snake.getBigger(pointX, pointY, pointType, gameBoard, lastDirection);
         this.p.deletePoint(pointX, pointY, pointType);
         this.p.generateRandomPoint(snake, 1);
