@@ -153,8 +153,8 @@ public class Main extends Application {
     }
 
     private void showGameOverPage(Stage primaryStage) {
-        Pages.gameOverPage(primaryStage, gameBoard); 
         mediaBG.stop();
+        Pages.gameOverPage(primaryStage, gameBoard); 
         try {
             String death_music = "Sound/Death.mp3";
             Media sound = new Media(ClassLoader.getSystemResource(death_music).toString());
