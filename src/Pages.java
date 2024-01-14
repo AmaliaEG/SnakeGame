@@ -31,7 +31,7 @@ public class Pages {
         title.setFill(Color.PINK);
 
         Button startGameButton = styleButton("Start game", "-fx-text-fill: white;",
-                e -> gameBoardInitialization(primaryStage, main));
+                e -> gameBoardInitialization(primaryStage, main, gameBoard));
         Button costumizeButton = styleButton("Costumize", "-fx-text-fill: white;",
                 e -> gameCustomize(primaryStage, main, gameBoard));
         Button quitButton = styleButton("Quit", "-fx-text-fill: white;", e -> primaryStage.close());
@@ -63,14 +63,15 @@ public class Pages {
 
     }
 
-    public static void gameBoardInitialization(Stage primaryStage, Main main) {
+    public static void gameBoardInitialization(Stage primaryStage, Main main, Draw gameBoard) {
+        Stage gridStage = new Stage();
         VBox the_root = new VBox();
         Label labelX = new Label("Input a grid width between 5-100 (inclusive) ");
         Label labelY = new Label("Input a grid height between 5-100 (inclusive) ");
         TextField textFieldX = new TextField();
         TextField textFieldY = new TextField();
 
-        Button createButton = styleButton("Create", "-fx-text-fill: white;", e -> {
+        Button createButton = styleButton("Create", "-fx-text-fill: black;", e -> {
             try {
                 int gridX = Integer.parseInt(textFieldX.getText());
                 int gridY = Integer.parseInt(textFieldY.getText());
@@ -87,19 +88,28 @@ public class Pages {
 
         labelX.setFont(LABEL_FONT);
         labelY.setFont(LABEL_FONT);
+        labelX.setStyle("-fx-text-fill: #d9defa;");
+        labelY.setStyle("-fx-text-fill: #d9defa;");
 
         createButton.setOnMouseEntered(e -> createButton.setStyle(HOVER));
         createButton.setOnMouseExited(e -> createButton.setStyle(DEFAULT));
 
-        the_root.setStyle("-fx-background-color: pink;");
-        the_root.getChildren().addAll(labelX, textFieldX, labelY, textFieldY, createButton);
+        Button frontPageButton = styleButton("Back", "-fx-text-fill: white;", e -> {
+            frontPage(primaryStage, main, gameBoard);
+            gridStage.close();
+        });
+
+        the_root.setStyle("-fx-background-color: #ad2a67;");
+        the_root.getChildren().addAll(frontPageButton, labelX, textFieldX, labelY, textFieldY, createButton);
 
         the_root.setAlignment(Pos.CENTER);
-        VBox.setMargin(labelX, new Insets(0, 0, 3, 0));
-        VBox.setMargin(labelY, new Insets(15, 0, 3, 0));
+        VBox.setMargin(labelX, new Insets(-100, 0, 3, 0));
+        VBox.setMargin(labelY, new Insets(25, 0, 3, 0));
         VBox.setMargin(textFieldX, new Insets(2, 0, 0, 0));
         VBox.setMargin(textFieldY, new Insets(2, 0, 0, 0));
-        VBox.setMargin(createButton, new Insets(25, 0, 0, 0));
+        VBox.setMargin(createButton, new Insets(25, 0, 30, 0));
+
+        VBox.setMargin(frontPageButton, new Insets(0, 320, 150, 0));
 
         textFieldX.setMaxWidth(100);
         textFieldY.setMaxWidth(100);
@@ -114,7 +124,7 @@ public class Pages {
     public static Button styleButton(String text, String textColor, EventHandler<ActionEvent> handler) {
         Button button = new Button(text);
         button.setFont(BUTTON_FONT);
-        button.setStyle("-fx-background-color: transparent; -fx-border-width: 0; " + textColor);
+        button.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white;");
         button.setOnAction(handler);
         button.setOnMouseEntered(e -> button.setStyle(HOVER));
         button.setOnMouseExited(e -> button.setStyle(DEFAULT));
@@ -155,12 +165,10 @@ public class Pages {
         // Buttons
         Button skel_bg = styleCustomButton(skeleton_bg, e -> {
             gameBoard.setBackground(skeleton_bg);
-
         });
 
         Button skel_p = styleCustomButton(skeleton_p, e -> {
             gameBoard.setPointSkin(skeleton_p, skeleton_p_gold);
-
         });
 
         Button skel_s = styleCustomButton(skeleton_s, e -> {
@@ -179,12 +187,12 @@ public class Pages {
             gameBoard.setSnakeSkin(cottage_s, cottage_body);
         });
 
-        Button gameButton = styleButton("Start Game", "", e -> {
-            gameBoardInitialization(primaryStage, main);
+        Button gameButton = styleButton("Start Game", "white", e -> {
+            gameBoardInitialization(primaryStage, main, gameBoard);
             customStage.close();
         });
 
-        Button frontPageButton = styleButton("Back", "", e -> {
+        Button frontPageButton = styleButton("Back", "white", e -> {
             frontPage(primaryStage, main, gameBoard);
             customStage.close();
         });
@@ -197,9 +205,13 @@ public class Pages {
         points.setFont(LABEL_FONT);
         snake.setFont(LABEL_FONT);
 
+        maps.setStyle("-fx-text-fill: #d9defa;");
+        points.setStyle("-fx-text-fill: #d9defa;");
+        snake.setStyle("-fx-text-fill: #d9defa;");
+
         StackPane root = new StackPane();
 
-        root.setStyle("-fx-background-color: pink;");
+        root.setStyle("-fx-background-color: #ad2a67;");
 
         root.getChildren().addAll(frontPageButton, maps, skel_bg, cot_bg, points, skel_p, cot_p, snake, skel_s, cot_s,
                 gameButton);
