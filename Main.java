@@ -128,14 +128,12 @@ public class Main extends Application {
                                 lastDirection = 4;
                                 snake.moveBody(snake, -1, 0);
                             }
-                        
-
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);
+                        canvas.drawSnake(snake);
                         if (snake.suicide(snake)) {
                             gameOver = true;
                         }
-                        canvas.drawSnake(snake);
                         System.out.println(snake); // Here for debugging purposes
                     }
                 } else {
