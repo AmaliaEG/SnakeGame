@@ -15,6 +15,7 @@ public class Main extends Application {
     public int lastDirection = 0;
     private Draw canvas;
     int pointX, pointY;
+    int gridX, gridY;
 
     // Both the main method and the start override method, are only necessary for
     // the main class, which is the one you run to run the whole code, it is the
@@ -30,9 +31,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Scanner sizeInput = new Scanner(System.in);
         System.out.print("Input a grid width between 5-100 (inclusive): ");
-        int gridX = sizeInput.nextInt();
+        gridX = sizeInput.nextInt();
         System.out.print("Input a grid height between 5-100 (inclusive): ");
-        int gridY = sizeInput.nextInt();
+        gridY = sizeInput.nextInt();
         sizeInput.close();
 
         canvas = new Draw(gridX, gridY);
