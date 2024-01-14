@@ -56,7 +56,8 @@ public class Draw {
     }
 
     public void initializeScene(Stage primaryStage) {
-        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause, powerUp), WIDTH_CANVAS, SCENE_HEIGHT, Color.GREEN);
+        Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause, powerUp), WIDTH_CANVAS, SCENE_HEIGHT);
+        scene.setFill(new ImagePattern(imgBackground));
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -64,13 +65,13 @@ public class Draw {
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.DARKGREEN);
+            lineVertical.setStroke(Color.rgb(1, 50, 32, 0.5));
             gridRoot.getChildren().add(lineVertical);
         }
 
         for (int i = 0; i <= gridYInput; i++) {
             Line lineHorizontal = new Line(0, i * tileSize, WIDTH_CANVAS, i * tileSize);
-            lineHorizontal.setStroke(Color.DARKGREEN);
+            lineHorizontal.setStroke(Color.rgb(1, 50, 32, 0.5));
             gridRoot.getChildren().add(lineHorizontal);
         }
     }
@@ -114,7 +115,7 @@ public class Draw {
     public void drawScore(int score) {
         scoreRoot.getChildren().clear();
         Text scoreText = new Text("Score: " + score);
-        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
+        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 35));
         scoreText.setFill(Color.rgb(255, 255, 255, 0.5));
         scoreText.setStroke(Color.rgb(255, 255, 255, 0.7));
         double textX = 12;

@@ -141,14 +141,16 @@ public class Pages {
         // Images
         Image skeleton_bg = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBackground.png").toString());
         Image skeleton_p = new Image(ClassLoader.getSystemResource("Skins/FlowerPoint.png").toString());
+        Image skeleton_p_gold = new Image(ClassLoader.getSystemResource("Skins/SkeletonChest.png").toString());
         Image skeleton_s = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeHead.png").toString());
         Image skeleton_body = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeBody.png").toString());
-        Image skeleton_tail = new Image(ClassLoader.getSystemResource("Skins/SkeletonSnakeTail.png").toString());
 
-        Image cottage_bg = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFlower6.png").toString());
+        Image cottage_bg = new Image(ClassLoader.getSystemResource("Skins/cottageCoreBackground.jpg").toString());
         Image cottage_p = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFood.png").toString());
         Image cottage_p_gold = new Image(ClassLoader.getSystemResource("Skins/cottageCoreGold.png").toString());
         Image cottage_s = new Image(ClassLoader.getSystemResource("Skins/cottageCoreHead.png").toString());
+        Image cottage_body = new Image(ClassLoader.getSystemResource("Skins/cottageCoreFlower6.png").toString());
+
 
         // Buttons
         Button skel_bg = styleCustomButton(skeleton_bg, e -> {
@@ -157,7 +159,7 @@ public class Pages {
         });
 
         Button skel_p = styleCustomButton(skeleton_p, e -> {
-            gameBoard.setPointSkin(skeleton_p, cottage_p_gold);
+            gameBoard.setPointSkin(skeleton_p, skeleton_p_gold);
 
         });
 
@@ -166,14 +168,15 @@ public class Pages {
         });
 
         Button cot_bg = styleCustomButton(cottage_bg, e -> {
-            gameBoard.setBackground(skeleton_bg);
+            gameBoard.setBackground(cottage_bg);
         });
+
         Button cot_p = styleCustomButton(cottage_p, e -> {
             gameBoard.setPointSkin(cottage_p, cottage_p_gold);
         });
 
         Button cot_s = styleCustomButton(cottage_s, e -> {
-            gameBoard.setSnakeSkin(cottage_s, cottage_bg);
+            gameBoard.setSnakeSkin(cottage_s, cottage_body);
         });
 
         Button gameButton = styleButton("Start Game", "", e -> {
