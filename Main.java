@@ -162,15 +162,15 @@ public class Main extends Application {
             snakeNextX -= 1;
         }
 
-        // if (snakeNextX == gridX) {
-        //     snakeNextX = 0;
-        // } else if (snakeNextX < 0) {
-        //     snakeNextX = gridX - 1;
-        // } else if (snakeNextY == gridY) {
-        //     snakeNextY = 0;
-        // } else if (snakeNextY < 0) {
-        //     snakeNextY = gridY - 1;
-        // }
+        if (snakeNextX == gridX) {
+            snakeNextX = 0;
+        } else if (snakeNextX < 0) {
+            snakeNextX = gridX - 1;
+        } else if (snakeNextY == gridY) {
+            snakeNextY = 0;
+        } else if (snakeNextY < 0) {
+            snakeNextY = gridY - 1;
+        }
         
         pointX = p.getX();
         pointY = p.getY();
