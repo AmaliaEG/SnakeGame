@@ -225,13 +225,14 @@ public class Pages {
         primaryStage.show();
     }
 
-    public static void gameOverPage(Stage primaryStage, Main main) {
+    public static void gameOverPage(Stage primaryStage, Draw gameBoard) {
         StackPane root = new StackPane();
 
         Stage gameOverStage = new Stage();
         gameOverStage.setTitle("Game Over");
 
         Button restartButton = styleButton("Restart Gaame", "", e -> {
+            Main main = new Main();
             main.start(primaryStage);
             gameOverStage.close();
         });

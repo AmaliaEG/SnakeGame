@@ -20,7 +20,7 @@ public class Main extends Application {
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
 
-    public int lastDirection = 0;
+    public int lastDirection = 3;
     public int gridX, gridY;
     public boolean apple, powerUp, gameOver, gamePause = false;
     public boolean firstMove = true;
@@ -86,17 +86,17 @@ public class Main extends Application {
                         }
                         break;
                     case DOWN:
-                        if (!(lastDirection == 1)) {
+                        if (!(lastDirection == 0)) {
                             directionChange(false, true, false, false);
                         }
                         break;
                     case RIGHT:
-                        if (!(lastDirection == 4) && !(firstMove)) {
+                        if (!(lastDirection == 3) && !(firstMove)) {
                             directionChange(false, false, true, false);
                         }
                         break;
                     case LEFT:
-                        if (!(lastDirection == 3)) {
+                        if (!(lastDirection == 1)) {
                             directionChange(false, false, false, true);
                         }
                         break;
@@ -119,17 +119,17 @@ public class Main extends Application {
                                 }
                                 appleCollision();
                             } else if (north) {
-                                lastDirection = 1;
-                                snake.moveBody(snake, 0, -1);
+                                lastDirection = 0;
+                                snake.moveBody(snake, 0, -1,lastDirection );
                             } else if (south) {
                                 lastDirection = 2;
-                                snake.moveBody(snake, 0, 1);
+                                snake.moveBody(snake, 0, 1,lastDirection);
                             } else if (east) {
-                                lastDirection = 3;
-                                snake.moveBody(snake, 1, 0);
+                                lastDirection = 1;
+                                snake.moveBody(snake, 1, 0, lastDirection);
                             } else if (west) {
-                                lastDirection = 4;
-                                snake.moveBody(snake, -1, 0);
+                                lastDirection = 3;
+                                snake.moveBody(snake, -1, 0, lastDirection);
                             }
                         } else {
                             gameBoard.drawGameIsPaused(primaryStage);
@@ -153,6 +153,7 @@ public class Main extends Application {
     }
 
     private void showGameOverPage(Stage primaryStage) {
+        Pages.gameOverPage(primaryStage, gameBoard); 
         mediaBG.stop();
         try {
             String death_music = "Sound/Death.mp3";
@@ -165,7 +166,7 @@ public class Main extends Application {
             e.printStackTrace();
             System.out.println("Could not play the music");
         }
-        Pages.gameOverPage(primaryStage, this);   
+  
         clearGame(primaryStage);
     }
 
@@ -231,7 +232,7 @@ public class Main extends Application {
 
     private void appleCollision() {
         this.speed =  acceleration(speed);
-        this.snake.getBigger(pointX, pointY, pointType, gameBoard);
+        this.snake.getBigger(pointX, pointY, pointType, gameBoard, lastDirection);
         this.p.deletePoint(pointX, pointY, pointType);
         this.p.generateRandomPoint(snake, 1);
         this.gameBoard.drawPoint(p.getPointList());
@@ -283,9 +284,6 @@ public class Main extends Application {
 
         snake = null;
         p = null;
-
-        gameBoard.clearDraw(primaryStage);
-
     }
 
 }

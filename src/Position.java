@@ -15,24 +15,27 @@ public class Position{
     public ArrayList<ArrayList<Integer>> spawnPoint() {
         int k = 2;
         for (int i = k; i >= 0; i--) {
-            snakePosition.add(new ArrayList<>(List.of((n/2) + i, m/2)));
+            snakePosition.add(new ArrayList<>(List.of((n/2) + i, m/2, 1)));
         }
         return snakePosition;
     }
 
-    public ArrayList<ArrayList<Integer>> moveBody(Position snake, int headX, int headY) {
+    public ArrayList<ArrayList<Integer>> moveBody(Position snake, int headX, int headY, int direction) {
         int iterations = snake.getSize() - 1;
         for (int i = 0; i < iterations; i++) {
             snakePosition.get(i).set(0, snakePosition.get(i + 1).get(0));
             snakePosition.get(i).set(1, snakePosition.get(i + 1).get(1));
+            snakePosition.get(i).set(2, snakePosition.get(i + 1).get(2));
         }
         snakePosition.get(iterations).set(0, snake.getX() + headX);
         snakePosition.get(iterations).set(1, snake.getY() + headY);
+        snakePosition.get(iterations).set(2, direction);
+
         return snakePosition;
     }
 
-    public void getBigger(int x, int y, int pointType, Draw gameBoard) {
-        snakePosition.add(new ArrayList<>(List.of(x, y)));
+    public void getBigger(int x, int y, int pointType, Draw gameBoard, int lastDirection) {
+        snakePosition.add(new ArrayList<>(List.of(x, y, lastDirection)));
         if (!(pointType == 0)) {
             score += 100 * multiplier;
         }

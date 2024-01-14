@@ -80,31 +80,13 @@ public class Draw {
         for (int i = dataXY.size() - 2; i >= 0; i--) {
             Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
                     tileSize);
-
+            tail.setRotate(90 * dataXY.get(i).get(2));
             tail.setFill(new ImagePattern(imgSnakeBody));
             // tail.setFill(Color.FORESTGREEN);
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
-
-        switch (lastDirection) {
-            case 1: // UP
-                head.setRotate(0);
-                break;
-            case 2: // DOWN
-                head.setRotate(180);
-                break;
-            case 3: // RIGHT
-                head.setRotate(90);
-                break;
-            case 4: // LEFT
-                head.setRotate(270);
-                break;
-            default:
-                head.setRotate(270);
-                break;
-        }
-
+        head.setRotate(90 * dataXY.get(dataXY.size()-1).get(2));
         head.setFill(new ImagePattern(imgSnakeHead));
 
         snakeRoot.getChildren().add(head);
