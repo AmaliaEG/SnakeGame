@@ -82,29 +82,21 @@ public class Main extends Application {
                         break;
                     case UP:
                         if (!(lastDirection == 2)) {
-                            lastDirection = 0;
-
                             directionChange(true, false, false, false);
                         }
                         break;
                     case DOWN:
                         if (!(lastDirection == 0)) {
-                            lastDirection = 2;
-
                             directionChange(false, true, false, false);
                         }
                         break;
                     case RIGHT:
                         if (!(lastDirection == 3) && !(firstMove)) {
-                            lastDirection = 1;
-
                             directionChange(false, false, true, false);
                         }
                         break;
                     case LEFT:
                         if (!(lastDirection == 1)) {
-                            lastDirection = 3;
-
                             directionChange(false, false, false, true);
                         }
                         break;
@@ -149,11 +141,12 @@ public class Main extends Application {
 
                         snake.wallJump(gridY, gridX, snake);
                         snake.suicide(snake);
+                        gameBoard.drawSnake(snake, lastDirection);
                         if (snake.suicide(snake)) {
                             gameOver = true;
                         }
-                        gameBoard.drawSnake(snake, lastDirection);
-                        System.out.println(snake);
+                        // System.out.println(snake);
+                        // Debugging reasons, to see the snakes position.
                     }
                 } else {
                     stop();
@@ -206,6 +199,16 @@ public class Main extends Application {
             snakeNextX -= 1;
         }
 
+        if (snakeNextX == gridX) {
+            snakeNextX = 0;
+        } else if (snakeNextX < 0) {
+            snakeNextX = gridX - 1;
+        } else if (snakeNextY == gridY) {
+            snakeNextY = 0;
+        } else if (snakeNextY < 0) {
+            snakeNextY = gridY - 1;
+        }
+
         for (ArrayList<Integer> point : p.getPointList()) {
             this.pointX = point.get(0);
             this.pointY = point.get(1);
@@ -243,8 +246,7 @@ public class Main extends Application {
     }
 
     private void appleCollision() {
-        this.speed =  acceleration(speed);
-        System.out.println("lastDirection = " + lastDirection);
+        this.speed = acceleration(speed);
         this.snake.getBigger(pointX, pointY, pointType, gameBoard, lastDirection);
         this.p.deletePoint(pointX, pointY, pointType);
         this.p.generateRandomPoint(snake, 1);

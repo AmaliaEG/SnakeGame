@@ -35,9 +35,9 @@ public class Position{
     }
 
     public void getBigger(int x, int y, int pointType, Draw gameBoard, int lastDirection) {
-        snakePosition.add(new ArrayList<>(List.of(x, y, lastDirection)));
         if (!(pointType == 0)) {
             score += 100 * multiplier;
+            snakePosition.add(new ArrayList<>(List.of(x, y, lastDirection)));
         }
         gameBoard.drawScore(score);
     }
