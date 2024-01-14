@@ -15,7 +15,7 @@ public class Position{
     public ArrayList<ArrayList<Integer>> spawnPoint() {
         int k = 2;
         for (int i = k; i >= 0; i--) {
-            snakePosition.add(new ArrayList<>(List.of((n/2) + i, m/2, 1)));
+            snakePosition.add(new ArrayList<>(List.of((n/2) + i, m/2, 3)));
         }
         return snakePosition;
     }
