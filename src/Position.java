@@ -12,7 +12,7 @@ public class Position{
     }
 
     public ArrayList<ArrayList<Integer>> spawnPoint() { // Creates spawn point for the snake based on the given formula.
-        int k = 2;
+        int k = 2; //Snake is 3 gridtiles long, but should have been 2
         for (int i = k; i >= 0; i--) {
             snakePosition.add(new ArrayList<>(List.of((n/2) + i, m/2)));
         }

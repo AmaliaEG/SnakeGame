@@ -38,8 +38,8 @@ public class Main extends Application {
         sizeInput.close();
 
         canvas = new Draw(gridX, gridY);
-        canvas.gridXInput = gridX;
-        canvas.gridYInput = gridY;
+        canvas.gridXInput = gridX; //Not nessecary, isn't really used
+        canvas.gridYInput = gridY; //Not nessecary, isn't really used
         canvas.calculateCanvasSize();
         canvas.initializeScene(primaryStage); // Seperate method from all the draw methods, it initializes the scene,
                                               // and layers the groups so that the snake is above the grid etc.
@@ -56,7 +56,7 @@ public class Main extends Application {
 
         canvas.drawScore(snake.getScore());
 
-        Scene scene = primaryStage.getScene();
+        Scene scene = primaryStage.getScene();  // Why did we use scene instead of stage?
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() { // sets up an event handler for key press events, this
                                                              // method is from the Scene class.
             @Override
@@ -107,7 +107,7 @@ public class Main extends Application {
         AnimationTimer timer = new AnimationTimer() { // AnimationTimer class, for frame-based animations.
             @Override
             public void handle(long now) { // this is the handle method from the Eventhandler interface.
-                if (!gameOver) {
+                if (!gameOver) {  //Could have been a while-loop
                     if (now - lastUpdateTime >= 150000000) { // Now is the current time in nanoseconds.
                         apple = checkForPoint(snake, p);
                         lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and
@@ -149,6 +149,7 @@ public class Main extends Application {
     public boolean checkForPoint(Position snake, Point p) { // Method to check the box that the snake is about to go on,
                                                             // this is neccesary for a possible point to become the new
                                                             // snake head.
+                                                            // This happens before the snake moves
         int snakeNextX = snake.getX();
         int snakeNextY = snake.getY();
 
@@ -162,6 +163,7 @@ public class Main extends Application {
             snakeNextX -= 1;
         }
 
+        //Makes sure point is taken if snake is out of the boundary
         if (snakeNextX == gridX) {
             snakeNextX = 0;
         } else if (snakeNextX < 0) {

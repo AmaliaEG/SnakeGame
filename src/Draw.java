@@ -22,7 +22,8 @@ public class Draw {
     public int gridXInput;
     public int gridYInput;
     private int tileSize;
-
+    
+    //StackPane is for drawing layers, groups is for objects
     private Group gridRoot = new Group();
     private Group snakeRoot = new Group();
     private Group pointRoot = new Group();
@@ -52,7 +53,7 @@ public class Draw {
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.DARKGREEN);
+            lineVertical.setStroke(Color.DARKGREEN); //Change colour
             gridRoot.getChildren().add(lineVertical);
         }
 
@@ -65,7 +66,7 @@ public class Draw {
 
     public void drawSnake(Position snake) {
         snakeRoot.getChildren().clear();
-        ArrayList<ArrayList<Integer>> dataXY = snake.getPosition();
+        ArrayList<ArrayList<Integer>> dataXY = snake.getPosition(); // pOSITION CLASS DOES NOT PROVIDE ALL ARRAYLIST METHODS
         for (int i = dataXY.size() - 2; i >= 0; i--) {
             Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
                     tileSize);
