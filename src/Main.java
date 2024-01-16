@@ -8,6 +8,7 @@ import java.util.*;
 import javafx.event.EventHandler;
 
 public class Main extends Application {
+    //WHat is the difference between public, private and nothing
     private long lastUpdateTime = 0;
     private boolean north, south, east, west;
     public boolean apple = false;
