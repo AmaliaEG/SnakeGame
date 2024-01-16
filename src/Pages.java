@@ -65,7 +65,7 @@ public class Pages {
 
     public static void gameBoardInitialization(Stage primaryStage, Main main, Draw gameBoard) {
         Stage gridStage = new Stage();
-        VBox the_root = new VBox();
+        VBox the_root = new VBox(); //Uses VBox instead of stackPane to work better with the textfield
         Label labelX = new Label("Input a grid width between 5-100 (inclusive) ");
         Label labelY = new Label("Input a grid height between 5-100 (inclusive) ");
         TextField textFieldX = new TextField();

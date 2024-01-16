@@ -26,7 +26,7 @@ public class Point {
 
             type = random.nextInt(8);
             ArrayList<Integer> point = new ArrayList<>();
-            point.add(randomX);
+            point.add(randomX); //Check for optimization
             point.add(randomY);
             point.add(type);
             pointList.add(point);

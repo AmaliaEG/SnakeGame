@@ -119,7 +119,7 @@ public class Main extends Application {
                                 }
                                 appleCollision();
                             } else if (north) {
-                                lastDirection = 0;
+                                lastDirection = 0; //Diagram needed
 
                                 snake.moveBody(snake, 0, -1,lastDirection);
                             } else if (south) {
@@ -267,7 +267,7 @@ public class Main extends Application {
             e.printStackTrace();
             System.out.println("Could not play the music");
         }
-        int surprise = random.nextInt(8);
+        int surprise = random.nextInt(4);
         String ability = "Nothing :P";
 
         switch (surprise) {
