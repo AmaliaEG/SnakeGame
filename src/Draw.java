@@ -33,7 +33,7 @@ public class Draw {
     public Draw(int gridXInput, int gridYInput) {
         this.gridXInput = gridXInput;
         this.gridYInput = gridYInput;
-        calculateCanvasSize();
+        //calculateCanvasSize();
     }
 
     public void calculateCanvasSize() {
@@ -113,6 +113,7 @@ public class Draw {
         ((Group) primaryStage.getScene().getRoot()).getChildren().add(gameOverText);
     }
 
+    /* NOT USED, WASN'T SUPPOSED TO BE HERE. 
     public void drawGameIsPaused(Stage primaryStage) {
         Text gamePauseText = new Text("Pause");
         gamePauseText.setFont(Font.font("Arial", FontWeight.BOLD, 50));
@@ -126,5 +127,5 @@ public class Draw {
 
     public void drawGameNotPaused(Stage primaryStage) {
         gamePause.getChildren().clear();
-    }
+    } */
 }
