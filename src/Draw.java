@@ -45,7 +45,7 @@ public class Draw {
 
     public void initializeScene(Stage primaryStage) {
         Scene scene = new Scene(new Group(gridRoot, pointRoot, snakeRoot, scoreRoot, gamePause), WIDTH_CANVAS,
-                HEIGHT_CANVAS, Color.GREEN);
+                HEIGHT_CANVAS, Color.rgb(69, 54, 67));
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -53,13 +53,13 @@ public class Draw {
     public void drawGrid() {
         for (int i = 0; i <= gridXInput; i++) {
             Line lineVertical = new Line(i * tileSize, 0, i * tileSize, HEIGHT_CANVAS);
-            lineVertical.setStroke(Color.DARKGREEN); //Change colour
+            lineVertical.setStroke(Color.rgb(40, 17, 43)); //Change colour
             gridRoot.getChildren().add(lineVertical);
         }
 
         for (int i = 0; i <= gridYInput; i++) {
             Line lineHorizontal = new Line(0, i * tileSize, WIDTH_CANVAS, i * tileSize);
-            lineHorizontal.setStroke(Color.DARKGREEN);
+            lineHorizontal.setStroke(Color.rgb(40, 17, 43));
             gridRoot.getChildren().add(lineHorizontal);
         }
     }
@@ -71,12 +71,12 @@ public class Draw {
             Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
                     tileSize);
 
-            tail.setFill(Color.FORESTGREEN);
+            tail.setFill(Color.rgb(92, 116, 87));
             snakeRoot.getChildren().add(tail);
         }
         Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
 
-        head.setFill(Color.DARKSEAGREEN);
+        head.setFill(Color.rgb(192, 223, 161));
         snakeRoot.getChildren().add(head);
     }
 
@@ -85,7 +85,7 @@ public class Draw {
         int pointX = p.getX();
         int pointY = p.getY();
         Rectangle pointSpawn = new Rectangle(pointX * tileSize, pointY * tileSize, tileSize, tileSize);
-        pointSpawn.setFill(Color.RED);
+        pointSpawn.setFill(Color.rgb(240, 100, 73));
         pointRoot.getChildren().add(pointSpawn);
     }
 

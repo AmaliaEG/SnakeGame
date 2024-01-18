@@ -55,7 +55,7 @@ public class Main extends Application {
         p.generateRandomPoint(snake);
         canvas.drawPoint(p);
 
-        canvas.drawScore(snake.getScore());
+        //canvas.drawScore(snake.getScore());
 
         Scene scene = primaryStage.getScene();  // Why did we use scene instead of stage?
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() { // sets up an event handler for key press events, this

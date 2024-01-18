@@ -35,7 +35,7 @@ public class Position{
     public void getBigger(int x, int y, Draw canvas) {
         snakePosition.add(new ArrayList<>(List.of(x, y)));
         score += 100;
-        canvas.drawScore(score);
+        //canvas.drawScore(score);
     }
 
     public void wallJump(int gridHeight, int gridWidth, Position snake) {
