@@ -64,21 +64,21 @@ public class Draw {
         }
     }
 
-    public void drawSnake(Position snake) {
-        snakeRoot.getChildren().clear();
-        ArrayList<ArrayList<Integer>> dataXY = snake.getPosition(); // pOSITION CLASS DOES NOT PROVIDE ALL ARRAYLIST METHODS
-        for (int i = dataXY.size() - 2; i >= 0; i--) {
-            Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
-                    tileSize);
+public void drawSnake(Position snake) {
+    snakeRoot.getChildren().clear();
+    ArrayList<ArrayList<Integer>> dataXY = snake.getPosition(); // pOSITION CLASS DOES NOT PROVIDE ALL ARRAYLIST METHODS
+    for (int i = dataXY.size() - 2; i >= 0; i--) {
+        Rectangle tail = new Rectangle(dataXY.get(i).get(0) * tileSize, dataXY.get(i).get(1) * tileSize, tileSize,
+                tileSize);
 
-            tail.setFill(Color.rgb(92, 116, 87));
-            snakeRoot.getChildren().add(tail);
-        }
-        Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
-
-        head.setFill(Color.rgb(192, 223, 161));
-        snakeRoot.getChildren().add(head);
+        tail.setFill(Color.rgb(92, 116, 87));
+        snakeRoot.getChildren().add(tail);
     }
+    Rectangle head = new Rectangle(snake.getX() * tileSize, snake.getY() * tileSize, tileSize, tileSize);
+
+    head.setFill(Color.rgb(192, 223, 161));
+    snakeRoot.getChildren().add(head);
+}
 
     public void drawPoint(Point p) {
         pointRoot.getChildren().clear();

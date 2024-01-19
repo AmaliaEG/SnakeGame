@@ -105,46 +105,46 @@ public class Main extends Application {
             }
         });
 
-        AnimationTimer timer = new AnimationTimer() { // AnimationTimer class, for frame-based animations.
-            @Override
-            public void handle(long now) { // this is the handle method from the Eventhandler interface.
-                if (!gameOver) {  //Could have been a while-loop
-                    if (now - lastUpdateTime >= 150000000) { // Now is the current time in nanoseconds.
-                        apple = checkForPoint(snake, p);
-                        lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and
-                                              // lastupdatetime is 0.
-                            if (apple) {
-                                apple = false;
-                                snake.getBigger(pointX, pointY, canvas);
-                                canvas.drawPoint(p);
-                            } else if (north) {
-                                lastDirection = 1;
-                                snake.moveBody(snake, 0, -1);
-                            } else if (south) {
-                                lastDirection = 2;
-                                snake.moveBody(snake, 0, 1);
-                            } else if (east) {
-                                lastDirection = 3;
-                                snake.moveBody(snake, 1, 0);
-                            } else if (west) {
-                                lastDirection = 4;
-                                snake.moveBody(snake, -1, 0);
-                            }
-                        snake.wallJump(gridY, gridX, snake);
-                        snake.suicide(snake);
-                        canvas.drawSnake(snake);
-                        if (snake.suicide(snake)) {
-                            gameOver = true;
-                        }
-                        System.out.println(snake); // Here for debugging purposes
+AnimationTimer timer = new AnimationTimer() { // AnimationTimer class, for frame-based animations.
+    @Override
+    public void handle(long now) { // this is the handle method from the Eventhandler interface.
+        if (!gameOver) {  //Could have been a while-loop
+            if (now - lastUpdateTime >= 150000000) { // Now is the current time in nanoseconds.
+                apple = checkForPoint(snake, p);
+                lastUpdateTime = now; // updates the lastUpdatetime so that the difference between now and
+                                        // lastupdatetime is 0.
+                    if (apple) {
+                        apple = false;
+                        snake.getBigger(pointX, pointY, canvas);
+                        canvas.drawPoint(p);
+                    } else if (north) {
+                        lastDirection = 1;
+                        snake.moveBody(snake, 0, -1);
+                    } else if (south) {
+                        lastDirection = 2;
+                        snake.moveBody(snake, 0, 1);
+                    } else if (east) {
+                        lastDirection = 3;
+                        snake.moveBody(snake, 1, 0);
+                    } else if (west) {
+                        lastDirection = 4;
+                        snake.moveBody(snake, -1, 0);
                     }
-                } else {
-                    canvas.drawGameOver(primaryStage);
-                    stop(); // Stops the animation timer.
+                snake.wallJump(gridY, gridX, snake);
+                snake.suicide(snake);
+                canvas.drawSnake(snake);
+                if (snake.suicide(snake)) {
+                    gameOver = true;
                 }
+                //System.out.println(snake); // Here for debugging purposes
             }
-        };
-        timer.start(); // Starts the animation timer, now the handle method will be called each frame.
+        } else {
+            canvas.drawGameOver(primaryStage);
+            stop(); // Stops the animation timer.
+        }
+    }
+};
+timer.start(); // Starts the animation timer, now the handle method will be called each frame.
     }
 
     public boolean checkForPoint(Position snake, Point p) { // Method to check the box that the snake is about to go on,
